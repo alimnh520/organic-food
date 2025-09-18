@@ -4,6 +4,7 @@ import NewProducts from './components/NewProducts'
 import AllProducts from './components/AllProducts'
 import NoticeHeadline from './components/Notice'
 import FeaturesPage from './components/FeaturePage'
+import MostSoldProduct from './components/MostSoldProduct'
 
 const page = () => {
   return (
@@ -11,6 +12,7 @@ const page = () => {
       <Animation />
       <NoticeHeadline/>
       <NewProducts/>
+      <MostSoldProduct/>
       <AllProducts/>
       <FeaturesPage/>
     </div>

@@ -56,6 +56,9 @@ export async function POST(request) {
 
         await saveOrder.save();
 
+        const collection = await getCollection("products");
+        await collection.updateOne({ _id: new ObjectId(productId) }, { $inc: { soldCount: quantity || 1 }, });
+
         return NextResponse.json({ message: 'অর্ডার সফল হয়েছে 🎉', success: true });
 
     } catch (error) {

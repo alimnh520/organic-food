@@ -34,7 +34,7 @@ const Animation = () => {
             >
                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                     <AnimatePresence mode="wait">
-                        <motion.p
+                        <motion.div
                             key={activeIndex} // change triggers animation
                             initial={{ opacity: 0, y: -20, scale: 0.8 }}
                             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -42,9 +42,11 @@ const Animation = () => {
                             transition={{ duration: 0.5 }}
                             className="sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-center px-4 leading-10 italic logo-font text-2xl mt-2 text-yellow-400"
                         >
-                            Organic Food and Medical Equipment <br />
-                            Electronics
-                        </motion.p>
+                            <div className="flex flex-col justify-center items-center gap-x-1.5">
+                                <img src="/logo/Polish_20250918_125903584.png" alt="" className='sm:h-16 h-8' />
+                                <p className='italic logo-font text-lg sm:text-5xl mt-2.5 text-yellow-400'>ONLINE SHOP</p>
+                            </div>
+                        </motion.div>
                     </AnimatePresence>
                 </div>
 

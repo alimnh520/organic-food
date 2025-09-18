@@ -6,7 +6,7 @@ export const metadata = {
   title: "অর্গানিক ফুড & ইলেকট্রনিক্স",
   description: "অর্গানিক ফুড & ইলেকট্রনিক্স",
   icons: {
-    icon: '/06c5f32c-625a-4122-871a-8280c514fe.jpg'
+    icon: '/Polish_20250919_010532269.png'
   }
 };
 

@@ -13,18 +13,18 @@ export default function Footer() {
                     <div className="space-y-4">
                         <div className="flex items-center gap-3">
                             <img
-                                src="/logo/06c5f32c-625a-4122-871a-8280c514fe.jpg"
+                                src="/logo/Polish_20250919_010532269.png"
                                 alt="Logo"
                                 className="h-12 w-12 rounded-full object-cover shadow-md"
                             />
-                            <div className='flex items-center'>
+                            <div className='flex items-center space-x-1'>
                                 <img
                                     src="/logo/Polish_20250918_125903584.png"
                                     alt="Brand"
-                                    className="h-10 drop-shadow-lg"
+                                    className="h-9"
                                 />
-                                <p className="italic logo-font text-2xl mt-3 text-yellow-400 font-bold tracking-wide">
-                                    TRADERS
+                                <p className="italic logo-font mt-4 text-yellow-400 font-bold tracking-wide">
+                                    ONLINE SHOP
                                 </p>
                             </div>
                         </div>
@@ -41,14 +41,12 @@ export default function Footer() {
                         <h4 className="font-semibold text-lg text-gray-800 dark:text-gray-100 mb-2">
                             📸 আমাদের গ্যালারী
                         </h4>
-                        <div className="grid sm:grid-cols-3 gap-3">
-                            <div className="sm:col-span-2">
-                                <img
-                                    src="/logo/3bfd2104-d49d-478b-b2a4-a543f4ac5537 .jpg"
-                                    alt="sample1"
-                                    className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300"
-                                />
-                            </div>
+                        <div className="grid sm:grid-cols-2 gap-3">
+                            <img
+                                src="/logo/3bfd2104-d49d-478b-b2a4-a543f4ac5537 .jpg"
+                                alt="sample1"
+                                className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300"
+                            />
                             <img
                                 src="/logo/090b9ce4-2a30-4fae-83d2-4e9f43748.jpg"
                                 alt="sample2"

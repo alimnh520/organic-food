@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { UserContext } from '@/app/Provider';
 
-export default function NewProducts() {
+export default function MostSoldProduct() {
     const { products } = useContext(UserContext);
     const [whitelist, setWhitelist] = useState([]);
 
@@ -31,13 +31,18 @@ export default function NewProducts() {
         return <p className="text-center py-12 text-gray-500">❌ কোনো পণ্য পাওয়া যায়নি</p>;
     }
 
+    // ✅ বিক্রির সংখ্যা অনুযায়ী সাজানো
+    const sortedProducts = [...products].sort((a, b) => b.soldCount - a.soldCount);
+
     return (
-        <div className="sm:py-12 px-5">
-            <h1 className="text-3xl font-bold text-green-600 mb-8 w-full pb-2 border-b border-b-green-600">নতুন পণ্য</h1>
+        <div className="py-6 px-5 sm:px-0 flex flex-col gap-y-5">
+            <h1 className="text-3xl font-bold text-green-600 mb-8 w-full pb-2 border-b border-b-green-600">
+                সর্বাধিক বিক্রিত পণ্য
+            </h1>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-9">
                 <AnimatePresence>
-                    {products.slice(0, 4).reverse().map((product) => (
+                    {sortedProducts.map((product) => (
                         <motion.div
                             key={product._id}
                             layout
@@ -57,19 +62,30 @@ export default function NewProducts() {
                                 </Link>
                             </div>
                             <div className="p-4 space-y-2">
-                                <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">{product.product_name}</h2>
+                                <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
+                                    {product.product_name}
+                                </h2>
                                 <p className="text-green-600 font-bold">৳ {product.price}</p>
-                                <p className="text-gray-500 dark:text-gray-400">স্টক: {product.stock}</p>
+                                <p className="text-gray-500 dark:text-gray-400">
+                                    স্টক: {product.stock}
+                                </p>
+                                <p className="text-sm text-blue-600">
+                                    ⭐ বিক্রি হয়েছে: {product.soldCount || 0} বার
+                                </p>
+
                                 <div className="flex justify-between mt-2">
                                     <button
                                         onClick={() => toggleWhitelist(product)}
                                         className={`flex items-center gap-1 px-3 py-1 rounded transition ${isWhitelisted(product._id)
-                                            ? 'bg-red-500 text-white'
-                                            : 'bg-red-100 hover:bg-red-200 text-red-500'
+                                                ? 'bg-red-500 text-white'
+                                                : 'bg-red-100 hover:bg-red-200 text-red-500'
                                             }`}
                                     >
                                         <Heart
-                                            className={`w-4 h-4 ${isWhitelisted(product._id) ? 'text-white' : 'text-red-500'}`}
+                                            className={`w-4 h-4 ${isWhitelisted(product._id)
+                                                    ? 'text-white'
+                                                    : 'text-red-500'
+                                                }`}
                                         />
                                         হোয়াটলিস্ট
                                     </button>
