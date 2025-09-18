@@ -1,5 +1,6 @@
 import "./globals.css";
 import Provider from "./Provider";
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata = {
   title: "অর্গানিক ফুড & ইলেকট্রনিক্স",
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
       >
         <Provider>
           {children}
+          <Analytics />
         </Provider>
       </body>
     </html>
