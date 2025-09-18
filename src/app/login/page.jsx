@@ -25,9 +25,7 @@ export default function LoginPage() {
             });
             const data = await res.json();
             toast.success(data.message, { position: "bottom-right" });
-            if (data.success) {
-                router.push('/components/dashboard');
-            }
+            if (data.success) window.location.reload();
         } catch (error) {
             console.log(error);
         } finally {

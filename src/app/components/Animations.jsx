@@ -7,11 +7,11 @@ const Animation = () => {
     const [activeIndex, setActiveIndex] = useState(0);
 
     const animateImg = [
-        { img: "/animation/flat-lay-box-nuts-stethoscope.jpg", number: "-1" },
-        { img: "/animation/modern-stationary-collection-arrangement.jpg", number: "-2" },
-        { img: "/animation/view-healthy-food-incased-pill-shaped-container.jpg", number: "-3" },
-        { img: "/animation/still-life-teenager-s-desk.jpg", number: "-4" },
-        { img: "/animation/wireless-earphones-smartphone-cup-coffee.jpg", number: "-5" },
+        { img: "/animation/animate1", number: "-1" },
+        { img: "/animation/animate2", number: "-2" },
+        { img: "/animation/animate3", number: "-3" },
+        { img: "/animation/animate4", number: "-4" },
+        { img: "/animation/animate5", number: "-5" },
 
     ];
 
