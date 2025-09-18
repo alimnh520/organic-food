@@ -11,6 +11,7 @@ export default function AllProducts() {
     const [price, setPrice] = useState('');
     const [stock, setStock] = useState('');
     const [loading, setLoading] = useState(false);
+    const [isDelete, setIsDelete] = useState(false);
 
     // ✅ Fetch all products
     useEffect(() => {
@@ -68,14 +69,14 @@ export default function AllProducts() {
     };
 
     // ✅ Delete Product
-    const handleDelete = async (id) => {
+    const handleDelete = async (id, image_id) => {
         if (!confirm("আপনি কি নিশ্চিত ডিলেট করতে চান?")) return;
-        setLoading(true);
+        setIsDelete(true);
         try {
             const res = await fetch(`/api/products`, {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ id })
+                body: JSON.stringify({ id, image_id })
             });
             const data = await res.json();
             if (data.success) {
@@ -89,7 +90,7 @@ export default function AllProducts() {
             console.error(err);
             toast.error("⚠️ সার্ভার এরর", { position: "bottom-right" });
         } finally {
-            setLoading(false);
+            setIsDelete(false);
         }
     };
 
@@ -154,11 +155,11 @@ export default function AllProducts() {
                                         বাতিল
                                     </button>
                                     <button
-                                        onClick={() => handleDelete(product._id)}
+                                        onClick={() => handleDelete(product._id, product.image_id)}
                                         disabled={loading}
                                         className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
                                     >
-                                        {loading ? "লোড হচ্ছে..." : "ডিলেট"}
+                                        {isDelete ? "লোড হচ্ছে..." : "ডিলেট"}
                                     </button>
                                 </>
                             ) : (

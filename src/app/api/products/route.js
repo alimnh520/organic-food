@@ -4,6 +4,7 @@ import { getCollection } from "@/lib/mongoClient";
 import products from "@/models/products";
 import { NextResponse } from "next/server";
 import { ObjectId } from "mongodb";
+import cloudinary from "@/cloudinary/cloudConfig";
 
 export async function POST(req) {
     try {
@@ -70,7 +71,11 @@ export async function PATCH(request) {
 
 export async function DELETE(request) {
     try {
-        const { id } = await request.json();
+        const { id, image_id } = await request.json();
+   
+        await cloudinary.uploader.destroy(image_id, {
+            resource_type: 'image',
+        });
 
         const collection = await getCollection("products");
         await collection.deleteOne({ _id: new ObjectId(id) });

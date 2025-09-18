@@ -73,10 +73,10 @@ export default function Orders() {
                                 <p className="mt-2">
                                     <span
                                         className={`px-2 py-1 text-xs rounded font-medium ${order.status === "confirmed"
-                                                ? "bg-green-100 text-green-700"
-                                                : order.status === "rejected"
-                                                    ? "bg-red-100 text-red-700"
-                                                    : "bg-yellow-100 text-yellow-700"
+                                            ? "bg-green-100 text-green-700"
+                                            : order.status === "rejected"
+                                                ? "bg-red-100 text-red-700"
+                                                : "bg-yellow-100 text-yellow-700"
                                             }`}
                                     >
                                         {order.status}
@@ -139,20 +139,33 @@ export default function Orders() {
                             </div>
 
                             {/* ✅ Confirm / Reject Buttons */}
-                            <div className="mt-6 flex gap-4">
-                                <button
-                                    className="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-lg transition"
-                                    onClick={() => updateOrderStatus(selectedOrder._id, "confirmed")}
-                                >
-                                    ✅ Confirm
-                                </button>
-                                <button
-                                    className="flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold py-2 rounded-lg transition"
-                                    onClick={() => updateOrderStatus(selectedOrder._id, "rejected")}
-                                >
-                                    ❌ Reject
-                                </button>
-                            </div>
+                            {!["confirmed", "rejected"].includes(selectedOrder.status) && (
+                                <div className="mt-6 flex gap-4">
+                                    <button
+                                        className="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-lg transition"
+                                        onClick={() => updateOrderStatus(selectedOrder._id, "confirmed")}
+                                    >
+                                        ✅ Confirm
+                                    </button>
+                                    <button
+                                        className="flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold py-2 rounded-lg transition"
+                                        onClick={() => updateOrderStatus(selectedOrder._id, "rejected")}
+                                    >
+                                        ❌ Reject
+                                    </button>
+                                </div>
+                            )}
+
+                            {["confirmed", "rejected"].includes(selectedOrder.status) && (
+                                <p className="mt-6 text-center font-semibold text-lg">
+                                    {selectedOrder.status === "confirmed" ? (
+                                        <span className="text-green-600">✅ অর্ডার কনফার্ম হয়েছে</span>
+                                    ) : (
+                                        <span className="text-red-600">❌ অর্ডার বাতিল হয়েছে</span>
+                                    )}
+                                </p>
+                            )}
+
                         </motion.div>
                     </motion.div>
                 )}
