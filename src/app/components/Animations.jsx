@@ -7,11 +7,11 @@ const Animation = () => {
     const [activeIndex, setActiveIndex] = useState(0);
 
     const animateImg = [
-        { img: "/animation/animate1", number: "-1" },
-        { img: "/animation/animate2", number: "-2" },
-        { img: "/animation/animate3", number: "-3" },
-        { img: "/animation/animate4", number: "-4" },
-        { img: "/animation/animate5", number: "-5" },
+        { img: "/animation/animate1.png", number: "-1" },
+        { img: "/animation/animate2.png", number: "-2" },
+        { img: "/animation/animate3.png", number: "-3" },
+        { img: "/animation/animate4.png", number: "-4" },
+        { img: "/animation/animate5.png", number: "-5" },
 
     ];
 
