@@ -147,7 +147,7 @@ export default function FeaturesPage() {
                         <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">আপনি চাইলে আজই অর্ডার করুন — আমরা দ্রুত পৌঁছে দেব।</p>
                     </div>
                     <div className="flex items-center gap-3">
-                        <Link href="/components/product" className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md font-medium shadow">অর্ডার করুন</Link>
+                        <Link href="/components/products" className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md font-medium shadow">অর্ডার করুন</Link>
                         <Link href="/components/contact" className="px-4 py-2 bg-transparent border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition">যোগাযোগ</Link>
                     </div>
                 </div>

@@ -3,8 +3,8 @@ import Provider from "./Provider";
 import { Analytics } from '@vercel/analytics/next';
 
 export const metadata = {
-  title: "অর্গানিক ফুড & ইলেকট্রনিক্স",
-  description: "অর্গানিক ফুড & ইলেকট্রনিক্স",
+  title: "Abdullah Online Shop",
+  description: "Abdullah Online Shop is a Online shopping center. You can order many product from here",
   icons: {
     icon: '/Polish_20250919_010532269.png'
   }
