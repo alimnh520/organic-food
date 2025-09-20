@@ -13,7 +13,7 @@ export default function NoticeHeadline() {
         getNotice();
     }, [])
     return (
-        <div className="bg-green-600 py-3 overflow-hidden relative">
+        <div className="bg-red-600/60 py-3 overflow-hidden relative">
             <motion.div
                 initial={{ x: "100%" }}
                 animate={{ x: "-100%" }}

@@ -32,8 +32,8 @@ export default function AllProducts() {
     }
 
     return (
-        <div className="py-6 px-5 sm:px-0 flex flex-col gap-y-5">
-            <h1 className="text-3xl font-bold text-green-600 mb-8 w-full pb-2 border-b border-b-green-600">সকল পণ্য</h1>
+        <div className="py-4 px-5 sm:px-0 flex flex-col gap-y-5">
+            <h1 className="sm:text-3xl text-xl  font-bold text-green-600 mb-8 w-full pb-2 border-b border-b-green-600">সকল পণ্য</h1>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-9">
                 <AnimatePresence>

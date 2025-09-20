@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { CiCircleChevLeft, CiCircleChevRight } from "react-icons/ci";
 import { motion, AnimatePresence } from "framer-motion";
+import NoticeHeadline from './Notice';
 
 const Animation = () => {
     const [activeIndex, setActiveIndex] = useState(0);
@@ -26,7 +27,7 @@ const Animation = () => {
     };
 
     return (
-        <div className="relative w-full h-[300px] md:h-[450px] lg:h-[500px] flex">
+        <div className="relative w-full h-[300px] px-5 sm:px-0 md:h-[450px] lg:h-[500px] flex">
             {/* Main Background */}
             <div
                 className="flex-1 bg-cover bg-center relative rounded-lg overflow-hidden"
@@ -42,12 +43,13 @@ const Animation = () => {
                             transition={{ duration: 0.5 }}
                             className="sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-center px-4 leading-10 italic logo-font text-2xl mt-2 text-yellow-400"
                         >
-                            <div className="flex flex-col justify-center items-center gap-x-1.5">
-                                <img src="/logo/Polish_20250918_125903584.png" alt="" className='sm:h-16 h-8' />
-                                <p className='italic logo-font text-lg sm:text-5xl mt-2.5 text-yellow-400'>ONLINE SHOP</p>
-                            </div>
+                            <p className='italic logo-font text-lg sm:text-5xl mt-2.5 text-yellow-400'>ABDULLAH ONLINE SHOP</p>
                         </motion.div>
+                        <div className="absolute w-full bottom-0">
+                            <NoticeHeadline />
+                        </div>
                     </AnimatePresence>
+
                 </div>
 
                 {/* Navigation */}
@@ -66,7 +68,7 @@ const Animation = () => {
             </div>
 
             {/* Right Side Thumbnails */}
-            <div className="w-28 sm:w-32 md:w-36 lg:w-40 ml-4 overflow-y-auto space-y-3">
+            <div className="w-28 hidden sm:block sm:w-32 md:w-36 lg:w-40 ml-4 overflow-y-auto space-y-3">
                 {animateImg.map((item, idx) => (
                     <div
                         key={idx}

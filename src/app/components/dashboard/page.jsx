@@ -96,8 +96,8 @@ function SidebarButton({ label, icon, active, onClick }) {
     return (
         <button
             className={`w-full flex items-center gap-3 p-3 rounded-lg transition text-left ${active
-                    ? "bg-white text-green-700 font-bold"
-                    : "hover:bg-green-500 text-white"
+                ? "bg-white text-green-700 font-bold"
+                : "hover:bg-green-500 text-white"
                 }`}
             onClick={onClick}
         >
@@ -117,7 +117,10 @@ function tabTitle(tab) {
     return titles[tab] || "ড্যাশবোর্ড";
 }
 
-function AddProduct() {
+
+// add product section
+
+export function AddProduct() {
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         name: "",
@@ -125,7 +128,20 @@ function AddProduct() {
         stock: "",
         details: "",
         image: null,
+        category: "",
     });
+
+    // ক্যাটাগরি লিস্ট (বাংলা দেখাবে, ইংরেজি ভ্যালু যাবে backend এ)
+    const categories = [
+        { label: "অর্গানিক খাবার", value: "organic_food" },
+        { label: "গেজেট", value: "gazette" },
+        { label: "মেডিকেল সরঞ্জাম", value: "medical_equipments" },
+        { label: "ফ্যাশন", value: "fashion" },
+        { label: "ইলেকট্রনিক্স", value: "electronics" },
+        { label: "সোর্সিং সার্ভিস", value: "sourcing_service" },
+        { label: "সাজসজ্জা", value: "decorate" },
+        { label: "অন্যান্য", value: "others" },
+    ];
 
     const handleChange = (e) => {
         const { name, value, type, files } = e.target;
@@ -158,7 +174,7 @@ function AddProduct() {
 
             if (result.success) {
                 toast.success(result.message, { position: "bottom-right" });
-                setFormData({ name: "", price: "", stock: "", details: "", image: null });
+                setFormData({ name: "", price: "", stock: "", details: "", image: null, category: "" });
                 e.target.reset();
             } else {
                 toast.error(result.message || "কিছু সমস্যা হয়েছে!", { position: "bottom-right" });
@@ -174,29 +190,32 @@ function AddProduct() {
     return (
         <form onSubmit={handleSubmit} className="space-y-4">
             <h3 className="text-lg font-semibold mb-3">🆕 নতুন পণ্য যোগ করুন</h3>
+
             <input type="text" name="name" placeholder="পণ্যের নাম" onChange={handleChange} className="w-full border p-2 rounded-lg dark:bg-gray-700 dark:text-gray-100" />
             <input type="number" name="price" placeholder="দাম (৳)" onChange={handleChange} className="w-full border p-2 rounded-lg dark:bg-gray-700 dark:text-gray-100" />
             <input type="number" name="stock" placeholder="স্টক" onChange={handleChange} className="w-full border p-2 rounded-lg dark:bg-gray-700 dark:text-gray-100" />
             <input type="text" name="details" placeholder="বিবরণ" onChange={handleChange} className="w-full border p-2 rounded-lg dark:bg-gray-700 dark:text-gray-100" />
+
+            {/* ক্যাটাগরি ড্রপডাউন */}
+            <select
+                name="category"
+                onChange={handleChange}
+                value={formData.category}
+                className="w-full border p-2 rounded-lg dark:bg-gray-700 dark:text-gray-100"
+                required
+            >
+                <option value="">-- ক্যাটাগরি নির্বাচন করুন --</option>
+                {categories.map((cat) => (
+                    <option key={cat.value} value={cat.value}>
+                        {cat.label}
+                    </option>
+                ))}
+            </select>
+
             <input type="file" accept="image/png, image/jpeg, image/jpg, image/webp" name="image" onChange={handleChange} className="w-full border p-2 rounded-lg dark:bg-gray-700 dark:text-gray-100" />
 
             <button type="submit" className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg">
-                {loading ? (
-                    <div className="flex items-center justify-center gap-x-2">
-                        <svg
-                            className="animate-spin h-5 w-5 text-white"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                        >
-                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z"></path>
-                        </svg>
-                        লোড হচ্ছে...
-                    </div>
-                ) : (
-                    "✅ যোগ করুন"
-                )}
+                {loading ? "লোড হচ্ছে..." : "✅ যোগ করুন"}
             </button>
         </form>
     );

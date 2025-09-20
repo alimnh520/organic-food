@@ -11,22 +11,15 @@ export default function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
                     {/* Brand + About */}
                     <div className="space-y-4">
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-2">
                             <img
                                 src="/logo/Polish_20250919_010532269.png"
                                 alt="Logo"
                                 className="h-12 w-12 rounded-full object-cover shadow-md"
                             />
-                            <div className='flex items-center space-x-1'>
-                                <img
-                                    src="/logo/Polish_20250918_125903584.png"
-                                    alt="Brand"
-                                    className="h-9"
-                                />
-                                <p className="italic logo-font mt-4 text-yellow-400 font-bold tracking-wide">
-                                    ONLINE SHOP
-                                </p>
-                            </div>
+                            <p className="logo-font text-yellow-400 font-bold">
+                               ABDULLAH ONLINE SHOP
+                            </p>
                         </div>
                         <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-300">
                             🌱 অর্গানিক ফুড, 🏥 মেডিকেল সরঞ্জাম ও 🔌 মানসম্মত ইলেকট্রনিক্স — সবই এক ছাদের নিচে।<br />

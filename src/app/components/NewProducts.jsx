@@ -33,7 +33,7 @@ export default function NewProducts() {
 
     return (
         <div className="sm:py-12 px-5">
-            <h1 className="text-3xl font-bold text-green-600 mb-8 w-full pb-2 border-b border-b-green-600">নতুন পণ্য</h1>
+            <h1 className="sm:text-3xl text-xl font-bold text-green-600 mb-8 w-full pb-2 border-b border-b-green-600">নতুন পণ্য</h1>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-9">
                 <AnimatePresence>

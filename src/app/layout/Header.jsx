@@ -20,13 +20,13 @@ export default function Header() {
 
     return (
         <header className="w-full bg-white shadow-md fixed top-0 left-0 z-50">
-            <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 flex justify-between items-center h-14 sm:h-16">
+            <div className="max-w-7xl mx-auto px-3 md:px-12 lg:px-16 flex justify-between items-center h-14 sm:h-16">
                 {/* লোগো */}
                 <div className="flex items-center gap-3">
-                    <img src="/logo/Polish_20250919_010532269.png" alt="লোগো" className="h-10 w-10 object-contain" />
-                    <div className="flex items-center gap-x-1.5">
-                        <img src="/logo/Polish_20250918_125903584.png" alt="" className='sm:h-9 h-8' />
-                        <p className='italic logo-font text-lg sm:text-2xl mt-2.5 text-yellow-400'>ONLINE SHOP</p>
+                    <img src="/logo/Polish_20250919_010532269.png" alt="লোগো" className="sm:h-12 w-10 sm:w-12 h-10 object-contain" />
+                    <div className="flex flex-col text-yellow-600 items-center justify-center">
+                        <p className='logo-font underline text-[17px] font-bold sm:text-2xl mt-1 '>ABDULLAH ONLINE SHOP</p>
+                        <p className='text-xs logo-font'>BELIEVE . QUALITY . SERVICE</p>
                     </div>
                 </div>
 

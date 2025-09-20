@@ -56,11 +56,11 @@ const cardVariant = {
 
 export default function FeaturesPage() {
     return (
-        <main className="min-h-screen bg-gray-50 dark:bg-gray-900 py-16 px-6">
+        <main className="min-h-screen bg-gray-50 dark:bg-gray-900 py-10 px-6">
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
                 <header className="text-center mb-12">
-                    <h1 className="text-3xl md:text-4xl font-extrabold text-gray-800 dark:text-gray-100">
+                    <h1 className="sm:text-3xl text-2xl  md:text-4xl font-extrabold text-gray-800 dark:text-gray-100">
                         আমাদের সেবা — দ্রুত, নিরাপদ ও বিশ্বাসযোগ্য
                     </h1>
                     <p className="mt-3 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
