@@ -22,8 +22,6 @@ export async function GET() {
     try {
         const collection = await getCollection("admin");
         const data = await collection.find({}).toArray();
-        console.log(data[0].visitor);
-
         return NextResponse.json({ message: data[0].visitor, success: true });
     } catch (error) {
         console.log(error);
