@@ -49,7 +49,7 @@ export default function CategoriesPage() {
     };
 
     return (
-        <div className="py-4">
+        <div className="py-3 px-5 sm:px-0 flex flex-col gap-y-5">
             <h1 className="sm:text-3xl text-xl font-bold text-green-600 mb-5 w-full pb-2 border-b border-b-green-600">
                 🛒 আমাদের পণ্যের ক্যাটাগরি
             </h1>

@@ -37,10 +37,10 @@ export default function WhiteList() {
     }
 
     return (
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 py-12 space-y-12">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 py-10 space-y-12">
             {/* ✅ হোয়াইটলিস্ট */}
             <div>
-                <h1 className="text-3xl font-bold text-green-600 mb-8 text-center">আমার হোয়াইটলিস্ট</h1>
+                <h1 className="sm:text-3xl text-xl font-bold text-green-600 mb-5 text-center">আমার হোয়াইটলিস্ট</h1>
                 {wishlist.length > 0 ? (
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                         {wishlist.slice().reverse().map((product) => (
@@ -87,7 +87,7 @@ export default function WhiteList() {
 
             {/* ✅ অর্ডার লিস্ট */}
             <div>
-                <h1 className="text-3xl font-bold text-blue-600 mb-8 text-center">আমার অর্ডারসমূহ</h1>
+                <h1 className="sm:text-3xl text-xl font-bold text-blue-600 mb-5 text-center"> আমার অর্ডারসমূহ</h1>
                 {orders.length > 0 ? (
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                         {orders.slice().reverse().map((order, idx) => (

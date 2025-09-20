@@ -79,12 +79,12 @@ export default function Page() {
 
     return (
         <div className="py-6 px-5 sm:px-8 mx-auto flex flex-col sm:w-10/12 w-full bg-white dark:bg-gray-900 gap-y-6">
-            <h1 className="text-3xl font-bold text-green-600 mb-2 w-full pb-2 border-b border-b-green-600">
+            <h1 className="sm:text-3xl text-xl font-bold text-green-600 mb-2 w-full pb-2 border-b border-b-green-600">
                 সকল পণ্য
             </h1>
 
             {/* সার্চ */}
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex items-center gap-2 mb-2">
                 <input
                     type="text"
                     placeholder="পণ্যের নাম লিখুন..."

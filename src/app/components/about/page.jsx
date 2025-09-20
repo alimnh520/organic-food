@@ -4,13 +4,13 @@ import { Leaf, HeartPulse, Users, ShieldCheck, MonitorSmartphone } from "lucide-
 
 export default function AboutUs() {
     return (
-        <main className="bg-gradient-to-br from-green-50 to-emerald-100 dark:from-gray-900 dark:to-gray-800 min-h-screen py-12 px-6">
+        <main className="bg-gradient-to-br from-green-50 to-emerald-100 dark:from-gray-900 dark:to-gray-800 min-h-screen py-10 px-6">
             <div className="max-w-6xl mx-auto">
                 {/* শিরোনাম */}
                 <motion.h1
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="text-3xl md:text-5xl font-bold text-center text-green-700 dark:text-green-300 drop-shadow mb-8"
+                    className="sm:text-3xl text-xl font-bold text-center text-green-700 dark:text-green-300 drop-shadow mb-5"
                 >
                     🌿 আমাদের সম্পর্ক
                 </motion.h1>

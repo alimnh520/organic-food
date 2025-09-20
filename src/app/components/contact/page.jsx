@@ -40,8 +40,8 @@ export default function ContactPage() {
     };
 
     return (
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 py-12">
-            <h1 className="text-3xl font-bold text-green-600 mb-8 text-center">📞 আমাদের সাথে যোগাযোগ</h1>
+        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 py-10">
+            <h1 className="sm:text-3xl text-xl font-bold text-green-600 mb-5 text-center">📞 আমাদের সাথে যোগাযোগ</h1>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                 {/* যোগাযোগ তথ্য */}
