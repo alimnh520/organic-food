@@ -25,7 +25,7 @@ export default function Dashboard() {
                 <div className="flex justify-between items-center mb-8">
 
                     <div className="flex items-center gap-x-3">
-                        <img src="/logo/Polish_20250919_010532269.png" alt="লোগো" className="w-10 h-10 object-contain" />
+                        <img src="/logo/my-logo.jpg" alt="লোগো" className="w-10 h-10 object-contain" />
                         <h1 className="text-2xl font-bold text-center mt-2"> ড্যাশবোর্ড</h1>
                     </div>
 
@@ -130,7 +130,7 @@ export function AddProduct() {
         { label: "ইলেকট্রনিক্স", value: "electronics" },
         { label: "সোর্সিং সার্ভিস", value: "sourcing_service" },
         { label: "সাজসজ্জা", value: "decorate" },
-        { label: "হোম এন্ড হেলথি", value: "home_and_healthy" },  // 🆕 নতুন
+        { label: "হেলথ্ এন্ড বিউটি", value: "home_and_healthy" },  // 🆕 নতুন
         { label: "মা ও শিশু", value: "mother_and_baby" },        // 🆕 নতুন
         { label: "লাইফস্টাইল", value: "life_style" },            // 🆕 নতুন
         { label: "অন্যান্য", value: "others" },

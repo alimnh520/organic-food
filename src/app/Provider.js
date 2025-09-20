@@ -21,6 +21,22 @@ const Provider = ({ children }) => {
             }
         }
         adminData();
+
+        const visitor = async () => {
+            try {
+                const res = await fetch('/api/admin/visitor', { 
+                    method: 'PATCH',
+                    headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({})
+                });
+                const data = await res.json();
+                // if (data.success) console.log(data.message);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        visitor();
+
     }, []);
 
     return (
