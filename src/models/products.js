@@ -20,11 +20,17 @@ const productSchema = new Schema(
                 "electronics",
                 "sourcing_service",
                 "decorate",
+                "home_and_healthy",
+                "mother_and_baby",
+                "life_style",
                 "others",
             ],
             required: true,
         },
-        viewCount: { type: Number, default: 0 }, // ← added
+        viewCount: { type: Number, default: 0 },
+
+        discount: { type: Number, default: 0 }, // শতাংশে ডিসকাউন্ট (0-100)
+        discountedPrice: { type: Number, default: 0 }, // ডিসকাউন্টের পর দাম
     },
     { timestamps: true }
 );

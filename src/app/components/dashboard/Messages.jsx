@@ -47,7 +47,7 @@ export function AllMessage() {
         <div>
 
             {/* সব বার্তা কার্ড আকারে */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:p-0 p-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {messages?.length > 0 ? (
                     messages.map((msg) => (
                         <motion.div
@@ -87,7 +87,7 @@ export function AllMessage() {
 
             {/* নির্বাচিত মেসেজ মডাল */}
             {selectedMessage && (
-                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                <div className="fixed inset-0 sm:p-0 p-2 bg-black/50 flex items-center justify-center z-50">
                     <div className="bg-white dark:bg-gray-900 p-6 rounded-xl max-w-lg w-full relative">
                         <h3 className="text-lg font-bold text-green-600 dark:text-green-400">
                             {selectedMessage.name}

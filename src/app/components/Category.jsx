@@ -12,7 +12,10 @@ export default function CategoriesPage() {
         { label: "ইলেকট্রনিক্স", value: "electronics", image: "/categories/applications-of-electronics.png" },
         { label: "সোর্সিং সার্ভিস", value: "sourcing_service", image: "/categories/AdobeStock_124121137-1568x1045.jpeg" },
         { label: "সাজসজ্জা", value: "decorate", image: "/categories/living-room-rug-shelves-7b5d7a52-dcb3e3a7b7e04df99893aeaa76f57d08.jpg" },
-        { label: "অন্যান্য", value: "others", image: "/categories/others.webp" },
+        { label: "হোম এন্ড হেলথি", value: "home_and_healthy", image: "/categories/istockphoto-1365830421-612x612.jpg" }, // 🆕
+        { label: "মা ও শিশু", value: "mother_and_baby", image: "/categories/360_F_455448048_94bxabQM0jCJA3zXMn7cAUfV4U01Ok8f.jpg" },        // 🆕
+        { label: "লাইফস্টাইল", value: "life_style", image: "/categories/lifestyle-logo-design-template-5e8c38a6b91aff44f6a05638a8dc7d1d_screen.jpg" },              // 🆕
+        { label: "অন্যান্য", value: "others", image: "/categories/VJwzw5IGgePKH9vjq8XxocT3aiVxIdntOW9Ww81v.png" },
     ];
 
     const scrollRef = useRef(null);
@@ -46,8 +49,8 @@ export default function CategoriesPage() {
     };
 
     return (
-        <div className="px-6 md:px-10 py-4">
-            <h1 className="sm:text-3xl text-xl py-3 font-bold text-green-600 text-center">
+        <div className="py-4">
+            <h1 className="sm:text-3xl text-xl font-bold text-green-600 mb-5 w-full pb-2 border-b border-b-green-600">
                 🛒 আমাদের পণ্যের ক্যাটাগরি
             </h1>
 

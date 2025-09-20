@@ -44,7 +44,7 @@ export default function Orders() {
 
     return (
         <div className="max-w-6xl mx-auto py-12 px-6">
-            <h1 className="text-4xl font-extrabold text-center text-green-700 mb-10 tracking-wide">
+            <h1 className="sm:text-4xl text-xl font-extrabold text-center text-green-700 mb-10 tracking-wide">
                 📦 আমার অর্ডার ড্যাশবোর্ড
             </h1>
 

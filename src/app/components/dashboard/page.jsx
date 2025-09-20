@@ -23,7 +23,12 @@ export default function Dashboard() {
         md:translate-x-0 md:static md:inset-0`}
             >
                 <div className="flex justify-between items-center mb-8">
-                    <h1 className="text-2xl font-bold text-center">📊 ড্যাশবোর্ড</h1>
+
+                    <div className="flex items-center gap-x-3">
+                        <img src="/logo/Polish_20250919_010532269.png" alt="লোগো" className="w-10 h-10 object-contain" />
+                        <h1 className="text-2xl font-bold text-center mt-2"> ড্যাশবোর্ড</h1>
+                    </div>
+
                     {/* Close btn on mobile */}
                     <button
                         className="md:hidden p-2 rounded hover:bg-green-500"
@@ -50,9 +55,9 @@ export default function Dashboard() {
             )}
 
             {/* Main Content */}
-            <main className="flex-1 p-4 md:p-6 overflow-y-auto">
+            <main className="flex-1 p-4 overflow-y-auto">
                 {/* Top bar */}
-                <div className="flex justify-between items-center mb-6">
+                <div className="flex justify-between items-center relative">
                     <div className="flex items-center gap-3">
                         {/* Hamburger button */}
                         <button
@@ -61,12 +66,9 @@ export default function Dashboard() {
                         >
                             <Menu className="w-6 h-6 text-gray-700 dark:text-gray-200" />
                         </button>
-                        <h2 className="text-xl md:text-2xl font-bold text-gray-800 dark:text-gray-100">
-                            {tabTitle(activeTab)}
-                        </h2>
                     </div>
 
-                    <div className="fixed right-6 p-2 bg-white dark:bg-gray-800 rounded-full shadow hover:bg-green-100 dark:hover:bg-gray-700">
+                    <div className="fixed sm:right-6 right-2 sm:top-24 z-50 top-[60px] p-2 bg-white dark:bg-gray-800 rounded-full shadow hover:bg-green-100 dark:hover:bg-gray-700">
                         <Notifications active={activeTab} />
                     </div>
                 </div>
@@ -76,7 +78,7 @@ export default function Dashboard() {
                     key={activeTab}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-white dark:bg-gray-800 sm:p-4 p-0 md:p-6 rounded-2xl shadow-md"
+                    className="bg-white dark:bg-gray-800 sm:p-4 p-0 rounded-2xl shadow-md"
                 >
                     {activeTab === "orders" && <Orders />}
                     {activeTab === "add-product" && <AddProduct />}
@@ -106,18 +108,6 @@ function SidebarButton({ label, icon, active, onClick }) {
     );
 }
 
-function tabTitle(tab) {
-    const titles = {
-        orders: "অর্ডারসমূহ",
-        "add-product": "নতুন পণ্য যোগ করুন",
-        products: "সকল পণ্য",
-        "add-notice": "নতুন নোটিশ",
-        notices: "📩 প্রাপ্ত বার্তাগুলো",
-    };
-    return titles[tab] || "ড্যাশবোর্ড";
-}
-
-
 // add product section
 
 export function AddProduct() {
@@ -131,7 +121,7 @@ export function AddProduct() {
         category: "",
     });
 
-    // ক্যাটাগরি লিস্ট (বাংলা দেখাবে, ইংরেজি ভ্যালু যাবে backend এ)
+    // ক্যাটাগরি লিস্ট (বাংলা দেখাবে, ইংরেজি ভ্যালু backend এ যাবে)
     const categories = [
         { label: "অর্গানিক খাবার", value: "organic_food" },
         { label: "গেজেট", value: "gazette" },
@@ -140,6 +130,9 @@ export function AddProduct() {
         { label: "ইলেকট্রনিক্স", value: "electronics" },
         { label: "সোর্সিং সার্ভিস", value: "sourcing_service" },
         { label: "সাজসজ্জা", value: "decorate" },
+        { label: "হোম এন্ড হেলথি", value: "home_and_healthy" },  // 🆕 নতুন
+        { label: "মা ও শিশু", value: "mother_and_baby" },        // 🆕 নতুন
+        { label: "লাইফস্টাইল", value: "life_style" },            // 🆕 নতুন
         { label: "অন্যান্য", value: "others" },
     ];
 
@@ -188,7 +181,7 @@ export function AddProduct() {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4 sm:p-0 p-2">
             <h3 className="text-lg font-semibold mb-3">🆕 নতুন পণ্য যোগ করুন</h3>
 
             <input type="text" name="name" placeholder="পণ্যের নাম" onChange={handleChange} className="w-full border p-2 rounded-lg dark:bg-gray-700 dark:text-gray-100" />

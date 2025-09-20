@@ -1,9 +1,10 @@
 'use client'
-import { Phone, Mail, MapPin, Facebook, Twitter, Instagram } from 'lucide-react';
+import { Phone, Mail, MapPin, Facebook, Instagram } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FaWhatsapp } from 'react-icons/fa';
 
 export default function ContactPage() {
     const [loading, setLoading] = useState(false);
@@ -69,9 +70,9 @@ export default function ContactPage() {
 
                     <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mt-6">🌐 সোশ্যাল মিডিয়া</h3>
                     <div className="flex gap-4 mt-2">
-                        <a href="#" className="text-blue-600 hover:text-blue-800"><Facebook /></a>
-                        <a href="#" className="text-sky-500 hover:text-sky-700"><Twitter /></a>
-                        <a href="#" className="text-pink-500 hover:text-pink-700"><Instagram /></a>
+                        <a href="https://www.facebook.com/abdullahonlineshoppingbd" className="text-blue-600 hover:text-blue-800"><Facebook /></a>
+                        <a href="https://wa.link/eefh9h" className="text-sky-500 hover:text-sky-700 text-2xl"><FaWhatsapp/></a>
+                        <a href="#" className="text-pink-500 mt-1 hover:text-pink-700"><Instagram /></a>
                     </div>
                 </motion.div>
 

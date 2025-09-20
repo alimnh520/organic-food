@@ -23,7 +23,7 @@ export default function Header() {
             <div className="max-w-7xl mx-auto px-3 md:px-12 lg:px-16 flex justify-between items-center h-14 sm:h-16">
                 {/* লোগো */}
                 <div className="flex items-center gap-3">
-                    <img src="/logo/Polish_20250919_010532269.png" alt="লোগো" className="sm:h-12 w-10 sm:w-12 h-10 object-contain" />
+                    <img src="/logo/my-logo.jpg" alt="লোগো" className="sm:h-12 w-10 sm:w-12 h-10 -mt-1 object-contain" />
                     <div className="flex flex-col text-yellow-600 items-center justify-center">
                         <p className='logo-font underline text-[17px] font-bold sm:text-2xl mt-1 '>ABDULLAH ONLINE SHOP</p>
                         <p className='text-xs logo-font'>BELIEVE . QUALITY . SERVICE</p>

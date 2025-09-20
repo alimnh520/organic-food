@@ -8,12 +8,12 @@ const Animation = () => {
     const [activeIndex, setActiveIndex] = useState(0);
 
     const animateImg = [
-        { img: "/animation/animate1.png", number: "-1" },
-        { img: "/animation/animate2.png", number: "-2" },
-        { img: "/animation/animate3.png", number: "-3" },
-        { img: "/animation/animate4.png", number: "-4" },
-        { img: "/animation/animate5.png", number: "-5" },
-
+        { img: "/animation/banner.jpg", text: '', number: "-1" },
+        { img: "/animation/sell.jpg", text: '', number: "-2" },
+        { img: "/animation/animate2.png", text: 'গ্যাজেট', number: "-3" },
+        { img: "/animation/animate3.png", text: 'ইলেকট্রনিক্স', number: "-4" },
+        { img: "/animation/animate4.png", text: 'হোম এন্ড হেলদি', number: "-5" },
+        { img: "/animation/animate1.png", text: 'অর্গানিক ফুড', number: "-6" },
     ];
 
     const handleNext = () => {
@@ -41,9 +41,9 @@ const Animation = () => {
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: 20, scale: 0.8 }}
                             transition={{ duration: 0.5 }}
-                            className="sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-center px-4 leading-10 italic logo-font text-2xl mt-2 text-yellow-400"
+                            className="sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-center px-4 leading-10 italic logo-font text-2xl mt-2 text-yellow-400 absolute top-0 left-0"
                         >
-                            <p className='italic logo-font text-lg sm:text-5xl mt-2.5 text-yellow-400'>ABDULLAH ONLINE SHOP</p>
+                            <p className='italic logo-font text-lg sm:text-5xl mt-2.5 text-yellow-600'>{animateImg[activeIndex].text}</p>
                         </motion.div>
                         <div className="absolute w-full bottom-0">
                             <NoticeHeadline />

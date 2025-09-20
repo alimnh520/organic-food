@@ -24,7 +24,7 @@ export function AddNotice() {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4 sm:p-0 p-2">
             <h3 className="text-lg font-semibold mb-3">📢 নতুন নোটিশ লিখুন</h3>
             <input type="text" placeholder="নোটিশ শিরোনাম" value={notice} className="w-full border p-2 rounded-lg" onChange={(e) => setNotice(e.target.value)} />
             <button type="submit" className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg">{loading ? "লোড হচ্ছে..." : "📢 প্রকাশ করুন"}</button>

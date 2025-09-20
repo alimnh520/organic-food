@@ -2,7 +2,8 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Facebook, Twitter, Instagram, Mail, Phone, MapPin } from 'lucide-react';
+import { Facebook, Instagram, Mail, Phone, MapPin } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 
 export default function Footer() {
     return (
@@ -13,9 +14,9 @@ export default function Footer() {
                     <div className="space-y-4">
                         <div className="flex items-center gap-2">
                             <img
-                                src="/logo/Polish_20250919_010532269.png"
+                                src="/logo/my-logo.jpg"
                                 alt="Logo"
-                                className="h-12 w-12 rounded-full object-cover shadow-md"
+                                className="h-12 w-12 object-cover shadow-md"
                             />
                             <p className="logo-font text-yellow-400 font-bold">
                                ABDULLAH ONLINE SHOP
@@ -72,11 +73,11 @@ export default function Footer() {
 
                         {/* Socials */}
                         <div className="flex gap-3 mt-3">
-                            <a href="#" className="p-2 bg-gray-100 dark:bg-gray-800 rounded-full hover:bg-green-100 dark:hover:bg-green-700 transition">
+                            <a href="https://www.facebook.com/abdullahonlineshoppingbd" className="p-2 bg-gray-100 dark:bg-gray-800 rounded-full hover:bg-green-100 dark:hover:bg-green-700 transition">
                                 <Facebook className="w-5 h-5 text-blue-600" />
                             </a>
-                            <a href="#" className="p-2 bg-gray-100 dark:bg-gray-800 rounded-full hover:bg-green-100 dark:hover:bg-green-700 transition">
-                                <Twitter className="w-5 h-5 text-sky-500" />
+                            <a href="https://wa.link/eefh9h" className="p-2 bg-gray-100 dark:bg-gray-800 rounded-full hover:bg-green-100 dark:hover:bg-green-700 transition">
+                                <FaWhatsapp className="w-5 h-5 text-sky-500" />
                             </a>
                             <a href="#" className="p-2 bg-gray-100 dark:bg-gray-800 rounded-full hover:bg-green-100 dark:hover:bg-green-700 transition">
                                 <Instagram className="w-5 h-5 text-pink-500" />

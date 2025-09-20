@@ -68,7 +68,7 @@ const Notifications = ({ active }) => {
 
             {/* 🔔 Notification Dropdown */}
             {showNotification && (
-                <div className="w-64 rounded-md z-20 overflow-y-auto max-h-72 bg-white dark:bg-gray-700 absolute right-0 mt-2 shadow-lg">
+                <div className="w-64 rounded-md overflow-y-auto max-h-72 bg-white dark:bg-gray-700 absolute right-0 mt-2 shadow-lg">
                     {notifications.length === 0 ? (
                         <p className="text-center text-gray-500 py-4">কোনো নোটিফিকেশন নেই</p>
                     ) : (

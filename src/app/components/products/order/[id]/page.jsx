@@ -29,13 +29,11 @@ export default function OrderPage() {
     // 🛒 Context থেকে পণ্য খুঁজে নেওয়া
     useEffect(() => {
         let productArray = [];
-
         if (Array.isArray(products)) {
             productArray = products;
         } else if (products?.data && Array.isArray(products.data)) {
             productArray = products.data;
         }
-
         const prod = productArray.find(p => p._id === productId);
         setProduct(prod);
     }, [products, productId]);
@@ -49,7 +47,6 @@ export default function OrderPage() {
                     fetch(process.env.NEXT_PUBLIC_DISTRICT),
                     fetch(process.env.NEXT_PUBLIC_UPAZILLA),
                 ]);
-
                 const divData = await divRes.json();
                 const disData = await disRes.json();
                 const upzData = await upzRes.json();
@@ -70,6 +67,11 @@ export default function OrderPage() {
         if (type === 'dec' && quantity > 1) setQuantity(quantity - 1);
     };
 
+    // ডিসকাউন্ট প্রাইস ক্যালকুলেট
+    const discountedPrice = product?.discount && product.discount > 0
+        ? Math.round(product.price - (product.price * product.discount) / 100)
+        : product?.price;
+
     const handleOrder = async () => {
         if (!name || !mobile || !selectedDivision || !selectedDistrict || !selectedUpazilla || !address) {
             toast.error('সব তথ্য পূরণ করুন!', { position: "bottom-right" });
@@ -81,9 +83,9 @@ export default function OrderPage() {
             productId: product._id,
             productName: product.product_name,
             productImage: product.product_image,
-            price: product.price,
+            price: discountedPrice, // এখানে ডিসকাউন্ট প্রাইস ব্যবহার
             quantity,
-            totalPrice: product.price * quantity,
+            totalPrice: discountedPrice * quantity, // ডিসকাউন্ট প্রাইস দিয়ে টোটাল
             name,
             mobile,
             division: divisionList.find(d => d.BBS_CODE === selectedDivision)?.NAME,
@@ -137,14 +139,17 @@ export default function OrderPage() {
                     <img src={product.product_image} alt={product.product_name} className="w-full md:w-1/3 h-64 object-cover rounded-xl shadow-lg" />
                     <div className="flex-1 space-y-3">
                         <h2 className="text-2xl font-semibold">{product.product_name}</h2>
-                        <p className="text-green-600 font-bold text-xl">৳ {product.price}</p>
+                        <div className="flex items-center gap-x-2">
+                            <p className="text-green-600 font-bold text-xl">৳ {discountedPrice}</p>
+                            {product.discount && product.discount > 0 && <p className="text-gray-500 line-through">৳ {product.price}</p>}
+                        </div>
                         <p className="text-gray-500">স্টক: {product.stock}</p>
 
                         <div className="flex items-center gap-4 mt-2">
                             <button onClick={() => handleQuantity('dec')} className="bg-gray-200 px-4 py-2 rounded-lg hover:bg-gray-300">-</button>
                             <span className="text-lg font-semibold">{quantity}</span>
                             <button onClick={() => handleQuantity('inc')} className="bg-gray-200 px-4 py-2 rounded-lg hover:bg-gray-300">+</button>
-                            <span className="ml-auto font-bold text-green-600">Total: ৳ {product.price * quantity}</span>
+                            <span className="ml-auto font-bold text-green-600">Total: ৳ {discountedPrice * quantity}</span>
                         </div>
                     </div>
                 </div>

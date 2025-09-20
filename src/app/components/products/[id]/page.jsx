@@ -22,6 +22,11 @@ export default function ProductDetails() {
         return <p className="text-center text-red-500 py-12">❌ কোনো পণ্য পাওয়া যায়নি</p>;
     }
 
+    // ডিসকাউন্ট প্রাইস ক্যালকুলেট
+    const discountedPrice = product.discount && product.discount > 0
+        ? Math.round(product.price - (product.price * product.discount) / 100)
+        : null;
+
     return (
         <motion.div
             className="max-w-5xl mx-auto py-12 px-4 sm:px-6 lg:px-8"
@@ -47,11 +52,24 @@ export default function ProductDetails() {
                         {product.details && (
                             <p className="text-gray-700 dark:text-gray-300 mt-2">{product.details}</p>
                         )}
-                        <p className="text-2xl font-semibold text-blue-600 mt-4">💰 ৳ {product.price}</p>
+
+                        {/* দাম + ডিসকাউন্ট */}
+                        {discountedPrice ? (
+                            <div className="mt-4">
+                                <div className="flex items-center gap-x-2">
+                                    <p className="text-2xl font-semibold text-blue-600">💰 ৳ {discountedPrice}</p>
+                                    <p className="text-gray-500 line-through">৳ {product.price}</p>
+                                </div>
+                                <p className="text-red-500 text-sm">ছাড়: {product.discount}%</p>
+                            </div>
+                        ) : (
+                            <p className="text-2xl font-semibold text-blue-600 mt-4">💰 ৳ {product.price}</p>
+                        )}
+
                         <p className="text-gray-500 mt-1">স্টক: {product.stock}</p>
                     </div>
 
-                    <Link href={`/components/products/order/${product._id}`}>
+                    <Link href={`/components/products/order/${product._id}?price=${discountedPrice ?? product.price}`}>
                         <button className="mt-6 w-full px-6 py-3 flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-xl shadow-lg transition-transform transform hover:scale-105">
                             <ShoppingCart className="w-5 h-5" /> এখনই অর্ডার করুন
                         </button>
