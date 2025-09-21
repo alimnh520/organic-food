@@ -9,6 +9,8 @@ import Notifications from "./Notification";
 import AllProducts from "./Products";
 import { AddNotice } from "./AddNotice";
 import { AllMessage } from "./Messages";
+import { FaKey, FaMailBulk } from "react-icons/fa";
+import ChangePassword from "./Password";
 
 export default function Dashboard() {
     const [activeTab, setActiveTab] = useState("orders");
@@ -42,7 +44,8 @@ export default function Dashboard() {
                     <SidebarButton label="নতুন পণ্য" icon={<PlusCircle className="w-5 h-5" />} active={activeTab === "add-product"} onClick={() => { setActiveTab("add-product"); setSidebarOpen(false); }} />
                     <SidebarButton label="সকল পণ্য" icon={<List className="w-5 h-5" />} active={activeTab === "products"} onClick={() => { setActiveTab("products"); setSidebarOpen(false); }} />
                     <SidebarButton label="নতুন নোটিশ" icon={<Megaphone className="w-5 h-5" />} active={activeTab === "add-notice"} onClick={() => { setActiveTab("add-notice"); setSidebarOpen(false); }} />
-                    <SidebarButton label="সকল বার্তা" icon={<List className="w-5 h-5" />} active={activeTab === "notices"} onClick={() => { setActiveTab("notices"); setSidebarOpen(false); }} />
+                    <SidebarButton label="সকল বার্তা" icon={<FaMailBulk className="w-5 h-5" />} active={activeTab === "notices"} onClick={() => { setActiveTab("notices"); setSidebarOpen(false); }} />
+                    <SidebarButton label="নতুন পাসওয়ার্ড" icon={<FaKey className="w-5 h-5" />} active={activeTab === "password"} onClick={() => { setActiveTab("password"); setSidebarOpen(false); }} />
                 </nav>
             </aside>
 
@@ -85,6 +88,7 @@ export default function Dashboard() {
                     {activeTab === "products" && <AllProducts />}
                     {activeTab === "add-notice" && <AddNotice />}
                     {activeTab === "notices" && <AllMessage />}
+                    {activeTab === "password" && <ChangePassword/>}
                 </motion.div>
             </main>
 
