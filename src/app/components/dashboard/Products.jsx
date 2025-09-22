@@ -135,7 +135,7 @@ export default function AllProducts() {
                                 className="w-full h-full object-cover transition-transform duration-500 transform hover:scale-110"
                             />
                         </div>
-                        <h2 className="text-xl font-semibold mt-2 text-gray-800 dark:text-gray-100">{product.product_name}</h2>
+                        <h2 className="text-xl break-words font-semibold mt-2 text-gray-800 dark:text-gray-100">{product.product_name}</h2>
 
                         {/* দাম */}
                         {editingProductId === product._id ? (

@@ -53,7 +53,7 @@ export default function OfferProductsPage() {
                                     className="w-full h-40 object-cover rounded-md"
                                 />
                             </Link>
-                            <h4 className="mt-3 font-semibold text-gray-800 dark:text-gray-100">
+                            <h4 className="mt-3 truncate font-semibold text-gray-800 dark:text-gray-100">
                                 {p.product_name}
                             </h4>
 

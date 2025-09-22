@@ -48,7 +48,7 @@ export default function ProductDetails() {
                 {/* ডিটেইলস */}
                 <div className="w-full md:w-1/2 p-6 flex flex-col justify-between space-y-4">
                     <div>
-                        <h1 className="text-3xl font-bold text-green-600">{product.product_name}</h1>
+                        <h1 className="text-3xl break-words font-bold text-green-600">{product.product_name}</h1>
                         {product.details && (
                             <p className="text-gray-700 dark:text-gray-300 mt-2">{product.details}</p>
                         )}

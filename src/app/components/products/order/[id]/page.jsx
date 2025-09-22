@@ -121,9 +121,9 @@ export default function OrderPage() {
     if (!product) return <p className="text-center py-12">লোড হচ্ছে...</p>;
 
     return (
-        <div className="max-w-3xl mx-auto py-12 px-6">
+        <div className="max-w-3xl mx-auto py-5 px-6">
             <motion.h1
-                className="text-4xl font-bold text-green-600 mb-10 text-center"
+                className="sm:text-3xl text-xl font-bold text-green-600 mb-10 text-center"
                 initial={{ opacity: 0, y: -30 }}
                 animate={{ opacity: 1, y: 0 }}
             >
@@ -138,7 +138,7 @@ export default function OrderPage() {
                 <div className="flex flex-col md:flex-row gap-6">
                     <img src={product.product_image} alt={product.product_name} className="w-full md:w-1/3 h-64 object-cover rounded-xl shadow-lg" />
                     <div className="flex-1 space-y-3">
-                        <h2 className="text-2xl font-semibold">{product.product_name}</h2>
+                        <h2 className="text-2xl break-words font-semibold">{product.product_name}</h2>
                         <div className="flex items-center gap-x-2">
                             <p className="text-green-600 font-bold text-xl">৳ {discountedPrice}</p>
                             {product.discount && product.discount > 0 && <p className="text-gray-500 line-through">৳ {product.price}</p>}

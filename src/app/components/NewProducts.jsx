@@ -57,7 +57,7 @@ export default function NewProducts() {
                                 </Link>
                             </div>
                             <div className="p-4 space-y-2">
-                                <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">{product.product_name}</h2>
+                                <h2 className="text-lg truncate font-semibold text-gray-800 dark:text-gray-100">{product.product_name}</h2>
                                 <p className="text-green-600 font-bold">৳ {product.price}</p>
                                 <p className="text-gray-500 dark:text-gray-400">স্টক: {product.stock}</p>
                                 <div className="flex justify-between mt-2">

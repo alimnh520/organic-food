@@ -96,7 +96,7 @@ export default function MostSoldProduct() {
                                         </Link>
                                     </div>
                                     <div className="p-4 space-y-2">
-                                        <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
+                                        <h2 className="text-lg truncate font-semibold text-gray-800 dark:text-gray-100">
                                             {product.product_name}
                                         </h2>
 
