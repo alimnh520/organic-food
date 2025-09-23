@@ -18,12 +18,16 @@ export async function generateMetadata({ params }) {
                 description: "এই পণ্যটি এখন আর পাওয়া যাচ্ছে না।",
             };
         }
+        const discountedPrice = product.discount && product.discount > 0
+            ? Math.round(product.price - (product.price * product.discount) / 100)
+            : null;
 
         return {
             title: product.product_name,
             description: product.details,
             openGraph: {
                 title: product.product_name,
+                price: `${discountedPrice ? discountedPrice : product.price}৳`,
                 description: product.details,
                 url: `https://yourdomain.com/components/products/${id}`,
                 images: [
