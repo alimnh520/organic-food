@@ -28,8 +28,8 @@ export async function generateMetadata({ params }) {
             description: product.details,
             openGraph: {
                 title: product.product_name,
-                description: product.details,
                 price: `৳${discountedPrice ? discountedPrice : product.price}`,
+                description: product.details,
                 url: `https://yourdomain.com/components/products/${id}`,
                 images: [
                     {
