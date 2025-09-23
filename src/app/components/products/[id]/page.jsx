@@ -24,11 +24,12 @@ export async function generateMetadata({ params }) {
 
         return {
             title: product.product_name,
+            price: `৳${discountedPrice ? discountedPrice : product.price}`,
             description: product.details,
             openGraph: {
                 title: product.product_name,
-                price: `${discountedPrice ? discountedPrice : product.price}৳`,
                 description: product.details,
+                price: `৳${discountedPrice ? discountedPrice : product.price}`,
                 url: `https://yourdomain.com/components/products/${id}`,
                 images: [
                     {
