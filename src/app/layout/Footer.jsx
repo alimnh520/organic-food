@@ -19,7 +19,7 @@ export default function Footer() {
                                 className="h-12 w-12 object-cover shadow-md"
                             />
                             <p className="logo-font text-yellow-400 font-bold">
-                               ABDULLAH ONLINE SHOP
+                                ABDULLAH ONLINE SHOP
                             </p>
                         </div>
                         <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-300">
@@ -35,18 +35,29 @@ export default function Footer() {
                         <h4 className="font-semibold text-lg text-gray-800 dark:text-gray-100 mb-2">
                             📸 আমাদের গ্যালারী
                         </h4>
-                        <div className="grid sm:grid-cols-2 gap-3">
+                        <div className="sm:h-64 h-auto grid sm:grid-cols-2 sm:grid-rows-2 gap-4">
                             <img
-                                src="/logo/3bfd2104-d49d-478b-b2a4-a543f4ac5537 .jpg"
+                                src="/logo/whatsapp1.jpg"
                                 alt="sample1"
-                                className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300"
+                                className="w-full h-full object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-300"
+                            />
+                            <img
+                                src="/logo/whatsapp2.jpg"
+                                alt="sample2"
+                                className="w-full h-full object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-300"
+                            />
+                            <img
+                                src="/logo/whatsapp4.jpg"
+                                alt="sample3"
+                                className="w-full h-full object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-300"
                             />
                             <img
                                 src="/logo/090b9ce4-2a30-4fae-83d2-4e9f43748.jpg"
-                                alt="sample2"
-                                className="rounded-lg h-full shadow-md hover:scale-105 transition-transform duration-300"
+                                alt="sample4"
+                                className="w-full h-full object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-300"
                             />
                         </div>
+
                     </div>
 
                     {/* Quick Links / Contact */}

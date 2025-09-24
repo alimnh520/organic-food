@@ -5,7 +5,6 @@ export async function generateMetadata({ params }) {
     const { id } = await params
 
     try {
-        // 🔥 API থেকে ডাটা আনবো (তোর নিজের /api/products/[id] endpoint থেকে)
         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/${id}`, {
             cache: "no-store", // যাতে fresh ডাটা আসে
         });
@@ -24,23 +23,27 @@ export async function generateMetadata({ params }) {
 
         return {
             title: product.product_name,
-            price: `৳${discountedPrice ? discountedPrice : product.price}`,
             description: product.details,
             openGraph: {
                 title: product.product_name,
-                price: `৳${discountedPrice ? discountedPrice : product.price}`,
                 description: product.details,
                 url: `https://yourdomain.com/components/products/${id}`,
                 images: [
                     {
-                        url: product.product_image, // ✅ DB এর ইমেজ
+                        url: product.product_image,
                         width: 1200,
                         height: 630,
                         alt: product.product_name,
                     },
                 ],
+                type: "product",
+            },
+            other: {
+                "product:price:amount": discountedPrice ? discountedPrice : product.price,
+                "product:price:currency": "BDT",
             },
         };
+
     } catch (err) {
         console.error(err);
         return {

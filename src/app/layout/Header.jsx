@@ -19,7 +19,7 @@ export default function Header() {
     ];
 
     return (
-        <header className="w-full bg-white shadow-md fixed top-0 left-0 z-50">
+        <header className="w-full bg-gray-900 shadow-md fixed top-0 left-0 z-50">
             <div className="max-w-7xl mx-auto px-3 md:px-12 lg:px-16 flex justify-between items-center h-14 sm:h-16">
                 {/* লোগো */}
                 <div className="flex items-center gap-3">
@@ -36,10 +36,10 @@ export default function Header() {
                         <Link
                             key={link.name}
                             href={link.href}
-                            className="text-gray-800  relative group font-medium transition"
+                            className=" text-white relative group font-medium transition"
                         >
                             {link.name}
-                            <span className={`absolute left-0 ${pathName === link.href && "w-full"} -bottom-1 w-0 h-0.5 bg-gray-800 transition-all group-hover:w-full`}></span>
+                            <span className={`absolute left-0 ${pathName === link.href && "w-full"} -bottom-1 w-0 h-0.5 bg-white transition-all group-hover:w-full`}></span>
                         </Link>
                     ))}
                 </nav>
