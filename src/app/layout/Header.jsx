@@ -48,7 +48,7 @@ export default function Header() {
                 <div className="md:hidden mt-2">
                     <button
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        className="text-gray-800 "
+                        className="text-gray-200 "
                     >
                         {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                     </button>
@@ -71,7 +71,7 @@ export default function Header() {
                                     key={link.name}
                                     href={link.href}
                                     onClick={() => setMobileMenuOpen(false)}
-                                    className="text-gray-800  hover:text-gray-800 font-medium transition"
+                                    className="text-gray-400  hover:text-gray-400 font-medium transition"
                                 >
                                     {link.name}
                                 </Link>
