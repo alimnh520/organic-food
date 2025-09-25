@@ -16,11 +16,11 @@ export default function Footer() {
                             <img
                                 src="/logo/my-logo.jpg"
                                 alt="Logo"
-                                className="h-12 w-12 object-cover shadow-md"
+                                className="h-20 object-cover shadow-md"
                             />
-                            <p className="logo-font text-yellow-400 font-bold">
+                            {/* <p className="logo-font text-yellow-400 font-bold">
                                 ABDULLAH ONLINE SHOP
-                            </p>
+                            </p> */}
                         </div>
                         <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-300">
                             🌱 অর্গানিক ফুড, 🏥 মেডিকেল সরঞ্জাম ও 🔌 মানসম্মত ইলেকট্রনিক্স — সবই এক ছাদের নিচে।<br />

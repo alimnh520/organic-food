@@ -18,7 +18,7 @@ export default function NoticeHeadline() {
                 initial={{ x: "100%" }}
                 animate={{ x: "-100%" }}
                 transition={{ repeat: Infinity, duration: 40, ease: "linear" }}
-                className="whitespace-nowrap text-white text-lg font-semibold"
+                className="whitespace-nowrap text-white text-2xl font-semibold"
             >
                 {notice ? notice.text : 'Loading....'}
             </motion.div>

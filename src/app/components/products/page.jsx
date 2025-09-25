@@ -123,7 +123,7 @@ export default function Page() {
             </div>
 
             {/* পণ্য গ্রিড */}
-            <div className="grid grid-cols-1 mt-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-9">
+            <div className="grid grid-cols-1 mt-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-4 gap-y-6">
                 <AnimatePresence>
                     {filteredProducts.slice().reverse().map((product) => {
                         const discountedPrice = product.discount && product.discount > 0
@@ -140,8 +140,8 @@ export default function Page() {
                                 whileHover={{ scale: 1.05 }}
                                 className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden relative cursor-pointer"
                             >
-                                <div className="relative overflow-hidden h-48">
-                                    <div className="absolute top-2 left-2 z-20 bg-white/90 dark:bg-black/70 px-2 py-1 rounded-full flex items-center gap-2 text-xs shadow">
+                                <div className="relative overflow-hidden h-52">
+                                    <div className="absolute top-2 right-2 z-20 bg-white/90 dark:bg-black/70 px-2 py-1 rounded-full flex items-center gap-2 text-xs shadow">
                                         <Eye className="w-4 h-4 text-gray-600 dark:text-gray-200" />
                                         <span className="text-gray-700 dark:text-gray-100">{product.viewCount ?? 0}</span>
                                     </div>
@@ -149,17 +149,17 @@ export default function Page() {
                                         <img
                                             src={product.product_image}
                                             alt={product.product_name}
-                                            className="w-full h-full object-cover transition-transform duration-500 transform hover:scale-110"
+                                            className="h-full transition-transform duration-500 transform hover:scale-110"
                                         />
                                     </Link>
                                 </div>
 
-                                <div className="p-4 space-y-2">
+                                <div className="p-2">
                                     <h2 className="text-lg truncate font-semibold text-gray-800 dark:text-gray-100">{product.product_name}</h2>
 
                                     {/* দাম + ডিসকাউন্ট */}
                                     {discountedPrice ? (
-                                        <div>
+                                        <div className='flex items-center gap-x-3'>
                                             <div className="flex items-center gap-x-2">
                                                 <p className="text-green-600 font-bold">৳ {discountedPrice}</p>
                                                 <p className="text-gray-500 line-through">৳ {product.price}</p>
@@ -170,12 +170,21 @@ export default function Page() {
                                         <p className="text-green-600 font-bold">৳ {product.price}</p>
                                     )}
 
-                                    <p className="text-gray-500 dark:text-gray-400">স্টক: {product.stock}</p>
+                                    <div className="flex items-center gap-x-2">
+                                        <p className="text-gray-500 dark:text-gray-400">স্টক: {product.stock}</p>
+                                        <p className="text-gray-500 truncate dark:text-gray-400 flex items-center gap-2">
+                                            <span className="w-0.5 h-4 bg-gray-200 -mt-1"></span>
+                                            বিক্রিত হয়েছে: {product?.soldCount}
+                                            {/* <span className="text-yellow-500">
+                                                {"⭐".repeat(Math.min(5, Math.floor(product?.soldCount || 0)))}
+                                            </span> */}
+                                        </p>
+                                    </div>
 
                                     <div className="flex justify-between mt-2">
                                         <button
                                             onClick={() => toggleWhitelist(product)}
-                                            className={`flex items-center gap-1 px-3 py-1 rounded transition ${isWhitelisted(product._id)
+                                            className={`flex items-center gap-1 px-2 text-sm py-1 rounded transition ${isWhitelisted(product._id)
                                                 ? 'bg-red-500 text-white'
                                                 : 'bg-red-100 hover:bg-red-200 text-red-500'
                                                 }`}
@@ -187,7 +196,7 @@ export default function Page() {
                                         </button>
 
                                         <Link href={`/components/products/order/${product._id}`}>
-                                            <button className="flex items-center gap-1 px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded">
+                                            <button className="flex items-center gap-1 px-2 text-sm py-1 bg-blue-500 hover:bg-blue-600 text-white rounded">
                                                 <ShoppingCart className="w-4 h-4" /> অর্ডার
                                             </button>
                                         </Link>

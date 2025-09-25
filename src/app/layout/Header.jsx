@@ -19,14 +19,14 @@ export default function Header() {
     ];
 
     return (
-        <header className="w-full bg-gray-900 shadow-md fixed top-0 left-0 z-50">
-            <div className="max-w-7xl mx-auto px-3 md:px-12 lg:px-16 flex justify-between items-center h-14 sm:h-16">
+        <header className="w-full bg-black shadow-md fixed top-0 left-0 z-50">
+            <div className="max-w-7xl mx-auto px-3 md:px-12 lg:px-16 flex justify-between items-center h-16 sm:h-20">
                 {/* লোগো */}
                 <div className="flex items-center gap-3">
-                    <img src="/logo/my-logo.jpg" alt="লোগো" className="sm:h-12 w-10 sm:w-12 h-10 -mt-1 object-contain" />
+                    <img src="/logo/my-logo.jpg" alt="লোগো" className="sm:h-20 h-16 -mt-0.5 object-contain" />
                     <div className="flex flex-col text-yellow-600 items-center justify-center">
-                        <p className='logo-font underline text-[17px] font-bold sm:text-2xl mt-1 '>ABDULLAH ONLINE SHOP</p>
-                        <p className='text-xs logo-font'>BELIEVE . QUALITY . SERVICE</p>
+                        {/* <p className='logo-font underline text-[17px] font-bold sm:text-2xl mt-1 '>ABDULLAH ONLINE SHOP</p>
+                        <p className='text-xs logo-font'>BELIEVE . QUALITY . SERVICE</p> */}
                     </div>
                 </div>
 
@@ -71,7 +71,7 @@ export default function Header() {
                                     key={link.name}
                                     href={link.href}
                                     onClick={() => setMobileMenuOpen(false)}
-                                    className="text-gray-400  hover:text-gray-400 font-medium transition"
+                                    className="text-gray-200  hover:text-gray-200 font-medium transition"
                                 >
                                     {link.name}
                                 </Link>

@@ -3,10 +3,11 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { ShoppingCart } from 'lucide-react'
+import Zoom from 'react-medium-image-zoom'
+import 'react-medium-image-zoom/dist/styles.css'
 
 export default function ProductDetails({ product }) {
 
-    // যদি product null বা undefined হয়
     if (!product) {
         return (
             <p className="text-center text-red-500 py-12 text-lg">
@@ -15,7 +16,6 @@ export default function ProductDetails({ product }) {
         )
     }
 
-    // ডিসকাউন্ট প্রাইস ক্যালকুলেট
     const discountedPrice = product.discount && product.discount > 0
         ? Math.round(product.price - (product.price * product.discount) / 100)
         : null
@@ -29,13 +29,15 @@ export default function ProductDetails({ product }) {
         >
             <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row gap-6">
 
-                {/* ছবি */}
+                {/* ছবি (জুম সহ) */}
                 <div className="w-full md:w-1/2 flex items-center justify-center bg-gray-50 dark:bg-gray-700 p-4">
-                    <img
-                        src={product.product_image || "/logo/placeholder.jpg"}
-                        alt={product.product_name || "Product Image"}
-                        className="w-full h-[400px] md:h-[500px] object-contain rounded-xl shadow-lg"
-                    />
+                    <Zoom>
+                        <img
+                            src={product.product_image || "/logo/placeholder.jpg"}
+                            alt={product.product_name || "Product Image"}
+                            className="h-[400px] md:h-[500px] object-contain rounded-xl shadow-lg cursor-zoom-in"
+                        />
+                    </Zoom>
                 </div>
 
                 {/* ডিটেইলস */}

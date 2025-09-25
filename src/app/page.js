@@ -2,7 +2,6 @@ import React from 'react'
 import Animation from './components/Animations'
 import AllProducts from './components/AllProducts'
 import FeaturesPage from './components/FeaturePage'
-import MostSoldProduct from './components/MostSoldProduct'
 import CategoriesPage from './components/Category'
 import OfferProductsPage from './components/OfferedProduct'
 
@@ -12,7 +11,6 @@ const page = () => {
       <Animation />
       <CategoriesPage/>
       <OfferProductsPage/>
-      <MostSoldProduct/>
       <AllProducts/>
       <FeaturesPage/>
     </div>

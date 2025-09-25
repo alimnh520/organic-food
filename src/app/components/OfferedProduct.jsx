@@ -40,17 +40,17 @@ export default function OfferProductsPage() {
                 </p>
             ) : (
                 <div
-                    className="flex gap-6 overflow-x-scroll scroll-bar pb-4">
+                    className="flex gap-4 overflow-x-scroll scroll-bar pb-4">
                     {products.map((p) => (
                         <div
                             key={p._id}
-                            className="flex-shrink-0 w-60 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4"
+                            className="flex-shrink-0 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-md p-2"
                         >
                             <Link href={`/components/products/${p._id}`}>
                                 <img
                                     src={p.product_image}
                                     alt={p.product_name}
-                                    className="w-full h-40 object-cover rounded-md"
+                                    className=" h-44 rounded-md"
                                 />
                             </Link>
                             <h4 className="mt-3 truncate font-semibold text-gray-800 dark:text-gray-100">
@@ -59,7 +59,7 @@ export default function OfferProductsPage() {
 
                             {/* আসল দাম + ডিসকাউন্টেড দাম */}
                             {p.discount > 0 ? (
-                                <div className="mt-1">
+                                <div className="mt-1 flex items-center gap-x-3">
                                     <div className="flex items-center gap-x-2">
                                         <p className="text-green-600 font-bold">
                                             ৳ {Math.round(p.price - (p.price * p.discount) / 100)}
@@ -75,6 +75,16 @@ export default function OfferProductsPage() {
                             ) : (
                                 <p className="text-green-600 font-bold">৳ {p.price}</p>
                             )}
+                            <div className="flex items-center gap-x-2">
+                                <p className="text-gray-500 dark:text-gray-400">স্টক: {p.stock}</p>
+                                <p className="text-gray-500 truncate dark:text-gray-400 flex items-center gap-2">
+                                    <span className="w-0.5 h-4 bg-gray-200 -mt-1"></span>
+                                    বিক্রিত হয়েছে: {p?.soldCount}
+                                    {/* <span className="text-yellow-500">
+                                                {"⭐".repeat(Math.min(5, Math.floor(product?.soldCount || 0)))}
+                                            </span> */}
+                                </p>
+                            </div>
 
                             {/* 🛒 অর্ডার বাটন */}
                             <div className="mt-3">

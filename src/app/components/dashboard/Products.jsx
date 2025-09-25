@@ -116,14 +116,14 @@ export default function AllProducts() {
         <div className="max-w-6xl mx-auto py-3 px-6">
             <h1 className="sm:text-3xl text-xl font-bold text-green-600 mb-8 text-center">📦 সকল পণ্য</h1>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {products?.slice().reverse().map(product => (
                     <motion.div
                         key={product._id}
-                        className="bg-white shadow-md rounded-xl p-5 dark:bg-gray-800"
+                        className="bg-white shadow-md rounded-xl p-3 dark:bg-gray-800"
                         whileHover={{ scale: 1.02 }}
                     >
-                        <div className="relative overflow-hidden h-48">
+                        <div className="relative overflow-hidden h-56">
                             <div className="absolute top-2 left-2 z-20 bg-white/90 dark:bg-black/70 px-2 py-1 rounded-full flex items-center gap-2 text-xs shadow">
                                 <Eye className="w-4 h-4 text-gray-600 dark:text-gray-200" />
                                 <span className="text-gray-700 dark:text-gray-100">{product.viewCount ?? 0}</span>
@@ -132,7 +132,7 @@ export default function AllProducts() {
                             <img
                                 src={product.product_image}
                                 alt={product.product_name}
-                                className="w-full h-full object-cover transition-transform duration-500 transform hover:scale-110"
+                                className="h-full transition-transform duration-500 transform hover:scale-110"
                             />
                         </div>
                         <h2 className="text-xl break-words font-semibold mt-2 text-gray-800 dark:text-gray-100">{product.product_name}</h2>
@@ -174,7 +174,17 @@ export default function AllProducts() {
                                 />
                             </div>
                         ) : (
-                            <p className="text-gray-600 dark:text-gray-300 mt-1">📦 স্টক: {product.stock}</p>
+
+                            <div className="flex items-center gap-x-2">
+                                <p className="text-gray-600 dark:text-gray-300 mt-1">📦 স্টক: {product.stock}</p>
+                                <p className="text-gray-500 truncate dark:text-gray-400 flex items-center gap-2">
+                                    <span className="w-0.5 h-4 bg-gray-200 -mt-1"></span>
+                                    বিক্রিত হয়েছে: {product?.soldCount}
+                                    {/* <span className="text-yellow-500">
+                                                {"⭐".repeat(Math.min(5, Math.floor(product?.soldCount || 0)))}
+                                            </span> */}
+                                </p>
+                            </div>
                         )}
 
                         {/* ডিসকাউন্ট */}

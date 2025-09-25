@@ -9,12 +9,13 @@ const Animation = () => {
     const [visitor, setVisitor] = useState('');
 
     const animateImg = [
-        { img: "/animation/ads.jpg", text: '', number: "-1" },
-        { img: "/animation/discount.jpg", text: '', number: "-2" },
-        { img: "/animation/animate2.png", text: 'গ্যাজেট', number: "-3" },
-        { img: "/animation/animate3.png", text: 'ইলেকট্রনিক্স', number: "-4" },
-        { img: "/animation/animate4.png", text: 'হোম এন্ড হেলদি', number: "-5" },
-        { img: "/animation/animate1.png", text: 'অর্গানিক ফুড', number: "-6" },
+        { img: "/animation/7777.jpg", text: '', number: "-1" },
+        { img: "/animation/5555.jpg", text: '', number: "-2" },
+        { img: "/animation/6666.jpg", text: '', number: "-3" },
+        { img: "/animation/4444.jpg", text: '', number: "-4" },
+        { img: "/animation/3333.jpg", text: '', number: "-5" },
+        { img: "/animation/2222.jpg", text: '', number: "-6" },
+        { img: "/animation/1111.jpg", text: '', number: "-7" },
     ];
 
     const handleNext = () => {
@@ -52,7 +53,7 @@ const Animation = () => {
                 className="flex-1 bg-cover bg-center relative rounded-lg overflow-hidden"
                 style={{ backgroundImage: `url(${animateImg[activeIndex].img})` }}
             >
-                <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                <div className="absolute inset-0 flex items-center justify-center">
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={activeIndex} // change triggers animation

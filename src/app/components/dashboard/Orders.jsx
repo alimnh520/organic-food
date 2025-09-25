@@ -49,26 +49,28 @@ export default function Orders() {
             </h1>
 
             {/* Orders Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4">
                 {orders.length > 0 ? (
                     orders.slice().reverse().map((order) => (
                         <motion.div
                             key={order._id}
-                            className="bg-gradient-to-br from-white to-green-50 border border-green-100 shadow-xl rounded-2xl p-5 cursor-pointer hover:shadow-2xl transition transform hover:-translate-y-2"
+                            className="bg-gradient-to-br break-words from-white to-green-50 border border-green-100 shadow-xl rounded-2xl p-2 cursor-pointer hover:shadow-2xl transition transform hover:-translate-y-2"
                             whileHover={{ scale: 1.02 }}
                             onClick={() => setSelectedOrder(order)}
                         >
                             <img
                                 src={order.productImage}
                                 alt={order.productName}
-                                className="w-full h-44 object-cover rounded-xl mb-4 shadow-md"
+                                className="h-46 rounded-xl mb-4 shadow-md"
                             />
                             <h2 className="text-xl font-semibold text-gray-800">{order.productName}</h2>
                             <p className="text-green-600 font-bold mt-1">
                                 ৳ {order.totalPrice} ({order.quantity} pcs)
                             </p>
-                            <p className="text-sm text-gray-500 mt-1">👤 {order.name}</p>
-                            <p className="text-xs text-gray-400">📅 {new Date(order.date).toLocaleDateString()}</p>
+                            <div className="flex items-center gap-x-2">
+                                <p className="text-sm text-gray-500">👤 {order.name}</p>
+                                <p className="text-xs text-gray-400">📅 {new Date(order.date).toLocaleDateString()}</p>
+                            </div>
                             {order.status && (
                                 <p className="mt-2">
                                     <span
@@ -96,13 +98,13 @@ export default function Orders() {
             <AnimatePresence>
                 {selectedOrder && (
                     <motion.div
-                        className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+                        className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-2"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                     >
                         <motion.div
-                            className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 relative overflow-y-auto max-h-[90vh]"
+                            className="bg-white rounded-2xl flex flex-col shadow-2xl max-w-lg w-full p-6 relative overflow-y-auto max-h-[90vh]"
                             initial={{ scale: 0.8 }}
                             animate={{ scale: 1 }}
                             exit={{ scale: 0.8 }}
@@ -119,7 +121,7 @@ export default function Orders() {
                             <img
                                 src={selectedOrder.productImage}
                                 alt={selectedOrder.productName}
-                                className="w-full h-56 object-cover rounded-xl mb-4 shadow"
+                                className=" h-56 self-center rounded-xl mb-4 shadow"
                             />
                             <h2 className="text-2xl font-bold text-gray-800 mb-2">
                                 {selectedOrder.productName}
