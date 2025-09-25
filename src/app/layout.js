@@ -6,7 +6,7 @@ export const metadata = {
   title: "Abdullah Online Shop",
   description: "Abdullah Online Shop is a Online shopping center. You can order many product from here",
   icons: {
-    icon: '/Polish_20250919_010532269.png'
+    icon: '/my-logo.jpg'
   }
 };
 
