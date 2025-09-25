@@ -49,10 +49,13 @@ export default function AllProducts() {
     };
 
     return (
-        <div className="py-4 px-5 sm:px-0 flex flex-col gap-y-5">
-            <h1 className="sm:text-3xl text-xl font-bold text-green-600 mb-5 w-full pb-2 border-b border-b-green-600">সকল পণ্য</h1>
+        <div className="py-4 px-3 sm:px-5 flex flex-col gap-y-5">
+            <h1 className="text-xl sm:text-3xl font-bold text-green-600 mb-3 sm:mb-5 w-full pb-2 border-b border-b-green-600">
+                সকল পণ্য
+            </h1>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-x-4 gap-y-6">
+            {/* grid ঠিক করা */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
                 <AnimatePresence>
                     {products.slice().reverse().map((product) => {
                         const discountedPrice = product.discount && product.discount > 0
@@ -69,63 +72,66 @@ export default function AllProducts() {
                                 whileHover={{ scale: 1.05 }}
                                 className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden relative cursor-pointer"
                             >
-                                <div className="relative overflow-hidden h-60">
-                                    <div className="absolute top-2 right-2 z-20 bg-white/90 dark:bg-black/70 px-2 py-1 rounded-full flex items-center gap-2 text-xs shadow">
-                                        <Eye className="w-4 h-4 text-gray-600 dark:text-gray-200" />
+                                {/* Product Image */}
+                                <div className="relative overflow-hidden h-36 sm:h-48 flex justify-center items-center">
+                                    <div className="absolute top-2 right-2 z-20 bg-white/90 dark:bg-black/70 px-2 py-1 rounded-full flex items-center gap-1 text-[10px] sm:text-xs shadow">
+                                        <Eye className="w-3 h-3 sm:w-4 sm:h-4 text-gray-600 dark:text-gray-200" />
                                         <span className="text-gray-700 dark:text-gray-100">{product.viewCount ?? 0}</span>
                                     </div>
                                     <Link href={`/components/products/${product._id}`} onClick={(e) => handleProductClick(e, product._id, `/components/products/${product._id}`)}>
                                         <img
                                             src={product.product_image}
                                             alt={product.product_name}
-                                            className="h-full transition-transform duration-500 transform hover:scale-110"
+                                            className="h-full w-full object-cover transition-transform duration-500 transform hover:scale-110"
                                         />
                                     </Link>
                                 </div>
-                                <div className="p-2">
-                                    <h2 className="text-lg truncate font-semibold text-gray-800 dark:text-gray-100">{product.product_name}</h2>
+
+                                {/* Product Details */}
+                                <div className="p-2 space-y-1">
+                                    <h2 className="text-sm sm:text-base truncate font-semibold text-gray-800 dark:text-gray-100">
+                                        {product.product_name}
+                                    </h2>
 
                                     {/* দাম + ডিসকাউন্ট */}
                                     {discountedPrice ? (
-                                        <div className='flex items-center gap-x-3'>
-                                            <div className="flex items-center gap-x-2">
-                                                <p className="text-green-600 font-bold">৳ {discountedPrice}</p>
-                                                <p className="text-gray-500 line-through">৳ {product.price}</p>
+                                        <div className='flex items-center gap-x-2 sm:gap-x-3'>
+                                            <div className="flex items-center gap-x-1 sm:gap-x-2">
+                                                <p className="text-green-600 text-sm sm:text-base font-bold">৳ {discountedPrice}</p>
+                                                <p className="text-gray-500 line-through text-xs sm:text-sm">৳ {product.price}</p>
                                             </div>
-                                            <p className="text-red-500 text-sm">ছাড়: {product.discount}%</p>
+                                            <p className="text-red-500 text-xs sm:text-sm">ছাড়: {product.discount}%</p>
                                         </div>
                                     ) : (
-                                        <p className="text-green-600 font-bold">৳ {product.price}</p>
+                                        <p className="text-green-600 font-bold text-sm sm:text-base">৳ {product.price}</p>
                                     )}
 
-                                    <div className="flex items-center gap-x-2">
+                                    <div className="flex flex-wrap items-center gap-x-2 text-xs sm:text-sm">
                                         <p className="text-gray-500 dark:text-gray-400">স্টক: {product.stock}</p>
-                                        <p className="text-gray-500 truncate dark:text-gray-400 flex items-center gap-2">
-                                            <span className="w-0.5 h-4 bg-gray-200 -mt-1"></span>
+                                        <p className="text-gray-500 dark:text-gray-400 flex items-center gap-1 truncate">
+                                            <span className="w-0.5 h-4 bg-gray-200 hidden sm:inline-block"></span>
                                             বিক্রিত হয়েছে: {product?.soldCount}
-                                            {/* <span className="text-yellow-500">
-                                                {"⭐".repeat(Math.min(5, Math.floor(product?.soldCount || 0)))}
-                                            </span> */}
                                         </p>
                                     </div>
 
-                                    <div className="flex justify-between mt-2">
+                                    {/* Buttons */}
+                                    <div className="flex justify-between mt-2 gap-2">
                                         <button
                                             onClick={() => toggleWhitelist(product)}
-                                            className={`flex items-center gap-1 px-2 text-sm py-1 rounded transition ${isWhitelisted(product._id)
+                                            className={`flex items-center sm:w-auto w-16 gap-1 px-2 py-1 text-xs sm:text-sm rounded transition ${isWhitelisted(product._id)
                                                 ? 'bg-red-500 text-white'
                                                 : 'bg-red-100 hover:bg-red-200 text-red-500'
                                                 }`}
                                         >
                                             <Heart
-                                                className={`w-4 h-4 ${isWhitelisted(product._id) ? 'text-white' : 'text-red-500'}`}
+                                                className={`w-3 hidden sm:inline h-3 sm:w-4 sm:h-4 ${isWhitelisted(product._id) ? 'text-white' : 'text-red-500'}`}
                                             />
                                             হোয়াটলিস্ট
                                         </button>
 
-                                        <Link href={`/components/products/order/${product._id}`}>
-                                            <button className="flex items-center gap-1 px-2 text-sm py-1 bg-blue-500 hover:bg-blue-600 text-white rounded">
-                                                <ShoppingCart className="w-4 h-4" /> অর্ডার
+                                        <Link href={`/components/products/order/${product._id}`} className="flex-1">
+                                            <button className="w-full flex items-center justify-center gap-1 px-2 py-1 text-xs sm:text-sm bg-blue-500 hover:bg-blue-600 text-white rounded">
+                                                <ShoppingCart className="w-3 h-3 sm:w-4 sm:h-4" /> অর্ডার
                                             </button>
                                         </Link>
                                     </div>
@@ -138,7 +144,7 @@ export default function AllProducts() {
 
             <div className="self-center mt-5">
                 <Link href="/components/products"
-                    className="px-6 py-4 bg-green-500 text-white font-semibold rounded-lg"
+                    className="px-4 sm:px-6 py-2 sm:py-3 bg-green-500 text-white text-sm sm:text-base font-semibold rounded-lg"
                 >
                     ➕ আরো দেখুন
                 </Link>

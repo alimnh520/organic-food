@@ -94,12 +94,12 @@ export default function WhiteList() {
                             <motion.div
                                 key={idx}
                                 whileHover={{ scale: 1.05 }}
-                                className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden relative transition"
+                                className="bg-white dark:bg-gray-800 break-words rounded-lg shadow-md overflow-hidden relative transition"
                             >
                                 <img
                                     src={order.productImage}
                                     alt={order.productName}
-                                    className="w-full h-48 object-cover"
+                                    className="h-48"
                                 />
                                 <div className="p-4 space-y-2">
                                     <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">

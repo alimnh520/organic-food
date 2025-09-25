@@ -71,7 +71,7 @@ export default function Header() {
                                     key={link.name}
                                     href={link.href}
                                     onClick={() => setMobileMenuOpen(false)}
-                                    className="text-gray-200  hover:text-gray-200 font-medium transition"
+                                    className="text-gray-800  hover:text-gray-900 font-medium transition"
                                 >
                                     {link.name}
                                 </Link>

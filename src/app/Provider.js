@@ -43,7 +43,7 @@ const Provider = ({ children }) => {
         <div className="">
             <UserContext.Provider value={{ products }}>
                 {path !== '/login' && <Header />}
-                <div className='sm:mt-20 mt-16'>{children}</div>
+                <div className='mt-20'>{children}</div>
                 {!hiddenPath.includes(path) && <Footer />}
             </UserContext.Provider>
         </div>

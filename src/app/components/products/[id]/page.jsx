@@ -28,18 +28,19 @@ export async function generateMetadata({ params }) {
                 title: product.product_name || "পণ্য",
                 description: product.details || "বিস্তারিত পাওয়া যায়নি।",
                 url: `${process.env.NEXT_PUBLIC_BASE_URL}/components/products/${id}`,
-                images: product.product_image
-                    ? [
-                        {
-                            url: product.product_image,
-                            width: 1200,
-                            height: 630,
-                            alt: product.product_name || "Product Image",
-                        },
-                    ]
-                    : [],
-                type: "website", // ✅ corrected
+                images: [
+                    {
+                        url: product.product_image?.startsWith("http")
+                            ? product.product_image
+                            : `${process.env.NEXT_PUBLIC_BASE_URL}${product.product_image}`,
+                        width: 1200,
+                        height: 630,
+                        alt: product.product_name || "Product Image",
+                    },
+                ],
+                type: "website",
             },
+
             other: {
                 "product:price:amount": discountedPrice,
                 "product:price:currency": "BDT",

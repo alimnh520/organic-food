@@ -6,7 +6,7 @@ export const metadata = {
   title: "Abdullah Online Shop",
   description: "Abdullah Online Shop is a Online shopping center. You can order many product from here",
   icons: {
-    icon: '/my-logo.jpg'
+    icon: '/my-logo.jpg '
   }
 };
 

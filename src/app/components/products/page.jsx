@@ -123,12 +123,14 @@ export default function Page() {
             </div>
 
             {/* পণ্য গ্রিড */}
-            <div className="grid grid-cols-1 mt-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-4 gap-y-6">
+            {/* পণ্য গ্রিড */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 mt-2">
                 <AnimatePresence>
                     {filteredProducts.slice().reverse().map((product) => {
-                        const discountedPrice = product.discount && product.discount > 0
-                            ? Math.round(product.price - (product.price * product.discount) / 100)
-                            : null;
+                        const discountedPrice =
+                            product.discount && product.discount > 0
+                                ? Math.round(product.price - (product.price * product.discount) / 100)
+                                : null;
 
                         return (
                             <motion.div
@@ -138,66 +140,63 @@ export default function Page() {
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: 50 }}
                                 whileHover={{ scale: 1.05 }}
-                                className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden relative cursor-pointer"
+                                className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden relative cursor-pointer"
                             >
-                                <div className="relative overflow-hidden h-52">
-                                    <div className="absolute top-2 right-2 z-20 bg-white/90 dark:bg-black/70 px-2 py-1 rounded-full flex items-center gap-2 text-xs shadow">
-                                        <Eye className="w-4 h-4 text-gray-600 dark:text-gray-200" />
+                                {/* ছবি */}
+                                <div className="relative overflow-hidden h-36 sm:h-48 flex justify-center items-center">
+                                    <div className="absolute top-2 right-2 z-20 bg-white/90 dark:bg-black/70 px-2 py-1 rounded-full flex items-center gap-1 text-[10px] sm:text-xs shadow">
+                                        <Eye className="w-3 h-3 sm:w-4 sm:h-4 text-gray-600 dark:text-gray-200" />
                                         <span className="text-gray-700 dark:text-gray-100">{product.viewCount ?? 0}</span>
                                     </div>
                                     <Link href={`/components/products/${product._id}`} onClick={(e) => handleProductClick(e, product._id, `/components/products/${product._id}`)}>
                                         <img
                                             src={product.product_image}
                                             alt={product.product_name}
-                                            className="h-full transition-transform duration-500 transform hover:scale-110"
+                                            className="h-full w-full object-cover transition-transform duration-500 transform hover:scale-110"
                                         />
                                     </Link>
                                 </div>
-
+                                {/* কনটেন্ট */}
                                 <div className="p-2">
-                                    <h2 className="text-lg truncate font-semibold text-gray-800 dark:text-gray-100">{product.product_name}</h2>
+                                    <h2 className="text-sm truncate font-semibold text-gray-800 dark:text-gray-100">
+                                        {product.product_name}
+                                    </h2>
 
                                     {/* দাম + ডিসকাউন্ট */}
                                     {discountedPrice ? (
-                                        <div className='flex items-center gap-x-3'>
-                                            <div className="flex items-center gap-x-2">
-                                                <p className="text-green-600 font-bold">৳ {discountedPrice}</p>
-                                                <p className="text-gray-500 line-through">৳ {product.price}</p>
-                                            </div>
-                                            <p className="text-red-500 text-sm">ছাড়: {product.discount}%</p>
+                                        <div className="flex items-center gap-x-2">
+                                            <p className="text-green-600 font-bold text-sm">৳ {discountedPrice}</p>
+                                            <p className="text-gray-500 line-through text-xs">৳ {product.price}</p>
+                                            <p className="text-red-500 text-[11px]">-{product.discount}%</p>
                                         </div>
                                     ) : (
-                                        <p className="text-green-600 font-bold">৳ {product.price}</p>
+                                        <p className="text-green-600 font-bold text-sm">৳ {product.price}</p>
                                     )}
 
-                                    <div className="flex items-center gap-x-2">
+                                    <div className="flex items-center gap-x-2 text-xs mt-1">
                                         <p className="text-gray-500 dark:text-gray-400">স্টক: {product.stock}</p>
-                                        <p className="text-gray-500 truncate dark:text-gray-400 flex items-center gap-2">
-                                            <span className="w-0.5 h-4 bg-gray-200 -mt-1"></span>
-                                            বিক্রিত হয়েছে: {product?.soldCount}
-                                            {/* <span className="text-yellow-500">
-                                                {"⭐".repeat(Math.min(5, Math.floor(product?.soldCount || 0)))}
-                                            </span> */}
-                                        </p>
+                                        <span className="w-px h-3 bg-gray-200"></span>
+                                        <p className="text-gray-500 dark:text-gray-400">বিক্রি: {product?.soldCount}</p>
                                     </div>
 
+                                    {/* বোতাম */}
                                     <div className="flex justify-between mt-2">
                                         <button
                                             onClick={() => toggleWhitelist(product)}
-                                            className={`flex items-center gap-1 px-2 text-sm py-1 rounded transition ${isWhitelisted(product._id)
+                                            className={`flex items-center sm:w-auto w-16 gap-1 px-2 py-1 text-xs sm:text-sm rounded transition ${isWhitelisted(product._id)
                                                 ? 'bg-red-500 text-white'
                                                 : 'bg-red-100 hover:bg-red-200 text-red-500'
                                                 }`}
                                         >
                                             <Heart
-                                                className={`w-4 h-4 ${isWhitelisted(product._id) ? 'text-white' : 'text-red-500'}`}
+                                                className={`w-3 hidden sm:inline h-3 sm:w-4 sm:h-4 ${isWhitelisted(product._id) ? 'text-white' : 'text-red-500'}`}
                                             />
                                             হোয়াটলিস্ট
                                         </button>
 
                                         <Link href={`/components/products/order/${product._id}`}>
-                                            <button className="flex items-center gap-1 px-2 text-sm py-1 bg-blue-500 hover:bg-blue-600 text-white rounded">
-                                                <ShoppingCart className="w-4 h-4" /> অর্ডার
+                                            <button className="flex items-center gap-1 px-2 text-[11px] py-1 bg-blue-500 hover:bg-blue-600 text-white rounded">
+                                                <ShoppingCart className="w-3 h-3" /> অর্ডার
                                             </button>
                                         </Link>
                                     </div>
@@ -207,6 +206,7 @@ export default function Page() {
                     })}
                 </AnimatePresence>
             </div>
+
 
             {filteredProducts.length === 0 && (
                 <p className="text-center text-gray-500 py-8">❌ কোনো পণ্য পাওয়া যায়নি</p>
