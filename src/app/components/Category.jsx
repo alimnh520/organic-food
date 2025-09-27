@@ -11,11 +11,11 @@ export default function CategoriesPage() {
         { label: "মেডিকেল সরঞ্জাম", value: "medical_equipments", image: "/categories/medicine-elements-tools_667648-1830.jpg" },
         { label: "ফ্যাশন", value: "fashion", image: "/categories/1600w-ABoOPrHi6D8.webp" },
         { label: "ইলেকট্রনিক্স", value: "electronics", image: "/categories/applications-of-electronics.png" },
-        { label: "সোর্সিং সার্ভিস", value: "sourcing_service", image: "/categories/AdobeStock_124121137-1568x1045.jpeg" },
         { label: "সাজসজ্জা", value: "decorate", image: "/categories/living-room-rug-shelves-7b5d7a52-dcb3e3a7b7e04df99893aeaa76f57d08.jpg" },
         { label: "হেলথ্ এন্ড বিউটি", value: "home_and_healthy", image: "/categories/health-beauty-studio-vector-logo-stroke-pink-rose-flower-illustration-brand-lettering-95564351.webp" }, // 🆕
         { label: "মা ও শিশু", value: "mother_and_baby", image: "/categories/360_F_455448048_94bxabQM0jCJA3zXMn7cAUfV4U01Ok8f.jpg" },        // 🆕
-        { label: "লাইফস্টাইল", value: "life_style", image: "/categories/lifestyle-logo-design-template-5e8c38a6b91aff44f6a05638a8dc7d1d_screen.jpg" },              // 🆕
+        { label: "লাইফস্টাইল", value: "life_style", image: "/categories/lifestyle-logo-design-template-5e8c38a6b91aff44f6a05638a8dc7d1d_screen.jpg" },
+        { label: "সোর্সিং সার্ভিস", value: "sourcing_service", image: "/categories/AdobeStock_124121137-1568x1045.jpeg" },             // 🆕
         { label: "অন্যান্য", value: "others", image: "/categories/VJwzw5IGgePKH9vjq8XxocT3aiVxIdntOW9Ww81v.png" },
     ];
 

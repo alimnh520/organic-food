@@ -7,7 +7,7 @@ import OfferProductsPage from './components/OfferedProduct'
 
 const page = () => {
   return (
-    <div className='mx-auto flex flex-col sm:w-10/12 w-full gap-y-5 bg-white sm:px-4 sm:pt-4'>
+    <div className='mx-auto flex flex-col sm:w-[1180px] w-full gap-y-5 bg-white sm:px-4 sm:pt-4'>
       <Animation />
       <CategoriesPage/>
       <OfferProductsPage/>

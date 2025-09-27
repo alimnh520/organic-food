@@ -21,11 +21,11 @@ export default function Page() {
         { label: "মেডিকেল সরঞ্জাম", value: "medical_equipments" },
         { label: "ফ্যাশন", value: "fashion" },
         { label: "ইলেকট্রনিক্স", value: "electronics" },
-        { label: "সোর্সিং সার্ভিস", value: "sourcing_service" },
         { label: "সাজসজ্জা", value: "decorate" },
         { label: "হেলথ্ এন্ড বিউটি", value: "home_and_healthy" },  // 🆕 নতুন
         { label: "মা ও শিশু", value: "mother_and_baby" },        // 🆕 নতুন
-        { label: "লাইফস্টাইল", value: "life_style" },            // 🆕 নতুন
+        { label: "লাইফস্টাইল", value: "life_style" },
+        { label: "সোর্সিং সার্ভিস", value: "sourcing_service" },         // 🆕 নতুন
         { label: "অন্যান্য", value: "others" },
     ];
 
@@ -152,7 +152,7 @@ export default function Page() {
                                         <img
                                             src={product.product_image}
                                             alt={product.product_name}
-                                            className="h-full w-full object-cover transition-transform duration-500 transform hover:scale-110"
+                                            className="h-36 sm:h-48 transition-transform duration-500 transform hover:scale-110"
                                         />
                                     </Link>
                                 </div>

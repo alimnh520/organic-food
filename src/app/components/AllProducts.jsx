@@ -82,7 +82,7 @@ export default function AllProducts() {
                                         <img
                                             src={product.product_image}
                                             alt={product.product_name}
-                                            className="h-full w-full object-cover transition-transform duration-500 transform hover:scale-110"
+                                            className="h-36 sm:h-48 transition-transform duration-500 transform hover:scale-110"
                                         />
                                     </Link>
                                 </div>
