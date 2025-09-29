@@ -140,7 +140,7 @@ export default function AllProducts() {
                                             <Heart
                                                 className={`w-3 hidden sm:inline h-3 sm:w-4 sm:h-4 ${isWhitelisted(product._id) ? 'text-white' : 'text-red-500'}`}
                                             />
-                                            হোয়াটলিস্ট
+                                            Add to cart
                                         </button>
 
                                         <Link href={`/components/products/order/${product._id}`} className="flex-1">

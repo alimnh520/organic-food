@@ -27,7 +27,7 @@ export default function Dashboard() {
                 <div className="flex justify-between items-center mb-8">
 
                     <div className="flex items-center gap-x-3">
-                        <img src="/logo/my-logo.jpg" alt="লোগো" className="w-10 h-10 object-contain" />
+                        <img src="/my-logo.jpg" alt="লোগো" className="w-10 h-10 object-contain" />
                         <h1 className="text-2xl font-bold text-center mt-2"> ড্যাশবোর্ড</h1>
                     </div>
 

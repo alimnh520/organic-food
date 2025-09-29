@@ -25,7 +25,7 @@ export function AllMessage() {
 
     const handleDelete = async (id) => {
         try {
-            const res = await fetch(`/api/message`, {
+            const res = await fetch(`/api/messages`, {
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ id })

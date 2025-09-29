@@ -1,6 +1,7 @@
 'use client'
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Mail, MapPin, Phone } from "lucide-react";
 
 export default function Orders() {
     const [orders, setOrders] = useState([]);
@@ -98,38 +99,54 @@ export default function Orders() {
             <AnimatePresence>
                 {selectedOrder && (
                     <motion.div
-                        className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-2"
+                        className="fixed inset-0 bg-black/70 py-10 overflow-auto backdrop-blur-sm flex items-center justify-center z-50 p-2"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                     >
                         <motion.div
-                            className="bg-white rounded-2xl flex flex-col shadow-2xl max-w-lg w-full p-6 relative overflow-y-auto max-h-[90vh]"
-                            initial={{ scale: 0.8 }}
+                            className="bg-white rounded-2xl top-60 flex flex-col shadow-2xl relative print-area"
+                            initial={{ scale: 0.9 }}
                             animate={{ scale: 1 }}
-                            exit={{ scale: 0.8 }}
+                            exit={{ scale: 0.9 }}
+                            style={{
+                                width: "794px",   // A4 width
+                                height: "1123px", // A4 height
+                                padding: "32px",
+                                overflow: "hidden" // scroll ছাড়াই A4 ফিট করবে
+                            }}
                         >
                             {/* Close button */}
                             <button
-                                className="absolute top-1.5 right-2 text-gray-500 hover:text-red-500 text-xl"
+                                className="absolute top-1.5 right-2 text-gray-500 hover:text-red-500 text-xl no-print"
                                 onClick={() => setSelectedOrder(null)}
                             >
                                 ✖
                             </button>
 
+                            {/* 🛍️ Shop Logo */}
+                            <div className="flex justify-center mb-4 border-b pb-3">
+                                <img
+                                    src="/logo/my-logo.jpg"
+                                    alt="Shop Logo"
+                                    className="h-16 object-contain"
+                                />
+                            </div>
+
                             {/* Order Details */}
                             <img
                                 src={selectedOrder.productImage}
                                 alt={selectedOrder.productName}
-                                className=" h-56 self-center rounded-xl mb-4 shadow"
+                                className="h-56 self-center rounded-xl mb-4 shadow-lg"
                             />
-                            <h2 className="text-2xl font-bold text-gray-800 mb-2">
+                            <h2 className="text-2xl font-bold text-gray-800 mb-2 text-center">
                                 {selectedOrder.productName}
                             </h2>
-                            <p className="text-green-600 font-bold text-lg mb-4">
+                            <p className="text-green-600 font-bold text-lg mb-4 text-center">
                                 ৳ {selectedOrder.totalPrice} ({selectedOrder.quantity} pcs)
                             </p>
-                            <div className="space-y-2 text-gray-700">
+
+                            <div className="space-y-2 text-gray-700 text-base">
                                 <p><span className="font-semibold">👤 ক্রেতার নাম:</span> {selectedOrder.name}</p>
                                 <p><span className="font-semibold">📞 মোবাইল:</span> {selectedOrder.mobile}</p>
                                 <p><span className="font-semibold">🌍 বিভাগ:</span> {selectedOrder.division}</p>
@@ -142,7 +159,7 @@ export default function Orders() {
 
                             {/* ✅ Confirm / Reject Buttons */}
                             {!["confirmed", "rejected"].includes(selectedOrder.status) && (
-                                <div className="mt-6 flex gap-4">
+                                <div className="mt-6 flex gap-4 no-print">
                                     <button
                                         className="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-lg transition"
                                         onClick={() => updateOrderStatus(selectedOrder._id, "confirmed")}
@@ -168,10 +185,41 @@ export default function Orders() {
                                 </p>
                             )}
 
+                            {/* 🖨️ Print Button */}
+                            <div className="mt-6 flex justify-center no-print">
+                                <button
+                                    className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-6 py-2 rounded-lg shadow transition"
+                                    onClick={() => window.print()}
+                                >
+                                    🖨️ Print
+                                </button>
+                            </div>
+
+                            {/* 🏬 Shop Address */}
+                            <div className="mt-6 text-center text-gray-600 border-t pt-3 text-sm space-y-2">
+                                <p>🏬 আমাদের ঠিকানা:</p>
+                                <div className="flex flex-col gap-y-1">
+                                    <div className="flex items-center gap-3">
+                                        <Phone className="text-green-500 w-5 h-5" />
+                                        <p className="text-gray-700">+880 1566-099299, +880 1813-623629</p>
+                                    </div>
+
+                                    <div className="flex items-center gap-3">
+                                        <Mail className="text-green-500 w-5 h-5" />
+                                        <p className="text-gray-700">khandokarabdullahbd@gmail.com</p>
+                                    </div>
+
+                                    <div className="flex items-center gap-3">
+                                        <MapPin className="text-green-500 w-5 h-5" />
+                                        <p className="text-gray-700">৩৩, লবনচরা বান্দাবাজার, শিপইয়ার্ড রোড, খুলনা</p>
+                                    </div>
+                                </div>
+                            </div>
                         </motion.div>
                     </motion.div>
                 )}
             </AnimatePresence>
+
         </div>
     );
 }

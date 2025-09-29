@@ -16,8 +16,6 @@ export default function OfferProductsPage() {
                     // শুধু যেগুলোর ডিসকাউন্ট আছে সেগুলো নিয়ে আসবো
                     const filtered = data.message
                         .filter(p => p.discount && p.discount > 0)
-                        .sort((a, b) => b.discount - a.discount) // বেশি ডিসকাউন্ট আগে
-                        .slice(0, 10); // সর্বোচ্চ 20 টা
                     setProducts(filtered);
                 }
             } catch (err) {
@@ -28,13 +26,10 @@ export default function OfferProductsPage() {
     }, []);
 
     return (
-        <div className="py-3 px-5 sm:px-0 flex flex-col gap-y-5">
-            <div className="flex items-center justify-between">
-                <h1 className="sm:text-3xl text-xl font-bold text-green-600 mb-5 w-full pb-2 border-b border-b-green-600">
-                    🎉 ফ্লাস সেল
-                </h1>
-                <Link href='/components/offered' className="w-32 px-2 py-2 bg-green-600 rounded-md text-white -mt-4">আরো দেখুন</Link>
-            </div>
+        <div className="py-6 px-5 sm:px-8 mx-auto flex flex-col sm:w-10/12 w-full bg-white dark:bg-gray-900 gap-y-6">
+            <h1 className="sm:text-3xl text-xl font-bold text-green-600 mb-5 w-full pb-2 border-b border-b-green-600">
+                🎉 ফ্লাস সেল
+            </h1>
 
             {products.length === 0 ? (
                 <p className="text-center text-gray-500">
@@ -42,7 +37,7 @@ export default function OfferProductsPage() {
                 </p>
             ) : (
                 <div
-                    className="flex gap-4 overflow-x-scroll scroll-bar pb-4">
+                    className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
                     {products.map((p) => (
                         <div
                             key={p._id}

@@ -14,7 +14,7 @@ export default function Header() {
         { name: 'পণ্য', href: '/components/products' },
         { name: 'আমাদের সম্পর্কে', href: '/components/about' },
         { name: 'যোগাযোগ', href: '/components/contact' },
-        { name: 'আমার হোয়াইটলিস্ট', href: '/components/whitelist' },
+        { name: 'আমার কার্ড', href: '/components/whitelist' },
         { name: 'ড্যাশবোর্ড', href: '/components/dashboard' },
     ];
 

@@ -61,22 +61,54 @@ export async function GET() {
 // 🟢 প্রোডাক্ট আপডেট (price, stock, category, discount)
 export async function PATCH(request) {
     try {
-        const { price, stock, id, category, discount } = await request.json();
+        const formData = await request.formData();
 
-        if (price == null || stock == null) {
+        const id = formData.get("id");
+        const price = Number(formData.get("price"));
+        const stock = Number(formData.get("stock"));
+        const discount = Number(formData.get("discount")) || 0;
+        const category = formData.get("category");
+        const image_id = formData.get("image_id"); // পুরোনো ইমেজ আইডি
+        const newImage = formData.get("newImage"); // নতুন ইমেজ ফাইল
+
+        if (!id || isNaN(price) || isNaN(stock)) {
             return NextResponse.json({ success: false, message: "⚠️ দাম এবং স্টক দিন" });
         }
 
-        const updateData = { price, stock };
+        // আপডেট ডাটা
+        const updateData = { price, stock, discount };
         if (category) updateData.category = category;
-        if (discount !== undefined) updateData.discount = Number(discount) || 0;
+
+        // ✅ নতুন ছবি থাকলে পুরোনো ডিলিট + নতুন আপলোড
+        let updatedImageUrl = null;
+        let updatedImageId = null;
+
+        if (newImage && newImage.size > 0) {
+            // পুরোনো ইমেজ ডিলিট করো
+            if (image_id) {
+                await cloudinary.uploader.destroy(image_id, { resource_type: "image" });
+            }
+
+            // নতুন ইমেজ আপলোড করো
+            const uploadResult = await UploadImage(newImage); // { secure_url, public_id } রিটার্ন করবে
+            updatedImageUrl = uploadResult.secure_url;
+            updatedImageId = uploadResult.public_id;
+
+            updateData.product_image = updatedImageUrl;
+            updateData.image_id = updatedImageId;
+        }
 
         const collection = await getCollection("products");
         await collection.updateOne({ _id: new ObjectId(id) }, { $set: updateData });
 
-        return NextResponse.json({ success: true, message: "✅ পণ্য আপডেট হয়েছে!" });
+        return NextResponse.json({
+            success: true,
+            message: "✅ পণ্য আপডেট হয়েছে!",
+            updatedImage: updatedImageUrl,
+            updatedImageId: updatedImageId,
+        });
     } catch (err) {
-        console.error(err);
+        console.error("PATCH error:", err);
         return NextResponse.json({ success: false, message: "❌ সার্ভার এরর" });
     }
 }

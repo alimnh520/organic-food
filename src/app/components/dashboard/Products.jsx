@@ -14,6 +14,7 @@ export default function AllProducts() {
     const [discount, setDiscount] = useState('');
     const [loading, setLoading] = useState(false);
     const [isDelete, setIsDelete] = useState(false);
+    const [newImage, setNewImage] = useState(null);
 
     // ✅ Fetch all products
     useEffect(() => {
@@ -34,6 +35,7 @@ export default function AllProducts() {
         setPrice(product.price);
         setStock(product.stock);
         setDiscount(product.discount ?? 0);
+        setNewImage(null);
     };
 
     const cancelEditing = () => {
@@ -41,31 +43,41 @@ export default function AllProducts() {
         setPrice('');
         setStock('');
         setDiscount('');
+        setNewImage(null);
     };
 
-    // ✅ Save Changes (Update price, stock, discount)
-    const saveChanges = async (id) => {
+    // ✅ Save Changes (Update price, stock, discount, image)
+    const saveChanges = async (id, image_id) => {
         if (!price || !stock) {
             toast.error("দয়া করে দাম এবং স্টক ঠিকভাবে দিন!", { position: "bottom-right" });
             return;
         }
+
         setLoading(true);
         try {
+            const formData = new FormData();
+            formData.append("price", Number(price));
+            formData.append("stock", Number(stock));
+            formData.append("discount", Number(discount) || 0);
+            formData.append("id", id);
+            formData.append("image_id", image_id);
+
+            if (newImage) {
+                formData.append("newImage", newImage);
+            }
+
             const res = await fetch(`/api/products`, {
                 method: 'PATCH',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    price: Number(price),
-                    stock: Number(stock),
-                    discount: Number(discount) || 0,
-                    id
-                })
+                body: formData
             });
+
             const data = await res.json();
             if (data.success) {
                 toast.success("✅ পণ্য আপডেট হয়েছে!", { position: "bottom-right" });
                 setProducts(products.map(p =>
-                    p._id === id ? { ...p, price: Number(price), stock: Number(stock), discount: Number(discount) || 0 } : p
+                    p._id === id
+                        ? { ...p, price: Number(price), stock: Number(stock), discount: Number(discount) || 0, product_image: data.updatedImage || p.product_image }
+                        : p
                 ));
                 cancelEditing();
             } else {
@@ -139,15 +151,27 @@ export default function AllProducts() {
 
                         {/* দাম */}
                         {editingProductId === product._id ? (
-                            <div className="mt-2">
-                                <label className="block text-gray-600 dark:text-gray-300 text-sm">💰 দাম:</label>
-                                <input
-                                    type="number"
-                                    value={price}
-                                    onChange={(e) => setPrice(e.target.value)}
-                                    className="border px-2 py-1 rounded w-full dark:bg-gray-700 dark:text-gray-100"
-                                />
-                            </div>
+                            <>
+                                <div className="mt-2">
+                                    <label className="block text-gray-600 dark:text-gray-300 text-sm">💰 দাম:</label>
+                                    <input
+                                        type="number"
+                                        value={price}
+                                        onChange={(e) => setPrice(e.target.value)}
+                                        className="border px-2 py-1 rounded w-full dark:bg-gray-700 dark:text-gray-100"
+                                    />
+                                </div>
+
+                                <div className="mt-2">
+                                    <label className="block text-gray-600 dark:text-gray-300 text-sm">🖼️ নতুন ছবি:</label>
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={(e) => setNewImage(e.target.files[0])}
+                                        className="border px-2 py-1 rounded w-full dark:bg-gray-700 dark:text-gray-100"
+                                    />
+                                </div>
+                            </>
                         ) : (
                             <p className="text-gray-600 dark:text-gray-300 mt-1">
                                 💰 দাম:{" "}
@@ -174,15 +198,11 @@ export default function AllProducts() {
                                 />
                             </div>
                         ) : (
-
                             <div className="flex items-center gap-x-2">
                                 <p className="text-gray-600 dark:text-gray-300 mt-1">📦 স্টক: {product.stock}</p>
                                 <p className="text-gray-500 truncate dark:text-gray-400 flex items-center gap-2">
                                     <span className="w-0.5 h-4 bg-gray-200 -mt-1"></span>
                                     বিক্রিত হয়েছে: {product?.soldCount}
-                                    {/* <span className="text-yellow-500">
-                                                {"⭐".repeat(Math.min(5, Math.floor(product?.soldCount || 0)))}
-                                            </span> */}
                                 </p>
                             </div>
                         )}
@@ -208,7 +228,7 @@ export default function AllProducts() {
                             {editingProductId === product._id ? (
                                 <>
                                     <button
-                                        onClick={() => saveChanges(product._id)}
+                                        onClick={() => saveChanges(product._id, product.image_id)}
                                         disabled={loading}
                                         className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
                                     >

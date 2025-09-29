@@ -33,11 +33,11 @@ body {
 ::-webkit-scrollbar {
   display: none;
 }
-.scroll-bar::-webkit-scrollbar{
+.scroll-bar::-webkit-scrollbar {
   display: block;
   background-color: rgba(0, 0, 0, 0.196);
 }
-.scroll-bar::-webkit-scrollbar-thumb{
+.scroll-bar::-webkit-scrollbar-thumb {
   background-color: green;
   border-radius: 20px;
 }
@@ -69,6 +69,35 @@ body {
 .button-prev {
   left: 10px !important;
 }
-.logo-font{
+.logo-font {
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* @media print {
+  .no-print {
+    display: none !important;
+  }
+} */
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .print-area, .print-area * {
+    visibility: visible;
+  }
+  .print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  .no-print {
+    display: none !important;
+  }
 }
