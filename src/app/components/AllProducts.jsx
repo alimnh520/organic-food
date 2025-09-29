@@ -49,10 +49,14 @@ export default function AllProducts() {
     };
 
     return (
-        <div className="py-4 px-3 sm:px-5 flex flex-col gap-y-5">
-            <h1 className="text-xl sm:text-3xl font-bold text-green-600 mb-3 sm:mb-5 w-full pb-2 border-b border-b-green-600">
-                সকল পণ্য
-            </h1>
+        <div className="py-4 px-3 sm:px-0 flex flex-col gap-y-5">
+
+            <div className="flex items-center justify-between">
+                <h1 className="sm:text-3xl text-xl font-bold text-green-600 mb-5 w-full pb-2 border-b border-b-green-600">
+                    সকল পণ্য
+                </h1>
+                <Link href='/components/products' className="w-32 px-2 py-2 bg-green-600 rounded-md text-white -mt-6 sm:-mt-4">আরো দেখুন</Link>
+            </div>
 
             {/* grid ঠিক করা */}
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
@@ -118,7 +122,7 @@ export default function AllProducts() {
                                     <div className="flex justify-between mt-2 gap-2">
                                         <button
                                             onClick={() => toggleWhitelist(product)}
-                                            className={`flex items-center sm:w-auto w-16 gap-1 px-2 py-1 text-xs sm:text-sm rounded transition ${isWhitelisted(product._id)
+                                            className={`flex truncate items-center sm:w-auto w-16 gap-1 px-2 py-1 text-xs sm:text-sm rounded transition ${isWhitelisted(product._id)
                                                 ? 'bg-red-500 text-white'
                                                 : 'bg-red-100 hover:bg-red-200 text-red-500'
                                                 }`}
@@ -140,14 +144,6 @@ export default function AllProducts() {
                         );
                     })}
                 </AnimatePresence>
-            </div>
-
-            <div className="self-center mt-5">
-                <Link href="/components/products"
-                    className="px-4 sm:px-6 py-2 sm:py-3 bg-green-500 text-white text-sm sm:text-base font-semibold rounded-lg"
-                >
-                    ➕ আরো দেখুন
-                </Link>
             </div>
         </div>
     );

@@ -42,18 +42,18 @@ export default function WhiteList() {
             <div>
                 <h1 className="sm:text-3xl text-xl font-bold text-green-600 mb-5 text-center">আমার হোয়াইটলিস্ট</h1>
                 {wishlist.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
                         {wishlist.slice().reverse().map((product) => (
                             <motion.div
                                 key={product._id || product.id}
                                 whileHover={{ scale: 1.05 }}
-                                className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden relative transition"
+                                className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden relative cursor-pointer"
                             >
                                 <Link href={`/components/products/${product._id || product.id}`}>
                                     <img
                                         src={product.product_image || product.img}
                                         alt={product.product_name || product.name}
-                                        className="w-full h-48 object-cover cursor-pointer"
+                                        className="h-36 sm:h-48 transition-transform duration-500 transform hover:scale-110"
                                     />
                                 </Link>
                                 <div className="p-4 space-y-2">
