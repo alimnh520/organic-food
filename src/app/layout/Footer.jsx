@@ -8,7 +8,7 @@ import { FaWhatsapp } from 'react-icons/fa';
 export default function Footer() {
     return (
         <footer className="bg-gradient-to-r from-green-50 via-white to-green-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 text-gray-800 dark:text-gray-100 border-t dark:border-gray-800 mt-12">
-            <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 py-6">
+            <div className="max-w-7xl mx-auto px-4 md:px-12 lg:px-16 py-6">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
                     {/* Brand + About */}
                     <div className="space-y-4">

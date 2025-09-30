@@ -56,7 +56,7 @@ const cardVariant = {
 
 export default function FeaturesPage() {
     return (
-        <main className="min-h-screen bg-gray-50 dark:bg-gray-900 py-10 px-6 sm:px-0">
+        <main className="min-h-screen bg-gray-50 dark:bg-gray-900 py-10 px-4 sm:px-0">
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
                 <header className="text-center mb-12">

@@ -183,7 +183,7 @@ export default function Page() {
                                     <div className="flex justify-between mt-2">
                                         <button
                                             onClick={() => toggleWhitelist(product)}
-                                            className={`flex items-center sm:w-auto w-16 gap-1 px-2 py-1 text-xs sm:text-sm rounded transition ${isWhitelisted(product._id)
+                                            className={`flex truncate items-center sm:w-auto w-16 gap-1 px-2 py-1 text-xs sm:text-sm rounded transition ${isWhitelisted(product._id)
                                                 ? 'bg-red-500 text-white'
                                                 : 'bg-red-100 hover:bg-red-200 text-red-500'
                                                 }`}

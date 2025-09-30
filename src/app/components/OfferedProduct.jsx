@@ -26,7 +26,7 @@ export default function OfferProductsPage() {
     }, []);
 
     return (
-        <div className="py-3 sm:px-0 flex flex-col gap-y-5">
+        <div className="py-3 sm:px-0 px-4 flex flex-col gap-y-5">
             <div className="flex items-center justify-between">
                 <h1 className="sm:text-3xl text-xl font-bold text-green-600 mb-5 w-full pb-2 border-b border-b-green-600">
                     🎉 ফ্লাস সেল

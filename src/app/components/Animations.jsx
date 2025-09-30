@@ -47,7 +47,7 @@ const Animation = () => {
     }
 
     return (
-        <div className="relative w-full h-[300px] px-5 sm:px-0 md:h-[450px] lg:h-[500px] flex">
+        <div className="relative w-full h-[200px] px-4 sm:px-0 md:h-[450px] lg:h-[500px] flex">
             {/* Main Background */}
             <div
                 className="flex-1 bg-cover bg-center relative rounded-lg overflow-hidden"

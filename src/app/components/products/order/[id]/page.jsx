@@ -83,14 +83,14 @@ export default function OrderPage() {
             productId: product._id,
             productName: product.product_name,
             productImage: product.product_image,
-            price: discountedPrice, // এখানে ডিসকাউন্ট প্রাইস ব্যবহার
+            price: discountedPrice,
             quantity,
-            totalPrice: discountedPrice * quantity, // ডিসকাউন্ট প্রাইস দিয়ে টোটাল
+            totalPrice: discountedPrice * quantity,
             name,
             mobile,
-            division: divisionList.find(d => d.BBS_CODE === selectedDivision)?.NAME,
-            district: districtList.find(d => d.BBS_CODE === selectedDistrict)?.NAME,
-            upazilla: upazillaList.find(u => u.BBS_CODE === selectedUpazilla)?.NAME,
+            division: selectedDivision,   // ✅ সরাসরি নাম যাবে
+            district: selectedDistrict,   // ✅ সরাসরি নাম যাবে
+            upazilla: selectedUpazilla,   // ✅ সরাসরি নাম যাবে
             address,
             paymentMethod: 'Cash on Delivery',
             date: new Date().toISOString()
@@ -159,20 +159,55 @@ export default function OrderPage() {
                     <input type="text" placeholder="মোবাইল" className="w-full border px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" value={mobile} onChange={e => setMobile(e.target.value)} />
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <select className="border px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" value={selectedDivision} onChange={e => { setSelectedDivision(e.target.value); setSelectedDistrict(''); setSelectedUpazilla(''); }}>
+                        {/* বিভাগ */}
+                        <select
+                            className="border px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+                            value={selectedDivision}
+                            onChange={e => {
+                                setSelectedDivision(e.target.value);
+                                setSelectedDistrict('');
+                                setSelectedUpazilla('');
+                            }}
+                        >
                             <option value="">বিভাগ নির্বাচন করুন</option>
-                            {divisionList.map(d => <option key={d.ID} value={d.BBS_CODE}>{d.NAME}</option>)}
+                            {divisionList.map(d => (
+                                <option key={d.ID} value={d.NAME}>{d.NAME}</option>
+                            ))}
                         </select>
 
-                        <select className="border px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" value={selectedDistrict} onChange={e => { setSelectedDistrict(e.target.value); setSelectedUpazilla(''); }} disabled={!selectedDivision}>
+                        {/* জেলা */}
+                        <select
+                            className="border px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+                            value={selectedDistrict}
+                            onChange={e => {
+                                setSelectedDistrict(e.target.value);
+                                setSelectedUpazilla('');
+                            }}
+                            disabled={!selectedDivision}
+                        >
                             <option value="">জেলা নির্বাচন করুন</option>
-                            {districtList.filter(d => d.DIVISION_BBS_CODE.toString() === selectedDivision.toString()).map(dis => <option key={dis.ID} value={dis.BBS_CODE}>{dis.NAME}</option>)}
+                            {districtList
+                                .filter(d => d.DIVISION_BBS_CODE.toString() === divisionList.find(div => div.NAME === selectedDivision)?.BBS_CODE?.toString())
+                                .map(dis => (
+                                    <option key={dis.ID} value={dis.NAME}>{dis.NAME}</option>
+                                ))}
                         </select>
 
-                        <select className="border px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" value={selectedUpazilla} onChange={e => setSelectedUpazilla(e.target.value)} disabled={!selectedDistrict}>
+                        {/* উপজেলা */}
+                        <select
+                            className="border px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+                            value={selectedUpazilla}
+                            onChange={e => setSelectedUpazilla(e.target.value)}
+                            disabled={!selectedDistrict}
+                        >
                             <option value="">উপজেলা নির্বাচন করুন</option>
-                            {upazillaList.filter(u => u.DISTRICT_BBS_CODE.toString() === selectedDistrict.toString()).map(upz => <option key={upz.ID} value={upz.BBS_CODE}>{upz.NAME}</option>)}
+                            {upazillaList
+                                .filter(u => u.DISTRICT_BBS_CODE.toString() === districtList.find(dis => dis.NAME === selectedDistrict)?.BBS_CODE?.toString())
+                                .map(upz => (
+                                    <option key={upz.ID} value={upz.NAME}>{upz.NAME}</option>
+                                ))}
                         </select>
+
                     </div>
 
                     <textarea placeholder="বিস্তারিত ঠিকানা" className="w-full border px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" value={address} onChange={e => setAddress(e.target.value)} />
