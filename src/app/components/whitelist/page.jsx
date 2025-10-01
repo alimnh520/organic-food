@@ -65,13 +65,13 @@ export default function WhiteList() {
                                     <div className="flex justify-between mt-2">
                                         <button
                                             onClick={() => removeFromWhitelist(product._id || product.id)}
-                                            className="flex items-center gap-1 px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded"
+                                            className="flex items-center gap-1 px-3 py-1 bg-red-500 px-2 py-1 text-xs sm:text-sm hover:bg-red-600 text-white rounded"
                                         >
                                             <Heart className="w-4 h-4 text-white" /> রিমুভ
                                         </button>
 
                                         <Link href={`/components/products/order/${product._id || product.id}`}>
-                                            <button className="flex items-center gap-1 px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded">
+                                            <button className="flex items-center px-2 py-1 text-xs sm:text-sm gap-1 px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded">
                                                 <ShoppingCart className="w-4 h-4" /> অর্ডার
                                             </button>
                                         </Link>
