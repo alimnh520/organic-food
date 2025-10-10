@@ -30,7 +30,11 @@ export default function AllProducts() {
     const isWhitelisted = (id) => whitelist.some((p) => p._id === id);
 
     if (!products || products.length === 0) {
-        return <p className="text-center py-12 text-gray-500">❌ কোনো পণ্য পাওয়া যায়নি</p>;
+        return (
+            <div className="w-full flex justify-center items-center py-20">
+                        <div className="w-16 h-16 border-4 border-red-500 border-t-transparent rounded-full animate-spin"></div>
+                    </div>
+        )
     }
 
     const handleProductClick = async (e, productId, href) => {
