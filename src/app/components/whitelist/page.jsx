@@ -28,7 +28,7 @@ export default function WhiteList() {
     // ✅ অর্ডার লিস্ট খালি হলে মেসেজ
     if (wishlist.length === 0 && orders.length === 0) {
         return (
-            <div className="text-center py-24">
+            <div className="text-center py-24 px-5">
                 <h2 className="text-2xl font-semibold text-gray-700 dark:text-gray-300">
                     কোনো পণ্য হোয়াইটলিস্ট বা অর্ডারে নেই 😢
                 </h2>
