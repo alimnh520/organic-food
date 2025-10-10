@@ -35,9 +35,9 @@ export default function OfferProductsPage() {
             </div>
 
             {products.length === 0 ? (
-                <p className="text-center text-gray-500">
-                    ❌ এখনো কোনো অফারের পণ্য নেই
-                </p>
+                <div className="w-full flex justify-center items-center py-20">
+                        <div className="w-16 h-16 border-4 border-red-500 border-t-transparent rounded-full animate-spin"></div>
+                    </div>
             ) : (
                 <div
                     className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
