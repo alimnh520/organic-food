@@ -209,7 +209,9 @@ export default function Page() {
 
 
             {filteredProducts.length === 0 && (
-                <p className="text-center text-gray-500 py-8">❌ কোনো পণ্য পাওয়া যায়নি</p>
+                <div className="w-full flex justify-center items-center py-20">
+                        <div className="w-16 h-16 border-4 border-red-500 border-t-transparent rounded-full animate-spin"></div>
+                    </div>
             )}
         </div>
     );
