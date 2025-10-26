@@ -14,7 +14,7 @@ export default function Footer() {
                     <div className="space-y-4">
                         <div className="flex items-center gap-2">
                             <img
-                                src="/logo/my-logo.jpg"
+                                src="/logo/my-image.png"
                                 alt="Logo"
                                 className="h-20 object-cover shadow-md"
                             />

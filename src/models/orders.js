@@ -30,6 +30,11 @@ const orderSchema = new mongoose.Schema(
             required: true,
             min: 0,
         },
+        deliveryCharge: {         // 🟢 নতুন ফিল্ড
+            type: Number,
+            default: 0,
+            min: 0,
+        },
         name: {
             type: String,
             required: true,

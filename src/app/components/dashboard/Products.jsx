@@ -12,9 +12,11 @@ export default function AllProducts() {
     const [price, setPrice] = useState('');
     const [stock, setStock] = useState('');
     const [discount, setDiscount] = useState('');
+    const [deliveryCharge, setDeliveryCharge] = useState('');
     const [loading, setLoading] = useState(false);
     const [isDelete, setIsDelete] = useState(false);
     const [newImage, setNewImage] = useState(null);
+    const [searchQuery, setSearchQuery] = useState('');
 
     // ✅ Fetch all products
     useEffect(() => {
@@ -35,6 +37,7 @@ export default function AllProducts() {
         setPrice(product.price);
         setStock(product.stock);
         setDiscount(product.discount ?? 0);
+        setDeliveryCharge(product.delivery_charge ?? 0);
         setNewImage(null);
     };
 
@@ -43,10 +46,11 @@ export default function AllProducts() {
         setPrice('');
         setStock('');
         setDiscount('');
+        setDeliveryCharge('');
         setNewImage(null);
     };
 
-    // ✅ Save Changes (Update price, stock, discount, image)
+    // ✅ Save Changes (Update price, stock, discount, image, deliveryCharge)
     const saveChanges = async (id, image_id) => {
         if (!price || !stock) {
             toast.error("দয়া করে দাম এবং স্টক ঠিকভাবে দিন!", { position: "bottom-right" });
@@ -59,6 +63,7 @@ export default function AllProducts() {
             formData.append("price", Number(price));
             formData.append("stock", Number(stock));
             formData.append("discount", Number(discount) || 0);
+            formData.append("delivery_charge", Number(deliveryCharge) || 0);
             formData.append("id", id);
             formData.append("image_id", image_id);
 
@@ -76,7 +81,14 @@ export default function AllProducts() {
                 toast.success("✅ পণ্য আপডেট হয়েছে!", { position: "bottom-right" });
                 setProducts(products.map(p =>
                     p._id === id
-                        ? { ...p, price: Number(price), stock: Number(stock), discount: Number(discount) || 0, product_image: data.updatedImage || p.product_image }
+                        ? {
+                            ...p,
+                            price: Number(price),
+                            stock: Number(stock),
+                            discount: Number(discount) || 0,
+                            delivery_charge: Number(deliveryCharge) || 0,
+                            product_image: data.updatedImage || p.product_image
+                        }
                         : p
                 ));
                 cancelEditing();
@@ -124,12 +136,28 @@ export default function AllProducts() {
         return product.price;
     };
 
+    const filteredProducts = products.filter(p =>
+        p.product_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.category.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     return (
         <div className="max-w-6xl mx-auto py-3 px-6">
-            <h1 className="sm:text-3xl text-xl font-bold text-green-600 mb-8 text-center">📦 সকল পণ্য</h1>
+            <h1 className="sm:text-3xl text-xl font-bold text-green-600 mb-4 text-center">📦 সকল পণ্য</h1>
+
+            {/* 🔍 Search Box */}
+            <div className="mb-6 text-center">
+                <input
+                    type="text"
+                    placeholder="Search by name or category..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full md:w-1/2 border p-2 rounded-lg dark:bg-gray-700 dark:text-gray-100"
+                />
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {products?.slice().reverse().map(product => (
+                {filteredProducts?.slice().reverse().map(product => (
                     <motion.div
                         key={product._id}
                         className="bg-white shadow-md rounded-xl p-3 dark:bg-gray-800"
@@ -140,121 +168,70 @@ export default function AllProducts() {
                                 <Eye className="w-4 h-4 text-gray-600 dark:text-gray-200" />
                                 <span className="text-gray-700 dark:text-gray-100">{product.viewCount ?? 0}</span>
                             </div>
-
                             <img
                                 src={product.product_image}
                                 alt={product.product_name}
                                 className="h-full transition-transform duration-500 transform hover:scale-110"
                             />
                         </div>
+
                         <h2 className="text-xl break-words font-semibold mt-2 text-gray-800 dark:text-gray-100">{product.product_name}</h2>
 
-                        {/* দাম */}
+                        {/* Edit mode */}
                         {editingProductId === product._id ? (
                             <>
                                 <div className="mt-2">
                                     <label className="block text-gray-600 dark:text-gray-300 text-sm">💰 দাম:</label>
-                                    <input
-                                        type="number"
-                                        value={price}
-                                        onChange={(e) => setPrice(e.target.value)}
-                                        className="border px-2 py-1 rounded w-full dark:bg-gray-700 dark:text-gray-100"
-                                    />
+                                    <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} className="border px-2 py-1 rounded w-full dark:bg-gray-700 dark:text-gray-100" />
+                                </div>
+
+                                <div className="mt-2">
+                                    <label className="block text-gray-600 dark:text-gray-300 text-sm">📦 স্টক:</label>
+                                    <input type="number" value={stock} onChange={(e) => setStock(e.target.value)} className="border px-2 py-1 rounded w-full dark:bg-gray-700 dark:text-gray-100" />
+                                </div>
+
+                                <div className="mt-2">
+                                    <label className="block text-gray-600 dark:text-gray-300 text-sm">🎉 ডিসকাউন্ট (%):</label>
+                                    <input type="number" value={discount} onChange={(e) => setDiscount(e.target.value)} className="border px-2 py-1 rounded w-full dark:bg-gray-700 dark:text-gray-100" />
+                                </div>
+
+                                <div className="mt-2">
+                                    <label className="block text-gray-600 dark:text-gray-300 text-sm">🚚 ডেলিভারি চার্জ:</label>
+                                    <input type="number" value={deliveryCharge} onChange={(e) => setDeliveryCharge(e.target.value)} className="border px-2 py-1 rounded w-full dark:bg-gray-700 dark:text-gray-100" />
                                 </div>
 
                                 <div className="mt-2">
                                     <label className="block text-gray-600 dark:text-gray-300 text-sm">🖼️ নতুন ছবি:</label>
-                                    <input
-                                        type="file"
-                                        accept="image/*"
-                                        onChange={(e) => setNewImage(e.target.files[0])}
-                                        className="border px-2 py-1 rounded w-full dark:bg-gray-700 dark:text-gray-100"
-                                    />
+                                    <input type="file" accept="image/*" onChange={(e) => setNewImage(e.target.files[0])} className="border px-2 py-1 rounded w-full dark:bg-gray-700 dark:text-gray-100" />
                                 </div>
                             </>
                         ) : (
-                            <p className="text-gray-600 dark:text-gray-300 mt-1">
-                                💰 দাম:{" "}
-                                {product.discount > 0 ? (
-                                    <>
-                                        <span className="line-through text-red-500 mr-2">{product.price}৳</span>
-                                        <span className="text-green-600 font-bold">{getDiscountedPrice(product)}৳</span>
-                                    </>
-                                ) : (
-                                    <span>{product.price}৳</span>
-                                )}
-                            </p>
-                        )}
-
-                        {/* স্টক */}
-                        {editingProductId === product._id ? (
-                            <div className="mt-2">
-                                <label className="block text-gray-600 dark:text-gray-300 text-sm">📦 স্টক:</label>
-                                <input
-                                    type="number"
-                                    value={stock}
-                                    onChange={(e) => setStock(e.target.value)}
-                                    className="border px-2 py-1 rounded w-full dark:bg-gray-700 dark:text-gray-100"
-                                />
-                            </div>
-                        ) : (
-                            <div className="flex items-center gap-x-2">
-                                <p className="text-gray-600 dark:text-gray-300 mt-1">📦 স্টক: {product.stock}</p>
-                                <p className="text-gray-500 truncate dark:text-gray-400 flex items-center gap-2">
-                                    <span className="w-0.5 h-4 bg-gray-200 -mt-1"></span>
-                                    বিক্রিত হয়েছে: {product?.soldCount}
+                            <>
+                                <p className="text-gray-600 dark:text-gray-300 mt-1">
+                                    💰 দাম: {product.discount > 0 ? (
+                                        <>
+                                            <span className="line-through text-red-500 mr-2">{product.price}৳</span>
+                                            <span className="text-green-600 font-bold">{getDiscountedPrice(product)}৳</span>
+                                        </>
+                                    ) : (
+                                        <span>{product.price}৳</span>
+                                    )}
                                 </p>
-                            </div>
-                        )}
-
-                        {/* ডিসকাউন্ট */}
-                        {editingProductId === product._id ? (
-                            <div className="mt-2">
-                                <label className="block text-gray-600 dark:text-gray-300 text-sm">🎉 ডিসকাউন্ট (%):</label>
-                                <input
-                                    type="number"
-                                    value={discount}
-                                    onChange={(e) => setDiscount(e.target.value)}
-                                    className="border px-2 py-1 rounded w-full dark:bg-gray-700 dark:text-gray-100"
-                                />
-                            </div>
-                        ) : (
-                            product.discount > 0 && (
-                                <p className="text-gray-600 dark:text-gray-300 mt-1">🎉 ডিসকাউন্ট: {product.discount}%</p>
-                            )
+                                <p className="text-gray-600 dark:text-gray-300 mt-1">🚚 ডেলিভারি চার্জ: {product.delivery_charge || 0}৳</p>
+                                <p className="text-gray-600 dark:text-gray-300 mt-1">📦 স্টক: {product.stock}</p>
+                                {product.discount > 0 && <p className="text-gray-600 dark:text-gray-300 mt-1">🎉 ডিসকাউন্ট: {product.discount}%</p>}
+                            </>
                         )}
 
                         <div className="mt-4 flex gap-2">
                             {editingProductId === product._id ? (
                                 <>
-                                    <button
-                                        onClick={() => saveChanges(product._id, product.image_id)}
-                                        disabled={loading}
-                                        className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
-                                    >
-                                        {loading ? "লোড হচ্ছে..." : "সেভ"}
-                                    </button>
-                                    <button
-                                        onClick={cancelEditing}
-                                        className="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded"
-                                    >
-                                        বাতিল
-                                    </button>
-                                    <button
-                                        onClick={() => handleDelete(product._id, product.image_id)}
-                                        disabled={loading}
-                                        className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
-                                    >
-                                        {isDelete ? "লোড হচ্ছে..." : "ডিলেট"}
-                                    </button>
+                                    <button onClick={() => saveChanges(product._id, product.image_id)} disabled={loading} className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">{loading ? "লোড হচ্ছে..." : "সেভ"}</button>
+                                    <button onClick={cancelEditing} className="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded">বাতিল</button>
+                                    <button onClick={() => handleDelete(product._id, product.image_id)} disabled={loading} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">{isDelete ? "লোড হচ্ছে..." : "ডিলেট"}</button>
                                 </>
                             ) : (
-                                <button
-                                    onClick={() => startEditing(product)}
-                                    className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-                                >
-                                    Edit
-                                </button>
+                                <button onClick={() => startEditing(product)} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Edit</button>
                             )}
                         </div>
                     </motion.div>

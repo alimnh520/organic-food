@@ -9,8 +9,9 @@ import Notifications from "./Notification";
 import AllProducts from "./Products";
 import { AddNotice } from "./AddNotice";
 import { AllMessage } from "./Messages";
-import { FaKey, FaMailBulk } from "react-icons/fa";
+import { FaImage, FaKey, FaMailBulk } from "react-icons/fa";
 import ChangePassword from "./Password";
+import SliderDashboard from "./Slider";
 
 export default function Dashboard() {
     const [activeTab, setActiveTab] = useState("orders");
@@ -45,6 +46,7 @@ export default function Dashboard() {
                     <SidebarButton label="সকল পণ্য" icon={<List className="w-5 h-5" />} active={activeTab === "products"} onClick={() => { setActiveTab("products"); setSidebarOpen(false); }} />
                     <SidebarButton label="নতুন নোটিশ" icon={<Megaphone className="w-5 h-5" />} active={activeTab === "add-notice"} onClick={() => { setActiveTab("add-notice"); setSidebarOpen(false); }} />
                     <SidebarButton label="সকল বার্তা" icon={<FaMailBulk className="w-5 h-5" />} active={activeTab === "notices"} onClick={() => { setActiveTab("notices"); setSidebarOpen(false); }} />
+                    <SidebarButton label="বিজ্ঞাপণ" icon={<FaImage className="w-5 h-5" />} active={activeTab === "slider"} onClick={() => { setActiveTab("slider"); setSidebarOpen(false); }} />
                     <SidebarButton label="নতুন পাসওয়ার্ড" icon={<FaKey className="w-5 h-5" />} active={activeTab === "password"} onClick={() => { setActiveTab("password"); setSidebarOpen(false); }} />
                 </nav>
             </aside>
@@ -88,7 +90,8 @@ export default function Dashboard() {
                     {activeTab === "products" && <AllProducts />}
                     {activeTab === "add-notice" && <AddNotice />}
                     {activeTab === "notices" && <AllMessage />}
-                    {activeTab === "password" && <ChangePassword/>}
+                    {activeTab === "slider" && <SliderDashboard />}
+                    {activeTab === "password" && <ChangePassword />}
                 </motion.div>
             </main>
 
@@ -123,21 +126,21 @@ export function AddProduct() {
         details: "",
         image: null,
         category: "",
+        delivery_charge: "", // ✅ নতুন ফিল্ড
     });
 
-    // ক্যাটাগরি লিস্ট (বাংলা দেখাবে, ইংরেজি ভ্যালু backend এ যাবে)
     const categories = [
-        { label: "অর্গানিক খাবার", value: "organic_food" },
-        { label: "গেজেট", value: "gazette" },
-        { label: "মেডিকেল সরঞ্জাম", value: "medical_equipments" },
-        { label: "ফ্যাশন", value: "fashion" },
-        { label: "ইলেকট্রনিক্স", value: "electronics" },
-        { label: "সোর্সিং সার্ভিস", value: "sourcing_service" },
-        { label: "সাজসজ্জা", value: "decorate" },
-        { label: "হেলথ্ এন্ড বিউটি", value: "home_and_healthy" },  // 🆕 নতুন
-        { label: "মা ও শিশু", value: "mother_and_baby" },        // 🆕 নতুন
-        { label: "লাইফস্টাইল", value: "life_style" },            // 🆕 নতুন
-        { label: "অন্যান্য", value: "others" },
+        { label: "99 TK Shop", value: "others" },
+        { label: "Electronic", value: "electronics" },
+        { label: "Home Decoration", value: "decorate" },
+        { label: "Organic Food", value: "organic_food" },
+        { label: "Health & Beauty", value: "home_and_healthy" },
+        { label: "Mother & Baby Care", value: "mother_and_baby" },
+        { label: "Medical Item", value: "medical_equipments" },
+        { label: "All Sourcing", value: "sourcing_service" },
+        { label: "Gadgets", value: "gazette" },
+        { label: "Fashion", value: "fashion" },
+        { label: "Lifestyle", value: "life_style" },
     ];
 
     const handleChange = (e) => {
@@ -171,7 +174,7 @@ export function AddProduct() {
 
             if (result.success) {
                 toast.success(result.message, { position: "bottom-right" });
-                setFormData({ name: "", price: "", stock: "", details: "", image: null, category: "" });
+                setFormData({ name: "", price: "", stock: "", details: "", image: null, category: "", delivery_charge: "" });
                 e.target.reset();
             } else {
                 toast.error(result.message || "কিছু সমস্যা হয়েছে!", { position: "bottom-right" });
@@ -191,9 +194,10 @@ export function AddProduct() {
             <input type="text" name="name" placeholder="পণ্যের নাম" onChange={handleChange} className="w-full border p-2 rounded-lg dark:bg-gray-700 dark:text-gray-100" />
             <input type="number" name="price" placeholder="দাম (৳)" onChange={handleChange} className="w-full border p-2 rounded-lg dark:bg-gray-700 dark:text-gray-100" />
             <input type="number" name="stock" placeholder="স্টক" onChange={handleChange} className="w-full border p-2 rounded-lg dark:bg-gray-700 dark:text-gray-100" />
+            <input type="number" name="delivery_charge" placeholder="ডেলিভারি চার্জ (৳)" onChange={handleChange} className="w-full border p-2 rounded-lg dark:bg-gray-700 dark:text-gray-100" /> {/* ✅ নতুন */}
+
             <input type="text" name="details" placeholder="বিবরণ" onChange={handleChange} className="w-full border p-2 rounded-lg dark:bg-gray-700 dark:text-gray-100" />
 
-            {/* ক্যাটাগরি ড্রপডাউন */}
             <select
                 name="category"
                 onChange={handleChange}

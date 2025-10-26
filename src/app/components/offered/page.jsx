@@ -10,12 +10,13 @@ export default function OfferProductsPage() {
     const [whitelist, setWhitelist] = useState([]);
     const router = useRouter();
 
-    // 🟢 লোকাল থেকে wishlist লোড
+    // Load Cart from local storage
     useEffect(() => {
         const saved = JSON.parse(localStorage.getItem("whitelist")) || [];
         setWhitelist(saved);
     }, []);
 
+    // Fetch offer products
     useEffect(() => {
         async function fetchOfferProducts() {
             try {
@@ -23,8 +24,8 @@ export default function OfferProductsPage() {
                 const data = await res.json();
                 if (data.success) {
                     const filtered = data.message
-                        .filter(p => p.discount && p.discount > 0)
-                        .sort((a, b) => b.discount - a.discount)
+                        .filter((p) => p.discount && p.discount > 0)
+                        .sort((a, b) => b.discount - a.discount);
                     setProducts(filtered);
                 }
             } catch (err) {
@@ -34,6 +35,7 @@ export default function OfferProductsPage() {
         fetchOfferProducts();
     }, []);
 
+    // Toggle Cart
     const toggleWhitelist = (product) => {
         let updated = [];
         if (whitelist.some((p) => p._id === product._id)) {
@@ -47,7 +49,7 @@ export default function OfferProductsPage() {
 
     const isWhitelisted = (id) => whitelist.some((p) => p._id === id);
 
-    // 🟢 পেজ ভিজিট ট্র্যাক
+    // Track page visit
     const handleProductClick = async (e, productId, href) => {
         e.preventDefault();
         try {
@@ -64,24 +66,22 @@ export default function OfferProductsPage() {
     };
 
     return (
-        <div className="py-6 px-5 sm:px-8 mx-auto flex flex-col sm:w-10/12 w-full bg-white dark:bg-gray-900 gap-y-6">
+        <div className="py-6 px-4 mx-auto flex flex-col sm:w-[1280px] w-full bg-white dark:bg-gray-900 gap-y-6">
             <h1 className="sm:text-3xl text-xl font-bold text-green-600 mb-5 w-full pb-2 border-b border-b-green-600">
-                🎉 ফ্লাস সেল
+                🎉 Flash Sale
             </h1>
 
             {products.length === 0 ? (
-                <p className="text-center text-gray-500">
-                    ❌ এখনো কোনো অফারের পণ্য নেই
-                </p>
+                <div className="w-full flex justify-center items-center py-20">
+                    <div className="w-16 h-16 border-4 border-red-500 border-t-transparent rounded-full animate-spin"></div>
+                </div>
             ) : (
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
                     <AnimatePresence>
                         {products.map((p) => {
                             const discountedPrice =
                                 p.discount && p.discount > 0
-                                    ? Math.round(
-                                        p.price - (p.price * p.discount) / 100
-                                    )
+                                    ? Math.round(p.price - (p.price * p.discount) / 100)
                                     : null;
 
                             return (
@@ -96,26 +96,39 @@ export default function OfferProductsPage() {
                                 >
                                     {/* Product Image */}
                                     <div className="relative overflow-hidden h-36 sm:h-48 flex justify-center items-center">
+                                        {/* 👁 View count */}
                                         <div className="absolute top-2 right-2 z-20 bg-white/90 dark:bg-black/70 px-2 py-1 rounded-full flex items-center gap-1 text-[10px] sm:text-xs shadow">
                                             <Eye className="w-3 h-3 sm:w-4 sm:h-4 text-gray-600 dark:text-gray-200" />
                                             <span className="text-gray-700 dark:text-gray-100">
                                                 {p.viewCount ?? 0}
                                             </span>
                                         </div>
+
+                                        {/* 🔖 Discount tag */}
+                                        {p.discount > 0 && (
+                                            <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded-md shadow-md">
+                                                -{p.discount}%
+                                            </div>
+                                        )}
+
+                                        {/* ❌ Sold out overlay */}
+                                        {p.stock === 0 && (
+                                            <div className="absolute left-5 bottom-5 z-20 flex items-center justify-center">
+                                                <img src="/logo/sold.jpg" alt="" className='w-20 h-20  rounded-full object-center' />
+                                            </div>
+                                        )}
+
                                         <Link
                                             href={`/components/products/${p._id}`}
                                             onClick={(e) =>
-                                                handleProductClick(
-                                                    e,
-                                                    p._id,
-                                                    `/components/products/${p._id}`
-                                                )
+                                                handleProductClick(e, p._id, `/components/products/${p._id}`)
                                             }
                                         >
                                             <img
                                                 src={p.product_image}
                                                 alt={p.product_name}
-                                                className="h-36 sm:h-48 transition-transform duration-500 transform hover:scale-110"
+                                                className={`h-36 sm:h-48 w-full object-cover transition-transform duration-500 transform hover:scale-110 ${p.stock === 0 ? "opacity-60" : ""
+                                                    }`}
                                             />
                                         </Link>
                                     </div>
@@ -126,7 +139,7 @@ export default function OfferProductsPage() {
                                             {p.product_name}
                                         </h2>
 
-                                        {/* দাম + ডিসকাউন্ট */}
+                                        {/* 💰 Price + Discount */}
                                         {discountedPrice ? (
                                             <div className="flex items-center gap-x-2 sm:gap-x-3">
                                                 <div className="flex items-center gap-x-1 sm:gap-x-2">
@@ -137,9 +150,6 @@ export default function OfferProductsPage() {
                                                         ৳ {p.price}
                                                     </p>
                                                 </div>
-                                                <p className="text-red-500 text-xs sm:text-sm">
-                                                    ছাড়: {p.discount}%
-                                                </p>
                                             </div>
                                         ) : (
                                             <p className="text-green-600 font-bold text-sm sm:text-base">
@@ -147,43 +157,41 @@ export default function OfferProductsPage() {
                                             </p>
                                         )}
 
+                                        {/* 📦 Stock info */}
                                         <div className="flex flex-wrap items-center gap-x-2 text-xs sm:text-sm">
-                                            <p className="text-gray-500 dark:text-gray-400">
-                                                স্টক: {p.stock}
-                                            </p>
+                                            <p className="text-gray-500 dark:text-gray-400">Stock: {p.stock}</p>
                                             <p className="text-gray-500 dark:text-gray-400 flex items-center gap-1 truncate">
                                                 <span className="w-0.5 h-4 bg-gray-200 hidden sm:inline-block"></span>
-                                                বিক্রিত হয়েছে: {p?.soldCount}
+                                                Sold: {p?.soldCount}
                                             </p>
                                         </div>
 
-                                        {/* Buttons */}
+                                        {/* ❤️ Cart + 🛒 Order Buttons */}
                                         <div className="flex justify-between mt-2 gap-2">
                                             <button
-                                                onClick={() =>
-                                                    toggleWhitelist(p)
-                                                }
+                                                onClick={() => toggleWhitelist(p)}
                                                 className={`flex truncate items-center sm:w-auto w-16 gap-1 px-2 py-1 text-xs sm:text-sm rounded transition ${isWhitelisted(p._id)
                                                     ? "bg-red-500 text-white"
                                                     : "bg-red-100 hover:bg-red-200 text-red-500"
                                                     }`}
                                             >
                                                 <Heart
-                                                    className={`w-3 hidden sm:inline h-3 sm:w-4 sm:h-4 ${isWhitelisted(p._id)
-                                                        ? "text-white"
-                                                        : "text-red-500"
+                                                    className={`w-3 hidden sm:inline h-3 sm:w-4 sm:h-4 ${isWhitelisted(p._id) ? "text-white" : "text-red-500"
                                                         }`}
                                                 />
-                                                Add to cart
+                                                Cart
                                             </button>
 
-                                            <Link
-                                                href={`/components/products/order/${p._id}`}
-                                                className="flex-1"
-                                            >
-                                                <button className="w-full flex items-center justify-center gap-1 px-2 py-1 text-xs sm:text-sm bg-blue-500 hover:bg-blue-600 text-white rounded">
-                                                    <ShoppingCart className="w-3 h-3 sm:w-4 sm:h-4" />{" "}
-                                                    অর্ডার
+                                            <Link href={`/components/products/order/${p._id}`} className="flex-1">
+                                                <button
+                                                    disabled={p.stock === 0}
+                                                    className={`w-full flex items-center justify-center gap-1 px-2 py-1 text-xs sm:text-sm rounded transition ${p.stock === 0
+                                                        ? "bg-gray-400 cursor-not-allowed text-white"
+                                                        : "bg-blue-500 hover:bg-blue-600 text-white"
+                                                        }`}
+                                                >
+                                                    <ShoppingCart className="w-3 h-3 sm:w-4 sm:h-4" />
+                                                    {p.stock === 0 ? "Unavailable" : "Order Now"}
                                                 </button>
                                             </Link>
                                         </div>

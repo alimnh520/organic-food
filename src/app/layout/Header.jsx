@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Home, ShoppingBag, Info, Phone, Heart, LayoutDashboard } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
@@ -10,60 +10,82 @@ export default function Header() {
     const pathName = usePathname();
 
     const links = [
-        { name: 'হোম', href: '/' },
-        { name: 'পণ্য', href: '/components/products' },
-        { name: 'আমাদের সম্পর্কে', href: '/components/about' },
-        { name: 'যোগাযোগ', href: '/components/contact' },
-        { name: 'আমার কার্ড', href: '/components/whitelist' },
-        { name: 'ড্যাশবোর্ড', href: '/components/dashboard' },
+        { name: 'Home', href: '/', icon: <Home className="w-4 h-4 mr-2" /> },
+        { name: 'Products', href: '/components/products', icon: <ShoppingBag className="w-4 h-4 mr-2" /> },
+        { name: 'Cart', href: '/components/whitelist', icon: <Heart className="w-4 h-4 mr-2" /> },
+        { name: 'Admin', href: '/components/dashboard', icon: <LayoutDashboard className="w-4 h-4 mr-2" /> },
     ];
 
     return (
-        <header className="w-full bg-black shadow-md fixed top-0 left-0 z-50">
-            <div className="max-w-7xl mx-auto px-3 md:px-12 lg:px-16 flex justify-between items-center h-16 sm:h-20">
-                {/* লোগো */}
-                <div className="flex items-center gap-3">
-                    <img src="/logo/my-logo.jpg" alt="লোগো" className="sm:h-20 h-16 -mt-0.5 object-contain" />
-                    <div className="flex flex-col text-yellow-600 items-center justify-center">
-                        {/* <p className='logo-font underline text-[17px] font-bold sm:text-2xl mt-1 '>ABDULLAH ONLINE SHOP</p>
-                        <p className='text-xs logo-font'>BELIEVE . QUALITY . SERVICE</p> */}
-                    </div>
-                </div>
+        <header className="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 shadow-lg fixed top-0 left-0 z-50">
+            <div className="max-w-7xl mx-auto px-4 md:px-12 lg:px-16 flex justify-center gap-x-5 items-center h-16 sm:h-20">
 
-                {/* ডেস্কটপ মেনু */}
                 <nav className="hidden md:flex items-center gap-8">
-                    {links.map((link) => (
+                    {links.slice(0,2).map((link) => (
                         <Link
                             key={link.name}
                             href={link.href}
-                            className=" text-white relative group font-medium transition"
+                            className={`flex items-center relative text-white font-medium transition duration-300 hover:text-yellow-300 ${pathName === link.href ? 'text-yellow-300' : ''
+                                }`}
                         >
+                            <div className="mb-1">{link.icon}</div>
                             {link.name}
-                            <span className={`absolute left-0 ${pathName === link.href && "w-full"} -bottom-1 w-0 h-0.5 bg-white transition-all group-hover:w-full`}></span>
+                            <span
+                                className={`absolute left-0 -bottom-1 h-0.5 bg-yellow-300 transition-all ${pathName === link.href ? 'w-full' : 'w-0 group-hover:w-full'
+                                    }`}
+                            ></span>
                         </Link>
                     ))}
                 </nav>
 
-                {/* মোবাইল মেনু বাটন */}
-                <div className="md:hidden mt-2">
+                {/* 🔸 Logo */}
+                <div className="flex items-center gap-3">
+                    <img
+                        src="/logo/my-image.png"
+                        alt="লোগো"
+                        className="sm:h-20 h-16 rounded-full object-cover shadow-md"
+                    />
+                </div>
+
+                {/* 🔹 Desktop Menu */}
+                <nav className="hidden md:flex items-center gap-8">
+                    {links.slice(2,4).map((link) => (
+                        <Link
+                            key={link.name}
+                            href={link.href}
+                            className={`flex items-center relative text-white font-medium transition duration-300 hover:text-yellow-300 ${pathName === link.href ? 'text-yellow-300' : ''
+                                }`}
+                        >
+                            <div className="mb-1">{link.icon}</div>
+                            {link.name}
+                            <span
+                                className={`absolute left-0 -bottom-1 h-0.5 bg-yellow-300 transition-all ${pathName === link.href ? 'w-full' : 'w-0 group-hover:w-full'
+                                    }`}
+                            ></span>
+                        </Link>
+                    ))}
+                </nav>
+
+                {/* 🔸 Mobile Menu Button */}
+                <div className="md:hidden">
                     <button
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        className="text-gray-200 "
+                        className="text-white hover:text-yellow-300 transition"
                     >
-                        {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                        {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
                     </button>
                 </div>
             </div>
 
-            {/* মোবাইল মেনু animation সহ */}
+            {/* 🔹 Mobile Menu */}
             <AnimatePresence>
                 {mobileMenuOpen && (
                     <motion.div
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="md:hidden overflow-hidden bg-white shadow-md"
+                        transition={{ duration: 0.4 }}
+                        className="md:hidden overflow-hidden bg-gradient-to-br from-indigo-700 via-purple-700 to-pink-700 shadow-lg"
                     >
                         <nav className="flex flex-col gap-4 p-4">
                             {links.map((link) => (
@@ -71,8 +93,10 @@ export default function Header() {
                                     key={link.name}
                                     href={link.href}
                                     onClick={() => setMobileMenuOpen(false)}
-                                    className="text-gray-800  hover:text-gray-900 font-medium transition"
+                                    className={`flex items-center text-white font-medium rounded-lg p-2 transition hover:bg-white/10 ${pathName === link.href ? 'bg-white/20' : ''
+                                        }`}
                                 >
+                                    <div className="mb-1">{link.icon}</div>
                                     {link.name}
                                 </Link>
                             ))}

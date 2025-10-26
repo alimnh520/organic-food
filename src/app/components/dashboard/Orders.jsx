@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, MapPin, Phone } from "lucide-react";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Orders() {
     const [orders, setOrders] = useState([]);
@@ -18,7 +20,7 @@ export default function Orders() {
         }
     }
 
-    // Update order status (confirm / reject)
+    // Update order status
     async function updateOrderStatus(orderId, status) {
         try {
             const res = await fetch(`/api/order`, {
@@ -32,10 +34,12 @@ export default function Orders() {
                 setOrders((prev) =>
                     prev.map((o) => (o._id === orderId ? { ...o, status } : o))
                 );
+                toast.success(`Order ${status} successfully!`, { position: "bottom-right" });
                 setSelectedOrder(null);
             }
         } catch (err) {
             console.error("Status update failed:", err);
+            toast.error("Status update failed!", { position: "bottom-right" });
         }
     }
 
@@ -55,37 +59,35 @@ export default function Orders() {
                     orders.slice().reverse().map((order) => (
                         <motion.div
                             key={order._id}
-                            className="bg-gradient-to-br break-words from-white to-green-50 border border-green-100 shadow-xl rounded-2xl p-2 cursor-pointer hover:shadow-2xl transition transform hover:-translate-y-2"
+                            className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg rounded-2xl p-2 cursor-pointer hover:shadow-2xl transition transform hover:-translate-y-1"
                             whileHover={{ scale: 1.02 }}
                             onClick={() => setSelectedOrder(order)}
                         >
                             <img
                                 src={order.productImage}
                                 alt={order.productName}
-                                className="h-46 rounded-xl mb-4 shadow-md"
+                                className="h-44 w-full rounded-xl mb-3 object-cover shadow-sm"
                             />
-                            <h2 className="text-xl font-semibold text-gray-800">{order.productName}</h2>
+                            <h2 className="text-lg truncate font-semibold text-gray-800 dark:text-gray-100">
+                                {order.productName}
+                            </h2>
                             <p className="text-green-600 font-bold mt-1">
                                 ৳ {order.totalPrice} ({order.quantity} pcs)
                             </p>
-                            <div className="flex items-center gap-x-2">
-                                <p className="text-sm text-gray-500">👤 {order.name}</p>
-                                <p className="text-xs text-gray-400">📅 {new Date(order.date).toLocaleDateString()}</p>
+                            <div className="flex justify-between mt-1 text-sm text-gray-500">
+                                <span>👤 {order.name}</span>
+                                <span>📅 {new Date(order.date).toLocaleDateString()}</span>
                             </div>
-                            {order.status && (
-                                <p className="mt-2">
-                                    <span
-                                        className={`px-2 py-1 text-xs rounded font-medium ${order.status === "confirmed"
-                                            ? "bg-green-100 text-green-700"
-                                            : order.status === "rejected"
-                                                ? "bg-red-100 text-red-700"
-                                                : "bg-yellow-100 text-yellow-700"
-                                            }`}
-                                    >
-                                        {order.status}
-                                    </span>
-                                </p>
-                            )}
+                            <span
+                                className={`inline-block mt-2 px-2 py-1 rounded text-xs font-semibold ${order.status === "confirmed"
+                                    ? "bg-green-100 text-green-700"
+                                    : order.status === "rejected"
+                                        ? "bg-red-100 text-red-700"
+                                        : "bg-yellow-100 text-yellow-700"
+                                    }`}
+                            >
+                                {order.status}
+                            </span>
                         </motion.div>
                     ))
                 ) : (
@@ -99,75 +101,107 @@ export default function Orders() {
             <AnimatePresence>
                 {selectedOrder && (
                     <motion.div
-                        className="fixed inset-0 bg-black/70 py-10 overflow-auto backdrop-blur-sm flex items-center justify-center z-50 p-2"
+                        className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-start justify-center z-50 overflow-auto pt-6 pb-10 px-4"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                     >
                         <motion.div
-                            className="bg-white rounded-2xl top-60 flex flex-col shadow-2xl relative print-area"
-                            initial={{ scale: 0.9 }}
+                            className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl relative w-full max-w-4xl p-6 print:overflow-visible"
+                            initial={{ scale: 0.95 }}
                             animate={{ scale: 1 }}
-                            exit={{ scale: 0.9 }}
-                            style={{
-                                width: "794px",   // A4 width
-                                height: "1123px", // A4 height
-                                padding: "32px",
-                                overflow: "hidden" // scroll ছাড়াই A4 ফিট করবে
-                            }}
+                            exit={{ scale: 0.95 }}
                         >
                             {/* Close button */}
                             <button
-                                className="absolute top-1.5 right-2 text-gray-500 hover:text-red-500 text-xl no-print"
+                                className="absolute top-3 right-3 text-gray-500 hover:text-red-500 text-xl no-print"
                                 onClick={() => setSelectedOrder(null)}
                             >
                                 ✖
                             </button>
 
-                            {/* 🛍️ Shop Logo */}
-                            <div className="flex justify-center mb-4 border-b pb-3">
+                            {/* Logo */}
+                            <div className="flex justify-center mb-4">
                                 <img
-                                    src="/logo/my-logo.jpg"
+                                    src="/logo/my-image.png"
                                     alt="Shop Logo"
                                     className="h-16 object-contain"
                                 />
                             </div>
 
-                            {/* Order Details */}
-                            <img
-                                src={selectedOrder.productImage}
-                                alt={selectedOrder.productName}
-                                className="h-56 self-center rounded-xl mb-4 shadow-lg"
-                            />
-                            <h2 className="text-2xl font-bold text-gray-800 mb-2 text-center">
-                                {selectedOrder.productName}
+                            {/* Order Table */}
+                            <h2 className="text-2xl font-bold text-center text-gray-800 dark:text-gray-100 mb-4">
+                                অর্ডার বিস্তারিত
                             </h2>
-                            <p className="text-green-600 font-bold text-lg mb-4 text-center">
-                                ৳ {selectedOrder.totalPrice} ({selectedOrder.quantity} pcs)
-                            </p>
+                            <table className="w-full border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden text-sm">
+                                <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                                    <tr className="bg-gray-100 dark:bg-gray-800">
+                                        <td className="px-4 py-2 font-semibold">ক্রেতার নাম</td>
+                                        <td className="px-4 py-2">{selectedOrder.name}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="px-4 py-2 font-semibold">মোবাইল</td>
+                                        <td className="px-4 py-2">{selectedOrder.mobile}</td>
+                                    </tr>
+                                    <tr className="bg-gray-100 dark:bg-gray-800">
+                                        <td className="px-4 py-2 font-semibold">পণ্যের নাম</td>
+                                        <td className="px-4 py-2">{selectedOrder.productName}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="px-4 py-2 font-semibold">দাম (প্রতি পিস)</td>
+                                        <td className="px-4 py-2">৳ {selectedOrder.price}</td>
+                                    </tr>
+                                    <tr className="bg-gray-100 dark:bg-gray-800">
+                                        <td className="px-4 py-2 font-semibold">Quantity</td>
+                                        <td className="px-4 py-2">{selectedOrder.quantity}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="px-4 py-2 font-semibold">ডেলিভারি চার্জ</td>
+                                        <td className="px-4 py-2">৳ {selectedOrder.deliveryCharge || 0}</td>
+                                    </tr>
+                                    <tr className="bg-gray-100 dark:bg-gray-800">
+                                        <td className="px-4 py-2 font-semibold">মোট দাম</td>
+                                        <td className="px-4 py-2">৳ {selectedOrder.totalPrice}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="px-4 py-2 font-semibold">পেমেন্ট মেথড</td>
+                                        <td className="px-4 py-2">{selectedOrder.paymentMethod}</td>
+                                    </tr>
+                                    <tr className="bg-gray-100 dark:bg-gray-800">
+                                        <td className="px-4 py-2 font-semibold">ঠিকানা</td>
+                                        <td className="px-4 py-2">
+                                            {selectedOrder.division}, {selectedOrder.district}, {selectedOrder.upazilla}, {selectedOrder.address}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="px-4 py-2 font-semibold">স্ট্যাটাস</td>
+                                        <td className="px-4 py-2">
+                                            <span
+                                                className={`px-2 py-1 rounded text-sm font-semibold ${selectedOrder.status === "confirmed"
+                                                    ? "bg-green-100 text-green-700"
+                                                    : selectedOrder.status === "rejected"
+                                                        ? "bg-red-100 text-red-700"
+                                                        : "bg-yellow-100 text-yellow-700"
+                                                    }`}
+                                            >
+                                                {selectedOrder.status}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
-                            <div className="space-y-2 text-gray-700 text-base">
-                                <p><span className="font-semibold">👤 ক্রেতার নাম:</span> {selectedOrder.name}</p>
-                                <p><span className="font-semibold">📞 মোবাইল:</span> {selectedOrder.mobile}</p>
-                                <p><span className="font-semibold">🌍 বিভাগ:</span> {selectedOrder.division}</p>
-                                <p><span className="font-semibold">🏙️ জেলা:</span> {selectedOrder.district}</p>
-                                <p><span className="font-semibold">🏡 উপজেলা:</span> {selectedOrder.upazilla}</p>
-                                <p><span className="font-semibold">📍 ঠিকানা:</span> {selectedOrder.address}</p>
-                                <p><span className="font-semibold">💳 পেমেন্ট:</span> {selectedOrder.paymentMethod}</p>
-                                <p><span className="font-semibold">🕒 তারিখ:</span> {new Date(selectedOrder.date).toLocaleString()}</p>
-                            </div>
-
-                            {/* ✅ Confirm / Reject Buttons */}
-                            {!["confirmed", "rejected"].includes(selectedOrder.status) && (
-                                <div className="mt-6 flex gap-4 no-print">
+                            {/* Confirm / Reject Buttons */}
+                            {selectedOrder.status === "pending" && (
+                                <div className="mt-4 flex gap-4 justify-center no-print">
                                     <button
-                                        className="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-lg transition"
+                                        className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded"
                                         onClick={() => updateOrderStatus(selectedOrder._id, "confirmed")}
                                     >
                                         ✅ Confirm
                                     </button>
                                     <button
-                                        className="flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold py-2 rounded-lg transition"
+                                        className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded"
                                         onClick={() => updateOrderStatus(selectedOrder._id, "rejected")}
                                     >
                                         ❌ Reject
@@ -175,18 +209,8 @@ export default function Orders() {
                                 </div>
                             )}
 
-                            {["confirmed", "rejected"].includes(selectedOrder.status) && (
-                                <p className="mt-6 text-center font-semibold text-lg">
-                                    {selectedOrder.status === "confirmed" ? (
-                                        <span className="text-green-600">✅ অর্ডার কনফার্ম হয়েছে</span>
-                                    ) : (
-                                        <span className="text-red-600">❌ অর্ডার বাতিল হয়েছে</span>
-                                    )}
-                                </p>
-                            )}
-
-                            {/* 🖨️ Print Button */}
-                            <div className="mt-6 flex justify-center no-print">
+                            {/* Print Button */}
+                            <div className="mt-4 flex justify-center no-print">
                                 <button
                                     className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-6 py-2 rounded-lg shadow transition"
                                     onClick={() => window.print()}
@@ -195,7 +219,7 @@ export default function Orders() {
                                 </button>
                             </div>
 
-                            {/* 🏬 Shop Address */}
+                            {/* Shop Address */}
                             <div className="mt-6 text-center text-gray-600 border-t pt-3 text-sm space-y-2">
                                 <p>🏬 আমাদের ঠিকানা:</p>
                                 <div className="flex flex-col gap-y-1">
@@ -203,12 +227,10 @@ export default function Orders() {
                                         <Phone className="text-green-500 w-5 h-5" />
                                         <p className="text-gray-700">+880 1566-099299, +880 1813-623629</p>
                                     </div>
-
                                     <div className="flex items-center gap-3">
                                         <Mail className="text-green-500 w-5 h-5" />
                                         <p className="text-gray-700">khandokarabdullahbd@gmail.com</p>
                                     </div>
-
                                     <div className="flex items-center gap-3">
                                         <MapPin className="text-green-500 w-5 h-5" />
                                         <p className="text-gray-700">৩৩, লবনচরা বান্দাবাজার, শিপইয়ার্ড রোড, খুলনা</p>
@@ -219,7 +241,7 @@ export default function Orders() {
                     </motion.div>
                 )}
             </AnimatePresence>
-
+            <ToastContainer />
         </div>
     );
 }

@@ -10,15 +10,19 @@ export default function ProductDetails({ product }) {
 
     if (!product) {
         return (
-            <p className="text-center text-red-500 py-12 text-lg">
-                ❌ কোনো পণ্য পাওয়া যায়নি
-            </p>
+            <div className="w-full flex justify-center items-center py-20">
+                <div className="w-16 h-16 border-4 border-red-500 border-t-transparent rounded-full animate-spin"></div>
+            </div>
         )
     }
 
     const discountedPrice = product.discount && product.discount > 0
         ? Math.round(product.price - (product.price * product.discount) / 100)
-        : null
+        : product.price
+
+    const delivery_charge = product.delivery_charge ?? 0
+    const totalPrice = discountedPrice + delivery_charge
+    const isSoldOut = product.stock === 0
 
     return (
         <motion.div
@@ -29,7 +33,7 @@ export default function ProductDetails({ product }) {
         >
             <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row gap-6">
 
-                {/* ছবি (জুম সহ) */}
+                {/* Product Image */}
                 <div className="w-full md:w-1/2 flex items-center justify-center bg-gray-50 dark:bg-gray-700 p-4">
                     <Zoom>
                         <img
@@ -40,45 +44,59 @@ export default function ProductDetails({ product }) {
                     </Zoom>
                 </div>
 
-                {/* ডিটেইলস */}
+                {/* Product Details */}
                 <div className="w-full md:w-1/2 p-6 flex flex-col justify-between space-y-4">
                     <div>
-                        <h1 className="text-3xl break-words font-bold text-green-600">
+                        <h1 className="text-3xl font-bold text-green-600">
                             {product.product_name || "Unnamed Product"}
                         </h1>
 
                         {product.details ? (
-                            <p className="text-gray-700 dark:text-gray-300 mt-2">
-                                {product.details}
-                            </p>
+                            <p className="text-gray-700 dark:text-gray-300 mt-2">{product.details}</p>
                         ) : (
                             <p className="text-gray-500 mt-2">বিস্তারিত পাওয়া যায়নি।</p>
                         )}
 
-                        {/* দাম + ডিসকাউন্ট */}
-                        <div className="mt-4">
-                            {discountedPrice ? (
-                                <div className="flex items-center gap-x-2">
-                                    <p className="text-2xl font-semibold text-blue-600">💰 ৳ {discountedPrice}</p>
-                                    <p className="text-gray-500 line-through">৳ {product.price}</p>
-                                    <p className="text-red-500 text-sm ml-2">ছাড়: {product.discount}%</p>
-                                </div>
-                            ) : (
-                                <p className="text-2xl font-semibold text-blue-600">
-                                    💰 ৳ {product.price}
-                                </p>
-                            )}
+                        {/* Price Section */}
+                        <div className="mt-4 flex flex-col gap-3">
+                            <div className="flex items-center gap-3 flex-wrap">
+                                {/* Original Price */}
+                                {product.discount && product.discount > 0 && (
+                                    <span className="text-gray-400 line-through text-lg">৳ {product.price}</span>
+                                )}
+                                {/* Discounted Price */}
+                                <span className="text-2xl font-bold text-blue-600">💰 {discountedPrice} টাকা</span>
+                                {/* Discount Badge */}
+                                {product.discount && product.discount > 0 && (
+                                    <span className="text-red-500 font-semibold text-sm px-2 py-1 bg-red-100 rounded-full">
+                                        -{product.discount}%
+                                    </span>
+                                )}
+                            </div>
+
+                            {/* Delivery Charge */}
+                            <p className="text-gray-500 text-sm">🚚 ডেলিভারি চার্জ: ৳ {delivery_charge}</p>
+                            {/* Total Price */}
+                            <p className="text-green-700 font-bold text-lg">🧾 মোট দাম: ৳ {totalPrice}</p>
                         </div>
 
-                        <p className="text-gray-500 mt-1">স্টক: {product.stock ?? "N/A"}</p>
+                        {/* Stock Info */}
+                        <p className={`mt-2 font-medium ${isSoldOut ? 'text-red-600' : 'text-gray-500'}`}>
+                            স্টক: {product.stock ?? "N/A"} {isSoldOut && '(Sold Out)'}
+                        </p>
                     </div>
 
+                    {/* Order Button */}
                     <Link
-                        href={`/components/products/order/${product._id}?price=${discountedPrice ?? product.price}`}
+                        href={isSoldOut ? '#' : `/components/products/order/${product._id}?price=${totalPrice}`}
                         className="w-full"
                     >
-                        <button className="mt-6 w-full px-6 py-3 flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-xl shadow-lg transition-transform transform hover:scale-105">
-                            <ShoppingCart className="w-5 h-5" /> এখনই অর্ডার করুন
+                        <button
+                            className={`mt-6 w-full px-6 py-3 flex items-center justify-center gap-2 text-white font-semibold rounded-xl shadow-lg transition-transform transform hover:scale-105
+                                ${isSoldOut ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-500 hover:bg-green-600'}`}
+                            disabled={isSoldOut}
+                        >
+                            <ShoppingCart className="w-5 h-5" /> {isSoldOut ? 'Out of Stock' : 'এখনই অর্ডার করুন'}
                         </button>
                     </Link>
                 </div>

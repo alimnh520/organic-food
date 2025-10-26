@@ -10,6 +10,7 @@ const productSchema = new Schema(
         stock: { type: Number, required: false },
         details: { type: String, required: false },
         soldCount: { type: Number, default: 0 },
+
         category: {
             type: String,
             enum: [
@@ -27,10 +28,15 @@ const productSchema = new Schema(
             ],
             required: true,
         },
+
         viewCount: { type: Number, default: 0 },
 
-        discount: { type: Number, default: 0 }, // শতাংশে ডিসকাউন্ট (0-100)
-        discountedPrice: { type: Number, default: 0 }, // ডিসকাউন্টের পর দাম
+        // 🏷️ Discount information
+        discount: { type: Number, default: 0 }, // discount percentage (0-100)
+        discountedPrice: { type: Number, default: 0 }, // final price after discount
+
+        // 🚚 Delivery charge field
+        delivery_charge: { type: Number, required: false, default: 0 }, // delivery fee in BDT
     },
     { timestamps: true }
 );

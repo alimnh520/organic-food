@@ -26,19 +26,14 @@ export default function OrderPage() {
     const [selectedDistrict, setSelectedDistrict] = useState('');
     const [selectedUpazilla, setSelectedUpazilla] = useState('');
 
-    // 🛒 Context থেকে পণ্য খুঁজে নেওয়া
+    // Context থেকে পণ্য খুঁজে নেওয়া
     useEffect(() => {
-        let productArray = [];
-        if (Array.isArray(products)) {
-            productArray = products;
-        } else if (products?.data && Array.isArray(products.data)) {
-            productArray = products.data;
-        }
+        let productArray = Array.isArray(products) ? products : products?.data || [];
         const prod = productArray.find(p => p._id === productId);
         setProduct(prod);
     }, [products, productId]);
 
-    // 🏙️ Location Data
+    // Location Data
     useEffect(() => {
         async function fetchData() {
             try {
@@ -67,10 +62,13 @@ export default function OrderPage() {
         if (type === 'dec' && quantity > 1) setQuantity(quantity - 1);
     };
 
-    // ডিসকাউন্ট প্রাইস ক্যালকুলেট
+    // ডিসকাউন্ট প্রাইস
     const discountedPrice = product?.discount && product.discount > 0
         ? Math.round(product.price - (product.price * product.discount) / 100)
         : product?.price;
+
+    const delivery_charge = product?.delivery_charge ?? 0;
+    const totalPrice = discountedPrice * quantity + delivery_charge;
 
     const handleOrder = async () => {
         if (!name || !mobile || !selectedDivision || !selectedDistrict || !selectedUpazilla || !address) {
@@ -85,12 +83,13 @@ export default function OrderPage() {
             productImage: product.product_image,
             price: discountedPrice,
             quantity,
-            totalPrice: discountedPrice * quantity,
+            delivery_charge,
+            totalPrice,
             name,
             mobile,
-            division: selectedDivision,   // ✅ সরাসরি নাম যাবে
-            district: selectedDistrict,   // ✅ সরাসরি নাম যাবে
-            upazilla: selectedUpazilla,   // ✅ সরাসরি নাম যাবে
+            division: selectedDivision,
+            district: selectedDistrict,
+            upazilla: selectedUpazilla,
             address,
             paymentMethod: 'Cash on Delivery',
             date: new Date().toISOString()
@@ -109,7 +108,7 @@ export default function OrderPage() {
             const data = await res.json();
             if (data.success) {
                 toast.success(data.message, { position: "bottom-right" });
-                router.push('/');
+                window.location.reload();
             }
         } catch (err) {
             console.error("Backend error:", err);
@@ -118,7 +117,11 @@ export default function OrderPage() {
         }
     };
 
-    if (!product) return <p className="text-center py-12">লোড হচ্ছে...</p>;
+    if (!product) return (
+        <div className="w-full flex justify-center items-center py-20">
+            <div className="w-16 h-16 border-4 border-red-500 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+    );
 
     return (
         <div className="max-w-3xl mx-auto py-5 px-6">
@@ -149,8 +152,9 @@ export default function OrderPage() {
                             <button onClick={() => handleQuantity('dec')} className="bg-gray-200 px-4 py-2 rounded-lg hover:bg-gray-300">-</button>
                             <span className="text-lg font-semibold">{quantity}</span>
                             <button onClick={() => handleQuantity('inc')} className="bg-gray-200 px-4 py-2 rounded-lg hover:bg-gray-300">+</button>
-                            <span className="ml-auto font-bold text-green-600">Total: ৳ {discountedPrice * quantity}</span>
+                            <span className="ml-auto font-bold text-green-600">ডেলিভারি: ৳ {delivery_charge}</span>
                         </div>
+                        <p className="text-lg font-bold text-blue-600 mt-2">🧾 মোট: ৳ {totalPrice}</p>
                     </div>
                 </div>
 
@@ -159,7 +163,6 @@ export default function OrderPage() {
                     <input type="text" placeholder="মোবাইল" className="w-full border px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" value={mobile} onChange={e => setMobile(e.target.value)} />
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        {/* বিভাগ */}
                         <select
                             className="border px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
                             value={selectedDivision}
@@ -170,12 +173,9 @@ export default function OrderPage() {
                             }}
                         >
                             <option value="">বিভাগ নির্বাচন করুন</option>
-                            {divisionList.map(d => (
-                                <option key={d.ID} value={d.NAME}>{d.NAME}</option>
-                            ))}
+                            {divisionList.map(d => <option key={d.ID} value={d.NAME}>{d.NAME}</option>)}
                         </select>
 
-                        {/* জেলা */}
                         <select
                             className="border px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
                             value={selectedDistrict}
@@ -188,12 +188,9 @@ export default function OrderPage() {
                             <option value="">জেলা নির্বাচন করুন</option>
                             {districtList
                                 .filter(d => d.DIVISION_BBS_CODE.toString() === divisionList.find(div => div.NAME === selectedDivision)?.BBS_CODE?.toString())
-                                .map(dis => (
-                                    <option key={dis.ID} value={dis.NAME}>{dis.NAME}</option>
-                                ))}
+                                .map(dis => <option key={dis.ID} value={dis.NAME}>{dis.NAME}</option>)}
                         </select>
 
-                        {/* উপজেলা */}
                         <select
                             className="border px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
                             value={selectedUpazilla}
@@ -203,11 +200,8 @@ export default function OrderPage() {
                             <option value="">উপজেলা নির্বাচন করুন</option>
                             {upazillaList
                                 .filter(u => u.DISTRICT_BBS_CODE.toString() === districtList.find(dis => dis.NAME === selectedDistrict)?.BBS_CODE?.toString())
-                                .map(upz => (
-                                    <option key={upz.ID} value={upz.NAME}>{upz.NAME}</option>
-                                ))}
+                                .map(upz => <option key={upz.ID} value={upz.NAME}>{upz.NAME}</option>)}
                         </select>
-
                     </div>
 
                     <textarea placeholder="বিস্তারিত ঠিকানা" className="w-full border px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" value={address} onChange={e => setAddress(e.target.value)} />
