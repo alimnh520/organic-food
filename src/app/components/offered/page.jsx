@@ -170,7 +170,7 @@ export default function OfferProductsPage() {
                                         <div className="flex justify-between mt-2 gap-2">
                                             <button
                                                 onClick={() => toggleWhitelist(p)}
-                                                className={`flex truncate items-center sm:w-auto w-16 gap-1 px-2 py-1 text-xs sm:text-sm rounded transition ${isWhitelisted(p._id)
+                                                className={`flex truncate items-center sm:w-auto w-16 gap-1 px-2 py-1 sm:py-2 text-xs sm:text-sm rounded transition ${isWhitelisted(p._id)
                                                     ? "bg-red-500 text-white"
                                                     : "bg-red-100 hover:bg-red-200 text-red-500"
                                                     }`}
@@ -185,7 +185,7 @@ export default function OfferProductsPage() {
                                             <Link href={`/components/products/order/${p._id}`} className="flex-1">
                                                 <button
                                                     disabled={p.stock === 0}
-                                                    className={`w-full flex items-center justify-center gap-1 px-2 py-1 text-xs sm:text-sm rounded transition ${p.stock === 0
+                                                    className={`w-full flex items-center justify-center gap-1 px-2 py-1 sm:py-2 text-xs sm:text-sm rounded transition ${p.stock === 0
                                                         ? "bg-gray-400 cursor-not-allowed text-white"
                                                         : "bg-blue-500 hover:bg-blue-600 text-white"
                                                         }`}

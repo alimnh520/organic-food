@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Eye } from 'lucide-react';
+import Link from 'next/link';
 
 export default function AllProducts() {
     const [products, setProducts] = useState([]);
@@ -12,7 +13,6 @@ export default function AllProducts() {
     const [price, setPrice] = useState('');
     const [stock, setStock] = useState('');
     const [discount, setDiscount] = useState('');
-    const [deliveryCharge, setDeliveryCharge] = useState('');
     const [loading, setLoading] = useState(false);
     const [isDelete, setIsDelete] = useState(false);
     const [newImage, setNewImage] = useState(null);
@@ -37,7 +37,6 @@ export default function AllProducts() {
         setPrice(product.price);
         setStock(product.stock);
         setDiscount(product.discount ?? 0);
-        setDeliveryCharge(product.delivery_charge ?? 0);
         setNewImage(null);
     };
 
@@ -46,11 +45,10 @@ export default function AllProducts() {
         setPrice('');
         setStock('');
         setDiscount('');
-        setDeliveryCharge('');
         setNewImage(null);
     };
 
-    // ✅ Save Changes (Update price, stock, discount, image, deliveryCharge)
+    // ✅ Save Changes (Update price, stock, discount, image)
     const saveChanges = async (id, image_id) => {
         if (!price || !stock) {
             toast.error("দয়া করে দাম এবং স্টক ঠিকভাবে দিন!", { position: "bottom-right" });
@@ -63,7 +61,6 @@ export default function AllProducts() {
             formData.append("price", Number(price));
             formData.append("stock", Number(stock));
             formData.append("discount", Number(discount) || 0);
-            formData.append("delivery_charge", Number(deliveryCharge) || 0);
             formData.append("id", id);
             formData.append("image_id", image_id);
 
@@ -86,7 +83,6 @@ export default function AllProducts() {
                             price: Number(price),
                             stock: Number(stock),
                             discount: Number(discount) || 0,
-                            delivery_charge: Number(deliveryCharge) || 0,
                             product_image: data.updatedImage || p.product_image
                         }
                         : p
@@ -143,7 +139,7 @@ export default function AllProducts() {
 
     return (
         <div className="max-w-6xl mx-auto py-3 px-6">
-            <h1 className="sm:text-3xl text-xl font-bold text-green-600 mb-4 text-center">📦 সকল পণ্য</h1>
+            <h1 className="sm:text-3xl text-xl font-bold text-green-600 mb-4 text-center"> সকল পণ্য</h1>
 
             {/* 🔍 Search Box */}
             <div className="mb-6 text-center">
@@ -168,14 +164,16 @@ export default function AllProducts() {
                                 <Eye className="w-4 h-4 text-gray-600 dark:text-gray-200" />
                                 <span className="text-gray-700 dark:text-gray-100">{product.viewCount ?? 0}</span>
                             </div>
-                            <img
-                                src={product.product_image}
-                                alt={product.product_name}
-                                className="h-full transition-transform duration-500 transform hover:scale-110"
-                            />
+                            <Link href={`/components/products/${product._id}`}>
+                                <img
+                                    src={product.product_image}
+                                    alt={product.product_name}
+                                    className="h-full transition-transform duration-500 transform hover:scale-110"
+                                />
+                            </Link>
                         </div>
 
-                        <h2 className="text-xl break-words font-semibold mt-2 text-gray-800 dark:text-gray-100">{product.product_name}</h2>
+                        <h2 className="text-xl line-clamp-2 font-semibold mt-2 text-gray-800 dark:text-gray-100">{product.product_name}</h2>
 
                         {/* Edit mode */}
                         {editingProductId === product._id ? (
@@ -196,11 +194,6 @@ export default function AllProducts() {
                                 </div>
 
                                 <div className="mt-2">
-                                    <label className="block text-gray-600 dark:text-gray-300 text-sm">🚚 ডেলিভারি চার্জ:</label>
-                                    <input type="number" value={deliveryCharge} onChange={(e) => setDeliveryCharge(e.target.value)} className="border px-2 py-1 rounded w-full dark:bg-gray-700 dark:text-gray-100" />
-                                </div>
-
-                                <div className="mt-2">
                                     <label className="block text-gray-600 dark:text-gray-300 text-sm">🖼️ নতুন ছবি:</label>
                                     <input type="file" accept="image/*" onChange={(e) => setNewImage(e.target.files[0])} className="border px-2 py-1 rounded w-full dark:bg-gray-700 dark:text-gray-100" />
                                 </div>
@@ -217,7 +210,6 @@ export default function AllProducts() {
                                         <span>{product.price}৳</span>
                                     )}
                                 </p>
-                                <p className="text-gray-600 dark:text-gray-300 mt-1">🚚 ডেলিভারি চার্জ: {product.delivery_charge || 0}৳</p>
                                 <p className="text-gray-600 dark:text-gray-300 mt-1">📦 স্টক: {product.stock}</p>
                                 {product.discount > 0 && <p className="text-gray-600 dark:text-gray-300 mt-1">🎉 ডিসকাউন্ট: {product.discount}%</p>}
                             </>

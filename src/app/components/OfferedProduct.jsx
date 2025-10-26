@@ -29,7 +29,7 @@ export default function OfferProductsPage() {
         <div className="py-3 sm:px-0 px-4 flex flex-col gap-y-5">
             <div className="flex items-center justify-between">
                 <h1 className="sm:text-3xl text-xl font-bold text-green-600 mb-5 w-full pb-2 border-b border-b-green-600">
-                     Flash Sale
+                    Flash Sale
                 </h1>
                 <Link
                     href="/components/offered"
@@ -50,9 +50,9 @@ export default function OfferProductsPage() {
                         return (
                             <div
                                 key={p._id}
-                                className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden relative cursor-pointer group"
+                                className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden relative cursor-pointer group p-3"
                             >
-                                <Link href={`/components/products/${p._id}`} className="relative block">
+                                <Link href={`/components/products/${p._id}`} className="relative flex items-center justify-center">
                                     {/* 🖼 Product Image */}
                                     <img
                                         src={p.product_image}
@@ -70,10 +70,8 @@ export default function OfferProductsPage() {
 
                                     {/* ❌ Sold Out Badge */}
                                     {p.stock === 0 && (
-                                        <div className="absolute inset-0 flex items-center justify-center">
-                                            <span className="bg-black/70 text-white text-sm sm:text-base px-4 py-2 rounded-md font-semibold uppercase">
-                                                SOLD OUT
-                                            </span>
+                                        <div className="absolute z-20 flex items-center justify-center">
+                                            <img src="/logo/sold.jpg" alt="" className='w-20 h-20  rounded-full object-center' />
                                         </div>
                                     )}
                                 </Link>
@@ -107,8 +105,8 @@ export default function OfferProductsPage() {
                                         <button
                                             disabled={p.stock === 0}
                                             className={`flex items-center gap-1 py-2 text-sm rounded w-full justify-center transition ${p.stock === 0
-                                                    ? "bg-gray-400 cursor-not-allowed"
-                                                    : "bg-blue-500 hover:bg-blue-600 text-white"
+                                                ? "bg-gray-400 cursor-not-allowed"
+                                                : "bg-blue-500 hover:bg-blue-600 text-white"
                                                 }`}
                                         >
                                             <ShoppingCart className="w-4 h-4" />{" "}

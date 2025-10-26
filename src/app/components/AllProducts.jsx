@@ -108,7 +108,7 @@ export default function AllProducts() {
                                         {/* Sold Out Overlay */}
 
                                         {product.stock === 0 && (
-                                            <div className="absolute left-5 bottom-5 z-20 flex items-center justify-center">
+                                            <div className="absolute z-20 flex items-center justify-center">
                                                 <img src="/logo/sold.jpg" alt="" className='w-20 h-20  rounded-full object-center'/>
                                             </div>
                                         )}
@@ -171,7 +171,7 @@ export default function AllProducts() {
                                         <div className="flex justify-between mt-2 gap-2">
                                             <button
                                                 onClick={() => toggleWhitelist(product)}
-                                                className={`flex truncate items-center sm:w-auto w-16 gap-1 px-2 py-1 text-xs sm:text-sm rounded transition ${isWhitelisted(product._id)
+                                                className={`flex truncate items-center sm:w-auto w-16 gap-1 px-2 py-1 sm:py-2 text-xs sm:text-sm rounded transition ${isWhitelisted(product._id)
                                                         ? 'bg-red-500 text-white'
                                                         : 'bg-red-100 hover:bg-red-200 text-red-500'
                                                     }`}
@@ -191,7 +191,7 @@ export default function AllProducts() {
                                             >
                                                 <button
                                                     disabled={product.stock === 0}
-                                                    className={`w-full flex items-center justify-center gap-1 px-2 py-1 text-xs sm:text-sm rounded transition ${product.stock === 0
+                                                    className={`w-full flex items-center justify-center gap-1 px-2 py-1 sm:py-2 text-xs sm:text-sm rounded transition ${product.stock === 0
                                                             ? 'bg-gray-400 cursor-not-allowed text-white'
                                                             : 'bg-blue-500 hover:bg-blue-600 text-white'
                                                         }`}

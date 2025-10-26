@@ -20,8 +20,6 @@ export default function ProductDetails({ product }) {
         ? Math.round(product.price - (product.price * product.discount) / 100)
         : product.price
 
-    const delivery_charge = product.delivery_charge ?? 0
-    const totalPrice = discountedPrice + delivery_charge
     const isSoldOut = product.stock === 0
 
     return (
@@ -52,7 +50,10 @@ export default function ProductDetails({ product }) {
                         </h1>
 
                         {product.details ? (
-                            <p className="text-gray-700 dark:text-gray-300 mt-2">{product.details}</p>
+                            <p className="text-gray-700 dark:text-gray-300 mt-2 whitespace-pre-line">
+                                {product.details}
+                            </p>
+
                         ) : (
                             <p className="text-gray-500 mt-2">বিস্তারিত পাওয়া যায়নি।</p>
                         )}
@@ -74,10 +75,8 @@ export default function ProductDetails({ product }) {
                                 )}
                             </div>
 
-                            {/* Delivery Charge */}
-                            <p className="text-gray-500 text-sm">🚚 ডেলিভারি চার্জ: ৳ {delivery_charge}</p>
-                            {/* Total Price */}
-                            <p className="text-green-700 font-bold text-lg">🧾 মোট দাম: ৳ {totalPrice}</p>
+                            {/* Delivery Info (Just Text, No Charge) */}
+                            <p className="text-gray-600 text-sm">🚚 খুলনার ভিতরে ৪০ টাকা, খুলনার বাইরে ৮০ টাকা ডেলিভারি চার্জ প্রযোজ্য</p>
                         </div>
 
                         {/* Stock Info */}
@@ -88,7 +87,7 @@ export default function ProductDetails({ product }) {
 
                     {/* Order Button */}
                     <Link
-                        href={isSoldOut ? '#' : `/components/products/order/${product._id}?price=${totalPrice}`}
+                        href={isSoldOut ? '#' : `/components/products/order/${product._id}`}
                         className="w-full"
                     >
                         <button

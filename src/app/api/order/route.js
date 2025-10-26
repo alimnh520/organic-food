@@ -34,9 +34,8 @@ export async function POST(request) {
         }
 
         const pricePerUnit = product.discountedPrice > 0 ? product.discountedPrice : product.price;
-        const deliveryCharge = product.delivery_charge || 0;
 
-        const finalTotalPrice = pricePerUnit * quantity + deliveryCharge;
+        const finalTotalPrice = pricePerUnit * quantity;  // ❌ ডেলিভারি চার্জ সরানো হয়েছে
 
         // Notify
         const saveNotify = new notification({
@@ -52,7 +51,6 @@ export async function POST(request) {
             price: pricePerUnit,
             quantity,
             totalPrice: finalTotalPrice,
-            deliveryCharge,             // 🟢 ডেলিভারি চার্জ
             name,
             mobile,
             division,

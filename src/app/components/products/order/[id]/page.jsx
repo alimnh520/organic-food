@@ -1,13 +1,12 @@
 'use client'
 import React, { useState, useEffect, useContext } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { UserContext } from '@/app/Provider';
 
 export default function OrderPage() {
-    const router = useRouter();
     const { id } = useParams();
     const { products } = useContext(UserContext);
     const productId = id;
@@ -67,8 +66,7 @@ export default function OrderPage() {
         ? Math.round(product.price - (product.price * product.discount) / 100)
         : product?.price;
 
-    const delivery_charge = product?.delivery_charge ?? 0;
-    const totalPrice = discountedPrice * quantity + delivery_charge;
+    const totalPrice = discountedPrice * quantity;
 
     const handleOrder = async () => {
         if (!name || !mobile || !selectedDivision || !selectedDistrict || !selectedUpazilla || !address) {
@@ -83,7 +81,6 @@ export default function OrderPage() {
             productImage: product.product_image,
             price: discountedPrice,
             quantity,
-            delivery_charge,
             totalPrice,
             name,
             mobile,
@@ -94,10 +91,6 @@ export default function OrderPage() {
             paymentMethod: 'Cash on Delivery',
             date: new Date().toISOString()
         };
-
-        const existingOrders = JSON.parse(localStorage.getItem('orders')) || [];
-        const updatedOrders = [...existingOrders, order];
-        localStorage.setItem('orders', JSON.stringify(updatedOrders));
 
         try {
             const res = await fetch('/api/order', {
@@ -152,9 +145,10 @@ export default function OrderPage() {
                             <button onClick={() => handleQuantity('dec')} className="bg-gray-200 px-4 py-2 rounded-lg hover:bg-gray-300">-</button>
                             <span className="text-lg font-semibold">{quantity}</span>
                             <button onClick={() => handleQuantity('inc')} className="bg-gray-200 px-4 py-2 rounded-lg hover:bg-gray-300">+</button>
-                            <span className="ml-auto font-bold text-green-600">ডেলিভারি: ৳ {delivery_charge}</span>
                         </div>
+
                         <p className="text-lg font-bold text-blue-600 mt-2">🧾 মোট: ৳ {totalPrice}</p>
+                        <p className="text-sm text-gray-600">🚚 খুলনার ভিতরে ৪০ টাকা, খুলনার বাইরে ৮০ টাকা ডেলিভারি চার্জ প্রযোজ্য</p>
                     </div>
                 </div>
 

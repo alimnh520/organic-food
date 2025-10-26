@@ -31,13 +31,10 @@ const productSchema = new Schema(
 
         viewCount: { type: Number, default: 0 },
 
-        // 🏷️ Discount information
-        discount: { type: Number, default: 0 }, // discount percentage (0-100)
-        discountedPrice: { type: Number, default: 0 }, // final price after discount
-
-        // 🚚 Delivery charge field
-        delivery_charge: { type: Number, required: false, default: 0 }, // delivery fee in BDT
+        discount: { type: Number, default: 0 },
+        discountedPrice: { type: Number, default: 0 },
     },
+    
     { timestamps: true }
 );
 

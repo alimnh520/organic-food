@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react';
-import { Menu, X, Home, ShoppingBag, Info, Phone, Heart, LayoutDashboard } from 'lucide-react';
+import { Menu, X, Home, ShoppingCart, LayoutDashboard, ShoppingBag } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
@@ -10,35 +10,33 @@ export default function Header() {
     const pathName = usePathname();
 
     const links = [
-        { name: 'Home', href: '/', icon: <Home className="w-4 h-4 mr-2" /> },
-        { name: 'Products', href: '/components/products', icon: <ShoppingBag className="w-4 h-4 mr-2" /> },
-        { name: 'Cart', href: '/components/whitelist', icon: <Heart className="w-4 h-4 mr-2" /> },
-        { name: 'Admin', href: '/components/dashboard', icon: <LayoutDashboard className="w-4 h-4 mr-2" /> },
+        { name: 'Home', href: '/', icon: <Home className="w-6 h-6 mr-2" /> },
+        { name: 'Products', href: '/components/products', icon: <ShoppingBag className="w-6 h-6 mr-2" /> },
+        { name: 'Cart', href: '/components/whitelist', icon: <ShoppingCart className="w-6 h-6 mr-2" /> },
+        { name: 'Admin', href: '/components/dashboard', icon: <LayoutDashboard className="w-6 h-6 mr-2" /> },
     ];
 
     return (
         <header className="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 shadow-lg fixed top-0 left-0 z-50">
             <div className="max-w-7xl mx-auto px-4 md:px-12 lg:px-16 flex justify-center gap-x-5 items-center h-16 sm:h-20">
 
-                <nav className="hidden md:flex items-center gap-8">
-                    {links.slice(0,2).map((link) => (
-                        <Link
-                            key={link.name}
-                            href={link.href}
-                            className={`flex items-center relative text-white font-medium transition duration-300 hover:text-yellow-300 ${pathName === link.href ? 'text-yellow-300' : ''
-                                }`}
-                        >
-                            <div className="mb-1">{link.icon}</div>
-                            {link.name}
-                            <span
-                                className={`absolute left-0 -bottom-1 h-0.5 bg-yellow-300 transition-all ${pathName === link.href ? 'w-full' : 'w-0 group-hover:w-full'
-                                    }`}
-                            ></span>
-                        </Link>
-                    ))}
+                {/* Desktop Left Menu */}
+                <nav className="hidden md:flex items-center gap-4">
+                    {links.slice(0, 2).map((link) => {
+                        const isActive = pathName === link.href;
+                        return (
+                            <Link
+                                key={link.name}
+                                href={link.href}
+                                className={`flex items-center pr-1 text-white px-3 py-2 rounded-lg transition-all duration-300 hover:bg-white/20 ${isActive ? 'bg-white/20' : ''}`}
+                            >
+                                {link.icon}
+                            </Link>
+                        );
+                    })}
                 </nav>
 
-                {/* 🔸 Logo */}
+                {/* Logo */}
                 <div className="flex items-center gap-3">
                     <img
                         src="/logo/my-image.png"
@@ -47,37 +45,34 @@ export default function Header() {
                     />
                 </div>
 
-                {/* 🔹 Desktop Menu */}
-                <nav className="hidden md:flex items-center gap-8">
-                    {links.slice(2,4).map((link) => (
-                        <Link
-                            key={link.name}
-                            href={link.href}
-                            className={`flex items-center relative text-white font-medium transition duration-300 hover:text-yellow-300 ${pathName === link.href ? 'text-yellow-300' : ''
-                                }`}
-                        >
-                            <div className="mb-1">{link.icon}</div>
-                            {link.name}
-                            <span
-                                className={`absolute left-0 -bottom-1 h-0.5 bg-yellow-300 transition-all ${pathName === link.href ? 'w-full' : 'w-0 group-hover:w-full'
-                                    }`}
-                            ></span>
-                        </Link>
-                    ))}
+                {/* Desktop Right Menu */}
+                <nav className="hidden md:flex items-center gap-4">
+                    {links.slice(2, 4).map((link) => {
+                        const isActive = pathName === link.href;
+                        return (
+                            <Link
+                                key={link.name}
+                                href={link.href}
+                                className={`flex items-center pr-1 text-white px-3 py-2 rounded-lg transition-all duration-300 hover:bg-white/20 ${isActive ? 'bg-white/20' : ''}`}
+                            >
+                                {link.icon}
+                            </Link>
+                        );
+                    })}
                 </nav>
 
-                {/* 🔸 Mobile Menu Button */}
+                {/* Mobile Menu Button */}
                 <div className="md:hidden">
                     <button
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        className="text-white hover:text-yellow-300 transition"
+                        className="text-white mt-2 ml-10 hover:text-yellow-300 transition"
                     >
                         {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
                     </button>
                 </div>
             </div>
 
-            {/* 🔹 Mobile Menu */}
+            {/* Mobile Menu */}
             <AnimatePresence>
                 {mobileMenuOpen && (
                     <motion.div

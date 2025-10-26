@@ -16,7 +16,6 @@ export async function POST(req) {
         const details = formData.get("details");
         const category = formData.get("category");
         const discount = formData.get("discount") || 0;
-        const delivery_charge = formData.get("delivery_charge") || 0; // ✅ নতুন
         const image = formData.get("image");
 
         if (!category) {
@@ -36,7 +35,6 @@ export async function POST(req) {
             details,
             category,
             discount: Number(discount) || 0,
-            delivery_charge: Number(delivery_charge) || 0, // ✅ সেভ করা
         });
 
         await saveProduct.save();
@@ -69,7 +67,6 @@ export async function PATCH(request) {
         const price = Number(formData.get("price"));
         const stock = Number(formData.get("stock"));
         const discount = Number(formData.get("discount")) || 0;
-        const deliveryCharge = Number(formData.get("delivery_charge")) || 0; // ✅ নতুন
         const category = formData.get("category");
         const image_id = formData.get("image_id"); // পুরোনো ইমেজ আইডি
         const newImage = formData.get("newImage"); // নতুন ইমেজ ফাইল
@@ -79,7 +76,7 @@ export async function PATCH(request) {
         }
 
         // আপডেট ডাটা
-        const updateData = { price, stock, discount, delivery_charge: deliveryCharge };
+        const updateData = { price, stock, discount };
         if (category) updateData.category = category;
 
         // ✅ নতুন ছবি থাকলে পুরোনো ডিলিট + নতুন আপলোড
@@ -114,7 +111,6 @@ export async function PATCH(request) {
         console.error("PATCH error:", err);
         return NextResponse.json({ success: false, message: "❌ সার্ভার এরর" });
     }
-
 }
 
 // 🟢 প্রোডাক্ট ডিলেট

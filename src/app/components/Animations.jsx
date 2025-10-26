@@ -43,7 +43,7 @@ export default function Animation() {
 
     useEffect(() => {
         if (slides.length > 1) {
-            const timer = setInterval(handleNext, 5000);
+            const timer = setInterval(handleNext, 6000);
             return () => clearInterval(timer);
         }
     }, [slides]);
@@ -84,26 +84,8 @@ export default function Animation() {
                         className="absolute inset-0 bg-cover bg-center transition-all duration-700"
                         style={{ backgroundImage: `url(${slides[activeIndex]?.imageUrl})` }}
                     >
-                        <div className="absolute inset-0 bg-black/30" />
                     </div>
-
-                    {/* 🔹 Text */}
-                    {/* <div className="absolute inset-0 flex items-center justify-center text-center px-2 sm:px-6">
-                        <AnimatePresence mode="wait">
-                            <motion.p
-                                key={activeIndex}
-                                initial={{ opacity: 0, y: 30 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -30 }}
-                                transition={{ duration: 0.6 }}
-                                className="text-[#f85606] absolute bottom-20 text-base sm:text-2xl md:text-4xl font-bold italic drop-shadow-lg"
-                            >
-                                {slides[activeIndex]?.text}
-                            </motion.p>
-                        </AnimatePresence>
-                    </div> */}
-
-                    {/* 🔹 Navigation Buttons */}
+                    
                     <button
                         onClick={handlePrev}
                         className="absolute left-0 bg-[#f5f5f5] top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-200 hover:text-gray-600 py-5 text-xl sm:text-3xl z-10"
