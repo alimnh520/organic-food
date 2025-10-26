@@ -56,14 +56,14 @@ const cardVariant = {
 
 export default function FeaturesPage() {
     return (
-        <main className="min-h-screen bg-gray-50 dark:bg-gray-900 py-10 px-4 sm:px-0">
+        <main className="min-h-screen bg-gray-50 text-blue-700 dark:bg-gray-900 py-10 px-4 sm:px-0">
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
                 <header className="text-center mb-12">
-                    <h1 className="sm:text-3xl text-2xl  md:text-4xl font-extrabold text-gray-800 dark:text-gray-100">
+                    <h1 className="sm:text-3xl text-2xl  md:text-4xl font-extrabold">
                         আমাদের সেবা — দ্রুত, নিরাপদ ও বিশ্বাসযোগ্য
                     </h1>
-                    <p className="mt-3 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                    <p className="mt-3 text-blue-400 max-w-2xl mx-auto">
                         নিচের সুবিধাগুলো আপনার কেনাকাটাকে সহজ, নিরাপদ ও তাড়াতাড়ি করে তোলে। যদি কোনো প্রশ্ন থাকে — সরাসরি Support এ জেনোর করুন।
                     </p>
                 </header>
@@ -83,7 +83,7 @@ export default function FeaturesPage() {
                                 key={f.id}
                                 variants={cardVariant}
                                 whileHover="hover"
-                                className="relative rounded-2xl bg-white dark:bg-gray-800 shadow-md overflow-hidden border border-gray-100 dark:border-gray-700"
+                                className="relative rounded-2xl bg-white shadow-md overflow-hidden border border-gray-100"
                                 role="region"
                                 aria-labelledby={`feature-${f.id}`}
                             >
@@ -102,7 +102,7 @@ export default function FeaturesPage() {
                                             <Icon className="w-6 h-6" />
                                         </div>
                                         <div>
-                                            <h3 id={`feature-${f.id}`} className="text-lg font-semibold text-gray-800 dark:text-gray-100">
+                                            <h3 id={`feature-${f.id}`} className="text-lg font-semibold text-blue-800 dark:text-gray-100">
                                                 {f.title}
                                             </h3>
                                             <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">{f.desc}</p>
@@ -112,17 +112,17 @@ export default function FeaturesPage() {
                                     {/* details row */}
                                     <div className="mt-6 flex items-center justify-between gap-4">
                                         <div className="flex items-center gap-3">
-                                            <span className="inline-block px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-700 text-xs text-gray-700 dark:text-gray-200 font-medium">
+                                            <span className="inline-block px-3 py-1 rounded-full bg-blue-100  text-xs text-gray-700 dark:text-gray-200 font-medium">
                                                 বিশ্বস্ত
                                             </span>
-                                            <span className="inline-block px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-700 text-xs text-gray-700 dark:text-gray-200 font-medium">
+                                            <span className="inline-block px-3 py-1 rounded-full bg-blue-100  text-xs text-gray-700 dark:text-gray-200 font-medium">
                                                 নিরাপদ
                                             </span>
                                         </div>
                                     </div>
 
                                     {/* subtle footer note */}
-                                    <div className="mt-4 text-xs text-gray-500 dark:text-gray-400">
+                                    <div className="mt-4 text-xs text-purple-400 dark:text-gray-400">
                                         <span className="font-semibold">নোট:</span> নির্দিষ্ট শর্ত ও নীতিমালা প্রযোজ্য।
                                     </div>
                                 </div>

@@ -71,7 +71,7 @@ export default function AllProducts() {
 
     return (
         <div className="py-6 px-4 sm:w-[1280px] mx-auto flex flex-col w-full bg-white dark:bg-gray-900 gap-y-6">
-            <h1 className="sm:text-3xl text-xl font-bold text-green-600 mb-2 w-full pb-2 border-b border-b-green-600">
+            <h1 className="sm:text-3xl text-xl font-bold text-blue-600 mb-2 w-full pb-2 border-b border-b-blue-600">
                 {categories.filter(cat => cat.value === id).map(elem => elem.label)}
             </h1>
 

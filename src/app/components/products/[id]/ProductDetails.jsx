@@ -45,7 +45,7 @@ export default function ProductDetails({ product }) {
                 {/* Product Details */}
                 <div className="w-full md:w-1/2 p-6 flex flex-col justify-between space-y-4">
                     <div>
-                        <h1 className="text-3xl font-bold text-green-600">
+                        <h1 className="text-3xl font-bold text-blue-600">
                             {product.product_name || "Unnamed Product"}
                         </h1>
 

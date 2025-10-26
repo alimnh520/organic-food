@@ -8,19 +8,27 @@ import Link from "next/link";
 
 export default function Orders() {
     const [orders, setOrders] = useState([]);
+    const [filteredOrders, setFilteredOrders] = useState([]);
     const [selectedOrder, setSelectedOrder] = useState(null);
-    const [deliveryCharge, setDeliveryCharge] = useState(0);
+    const [searchCode, setSearchCode] = useState("");
 
-    // Fetch all orders
+    // Fetch all orders from backend
     async function fetchOrders() {
         try {
             const res = await fetch('/api/order', { method: 'GET' });
             const data = await res.json();
-            if (data.success) setOrders(data.message);
+            if (data.success) {
+                setOrders(data.message);
+                setFilteredOrders(data.message); // প্রথমে সব দেখাবে
+            }
         } catch (error) {
             console.log(error);
         }
     }
+
+    useEffect(() => {
+        fetchOrders();
+    }, []);
 
     // Update order status
     async function updateOrderStatus(orderId, status) {
@@ -33,9 +41,8 @@ export default function Orders() {
 
             const data = await res.json();
             if (data.success) {
-                setOrders((prev) =>
-                    prev.map((o) => (o._id === orderId ? { ...o, status } : o))
-                );
+                setOrders(prev => prev.map(o => o._id === orderId ? { ...o, status } : o));
+                setFilteredOrders(prev => prev.map(o => o._id === orderId ? { ...o, status } : o));
                 toast.success(`Order ${status} successfully!`, { position: "bottom-right" });
                 setSelectedOrder(null);
             }
@@ -45,18 +52,44 @@ export default function Orders() {
         }
     }
 
-    useEffect(() => {
-        fetchOrders();
-    }, []);
+    // Handle search
+    const handleSearch = () => {
+        if (searchCode.trim() === "") {
+            setFilteredOrders(orders); // খালি হলে সব দেখাবে
+        } else {
+            const filtered = orders.filter(order =>
+                order.referCode?.toLowerCase().includes(searchCode.toLowerCase())
+            );
+            setFilteredOrders(filtered);
+        }
+    };
 
     return (
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6">
-            <h1 className="sm:text-3xl text-xl font-extrabold text-center text-green-700 mb-10 tracking-wide">
+            <h1 className="sm:text-3xl text-xl font-extrabold text-center text-blue-700 mb-6 tracking-wide">
                 আমার অর্ডার ড্যাশবোর্ড
             </h1>
 
+            {/* Search by Refer Code */}
+            <div className="flex justify-center mb-6 gap-2">
+                <input
+                    type="text"
+                    placeholder="রেফার কোড দিয়ে খুঁজুন"
+                    className="border px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    value={searchCode}
+                    onChange={(e) => setSearchCode(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && handleSearch()} // Enter চাপলেও সার্চ হবে
+                />
+                <button
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
+                    onClick={handleSearch}
+                >
+                    🔍 খুঁজুন
+                </button>
+            </div>
+
             {/* Orders Table View */}
-            {orders.length > 0 ? (
+            {filteredOrders.length > 0 ? (
                 <div className="overflow-x-auto shadow-md rounded-2xl border border-gray-200 dark:border-gray-700">
                     <table className="min-w-full text-sm text-gray-800 dark:text-gray-100">
                         <thead className="bg-green-100 dark:bg-green-800 text-green-900 dark:text-white">
@@ -68,24 +101,26 @@ export default function Orders() {
                                 <th className="px-3 py-3 text-left border-r border-r-green-100">দাম</th>
                                 <th className="px-3 py-3 text-left border-r border-r-green-100">পরিমাণ</th>
                                 <th className="px-3 py-3 text-left border-r border-r-green-100">মোট</th>
+                                <th className="px-3 py-3 text-left border-r border-r-green-100">রেফার কোড</th>
                                 <th className="px-3 py-3 text-left border-r border-r-green-100">স্ট্যাটাস</th>
                                 <th className="px-3 py-3 text-left border-r border-r-green-100">অ্যাকশন</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                            {orders.slice().reverse().map((order) => (
+                            {filteredOrders.slice().reverse().map((order) => (
                                 <tr key={order._id} className="hover:bg-gray-100 dark:hover:bg-gray-800 transition">
                                     <td className="px-3 py-2 border-r border-r-green-100">
                                         <Link href={`/components/products/${order.productId}`}>
                                             <img src={order.productImage} alt={order.productName} className="w-14 h-14 rounded object-cover" />
                                         </Link>
                                     </td>
-                                    <td className="px-3 py-2 border-r border-r-green-100 font-semibold w-80">{order.productName}</td>
+                                    <td className="px-3 py-2 border-r line-clamp-2 border-r-green-100 font-semibold w-52">{order.productName}</td>
                                     <td className="px-3 py-2 border-r border-r-green-100">{order.name}</td>
                                     <td className="px-3 py-2 border-r border-r-green-100">{new Date(order.date).toLocaleDateString()}</td>
                                     <td className="px-3 py-2 border-r border-r-green-100">৳ {order.price}</td>
                                     <td className="px-3 py-2 border-r border-r-green-100">{order.quantity}</td>
                                     <td className="px-3 py-2 border-r border-r-green-100 font-bold text-green-600">৳ {order.totalPrice}</td>
+                                    <td className="px-3 py-2 border-r border-r-green-100">{order.referCode || "N/A"}</td>
                                     <td className="px-3 py-2 border-r border-r-green-100">
                                         <span
                                             className={`px-2 py-1 rounded text-xs font-semibold ${order.status === "confirmed"
@@ -101,10 +136,7 @@ export default function Orders() {
                                     <td className="px-3 py-2">
                                         <button
                                             className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-xs"
-                                            onClick={() => {
-                                                setSelectedOrder(order);
-                                                setDeliveryCharge(0);
-                                            }}
+                                            onClick={() => setSelectedOrder(order)}
                                         >
                                             বিস্তারিত
                                         </button>
@@ -155,22 +187,9 @@ export default function Orders() {
                                     <tr><td className="px-4 py-2 font-semibold">পণ্যের নাম</td><td className="px-4 py-2">{selectedOrder.productName}</td></tr>
                                     <tr><td className="px-4 py-2 font-semibold">দাম</td><td className="px-4 py-2">৳ {selectedOrder.price}</td></tr>
                                     <tr><td className="px-4 py-2 font-semibold">পরিমাণ</td><td className="px-4 py-2">{selectedOrder.quantity}</td></tr>
-                                    <tr>
-                                        <td className="px-4 py-2 font-semibold">ডেলিভারি চার্জ</td>
-                                        <td className="px-4 py-2">
-                                            <input
-                                                type="number"
-                                                className="border px-2 py-1 rounded w-28 text-center"
-                                                value={deliveryCharge}
-                                                onChange={(e) => setDeliveryCharge(Number(e.target.value))}
-                                            /> ৳
-                                        </td>
-                                    </tr>
-                                    <tr><td className="px-4 py-2 font-semibold">মোট দাম</td>
-                                        <td className="px-4 py-2 font-bold text-green-600">
-                                            ৳ {Number(selectedOrder.totalPrice) + Number(deliveryCharge || 0)}
-                                        </td>
-                                    </tr>
+                                    <tr><td className="px-4 py-2 font-semibold">ডেলিভারি চার্জ</td><td className="px-4 py-2">৳ {selectedOrder.deliveryCharge}</td></tr>
+                                    <tr><td className="px-4 py-2 font-semibold">মোট দাম</td><td className="px-4 py-2 font-bold text-green-600">৳ {selectedOrder.totalPrice}</td></tr>
+                                    <tr><td className="px-4 py-2 font-semibold">রেফার কোড</td><td className="px-4 py-2">{selectedOrder.referCode || "N/A"}</td></tr>
                                     <tr><td className="px-4 py-2 font-semibold">পেমেন্ট মেথড</td><td className="px-4 py-2">{selectedOrder.paymentMethod}</td></tr>
                                     <tr><td className="px-4 py-2 font-semibold">ঠিকানা</td><td className="px-4 py-2">{selectedOrder.division}, {selectedOrder.district}, {selectedOrder.upazilla}, {selectedOrder.address}</td></tr>
                                     <tr><td className="px-4 py-2 font-semibold">স্ট্যাটাস</td>

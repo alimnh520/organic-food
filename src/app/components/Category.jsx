@@ -21,7 +21,7 @@ export default function CategoriesPage() {
 
     return (
         <div className="py-4 px-4 sm:px-8 bg-gradient-to-br from-green-50 via-white to-green-100">
-            <h1 className="text-center text-3xl sm:text-4xl font-extrabold text-green-700 mb-8 sm:mb-12 drop-shadow-md">
+            <h1 className="text-center text-3xl sm:text-4xl font-extrabold text-blue-700 mb-8 sm:mb-12 drop-shadow-md">
                 🌿 Our Categories 🌿
             </h1>
 
@@ -51,7 +51,7 @@ export default function CategoriesPage() {
                             </div>
 
                             {/* Label */}
-                            <p className="text-center text-green-700 font-semibold text-xs sm:text-sm group-hover:text-red-500 transition-colors duration-500 drop-shadow-sm">
+                            <p className="text-center text-purple-500 font-semibold text-xs sm:text-sm group-hover:text-red-500 transition-colors duration-500 drop-shadow-sm">
                                 {cat.label}
                             </p>
                         </Link>

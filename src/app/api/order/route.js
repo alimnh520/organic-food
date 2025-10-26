@@ -18,7 +18,8 @@ export async function POST(request) {
             upazilla,
             address,
             paymentMethod,
-            date
+            date,
+            referCode
         } = await request.json();
 
         // Validation
@@ -35,7 +36,9 @@ export async function POST(request) {
 
         const pricePerUnit = product.discountedPrice > 0 ? product.discountedPrice : product.price;
 
-        const finalTotalPrice = pricePerUnit * quantity;  // ❌ ডেলিভারি চার্জ সরানো হয়েছে
+        const deliveryCharge = district === 'খুলনা' ? 40 : 80;
+
+        const finalTotalPrice = pricePerUnit * quantity + deliveryCharge;
 
         // Notify
         const saveNotify = new notification({
@@ -51,6 +54,8 @@ export async function POST(request) {
             price: pricePerUnit,
             quantity,
             totalPrice: finalTotalPrice,
+            deliveryCharge,
+            referCode: referCode || null,
             name,
             mobile,
             division,
@@ -75,7 +80,6 @@ export async function POST(request) {
         console.error("Order API error:", error);
         return NextResponse.json({ message: 'সার্ভারে সমস্যা হয়েছে 😢', success: false });
     }
-
 }
 
 export async function GET() {

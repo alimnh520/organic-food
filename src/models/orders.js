@@ -30,6 +30,17 @@ const orderSchema = new mongoose.Schema(
             required: true,
             min: 0,
         },
+        deliveryCharge: {
+            type: Number,
+            required: true,
+            default: 0, // ডিফল্ট ডেলিভারি চার্জ 0
+            min: 0,
+        },
+        referCode: {
+            type: String,
+            trim: true,
+            default: null, // রেফার কোড দিতে না চাইলে null
+        },
         name: {
             type: String,
             required: true,

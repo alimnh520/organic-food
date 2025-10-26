@@ -67,7 +67,7 @@ export default function OfferProductsPage() {
 
     return (
         <div className="py-6 px-4 mx-auto flex flex-col sm:w-[1280px] w-full bg-white dark:bg-gray-900 gap-y-6">
-            <h1 className="sm:text-3xl text-xl font-bold text-green-600 mb-5 w-full pb-2 border-b border-b-green-600">
+            <h1 className="sm:text-3xl text-xl font-bold text-blue-600 mb-5 w-full pb-2 border-b border-b-blue-600">
                 🎉 Flash Sale
             </h1>
 

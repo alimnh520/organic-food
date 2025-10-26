@@ -16,6 +16,7 @@ export default function OrderPage() {
     const [mobile, setMobile] = useState('');
     const [quantity, setQuantity] = useState(1);
     const [address, setAddress] = useState('');
+    const [referCode, setReferCode] = useState('');
     const [loading, setLoading] = useState(false);
 
     const [divisionList, setDivisionList] = useState([]);
@@ -66,7 +67,10 @@ export default function OrderPage() {
         ? Math.round(product.price - (product.price * product.discount) / 100)
         : product?.price;
 
-    const totalPrice = discountedPrice * quantity;
+    // ডেলিভারি চার্জ নির্ধারণ
+    const deliveryCharge = selectedDistrict === 'খুলনা' ? 40 : selectedDistrict ? 80 : 0;
+
+    const totalPrice = discountedPrice * quantity + deliveryCharge;
 
     const handleOrder = async () => {
         if (!name || !mobile || !selectedDivision || !selectedDistrict || !selectedUpazilla || !address) {
@@ -82,6 +86,8 @@ export default function OrderPage() {
             price: discountedPrice,
             quantity,
             totalPrice,
+            deliveryCharge,
+            referCode: referCode || null,
             name,
             mobile,
             division: selectedDivision,
@@ -119,7 +125,7 @@ export default function OrderPage() {
     return (
         <div className="max-w-3xl mx-auto py-5 px-6">
             <motion.h1
-                className="sm:text-3xl text-xl font-bold text-green-600 mb-10 text-center"
+                className="sm:text-3xl text-xl font-bold text-blue-600 mb-10 text-center"
                 initial={{ opacity: 0, y: -30 }}
                 animate={{ opacity: 1, y: 0 }}
             >
@@ -134,7 +140,7 @@ export default function OrderPage() {
                 <div className="flex flex-col md:flex-row gap-6">
                     <img src={product.product_image} alt={product.product_name} className="w-full md:w-1/3 h-64 object-cover rounded-xl shadow-lg" />
                     <div className="flex-1 space-y-3">
-                        <h2 className="text-2xl break-words font-semibold">{product.product_name}</h2>
+                        <h2 className="text-2xl break-words font-semibold text-blue-600">{product.product_name}</h2>
                         <div className="flex items-center gap-x-2">
                             <p className="text-green-600 font-bold text-xl">৳ {discountedPrice}</p>
                             {product.discount && product.discount > 0 && <p className="text-gray-500 line-through">৳ {product.price}</p>}
@@ -148,13 +154,15 @@ export default function OrderPage() {
                         </div>
 
                         <p className="text-lg font-bold text-blue-600 mt-2">🧾 মোট: ৳ {totalPrice}</p>
-                        <p className="text-sm text-gray-600">🚚 খুলনার ভিতরে ৪০ টাকা, খুলনার বাইরে ৮০ টাকা ডেলিভারি চার্জ প্রযোজ্য</p>
+                        <p className="text-sm text-gray-600">🚚 ডেলিভারি চার্জ: ৳ {deliveryCharge} (খুলনা জেলার ভিতরে ৪০, বাইরে ৮০)</p>
                     </div>
                 </div>
 
                 <div className="space-y-4">
                     <input type="text" placeholder="নাম" className="w-full border px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" value={name} onChange={e => setName(e.target.value)} />
                     <input type="text" placeholder="মোবাইল" className="w-full border px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" value={mobile} onChange={e => setMobile(e.target.value)} />
+
+                    <input type="text" placeholder="রেফার কোড (যদি থাকে)" className="w-full border px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" value={referCode} onChange={e => setReferCode(e.target.value)} />
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <select

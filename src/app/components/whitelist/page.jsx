@@ -39,7 +39,7 @@ export default function WhiteList() {
         <div className=" sm:w-[1280px] mx-auto px-4 py-10 space-y-12">
             {/* ✅ Wishlist Section */}
             <div>
-                <h1 className="sm:text-3xl text-xl font-bold text-green-600 mb-5 text-center">
+                <h1 className="sm:text-3xl text-xl font-bold text-blue-600 mb-5 text-center">
                     My Wishlist
                 </h1>
 
@@ -138,6 +138,7 @@ export default function WhiteList() {
             </div>
 
             {/* ✅ Orders Section */}
+            
             <div>
                 <h1 className="sm:text-3xl text-xl font-bold text-blue-600 mb-5 text-center">
                     My Orders

@@ -55,12 +55,12 @@ export default function AllProducts() {
     return (
         <div className="py-4 px-4 sm:px-0 flex flex-col gap-y-5">
             <div className="flex items-center justify-between">
-                <h1 className="sm:text-3xl text-xl font-bold text-green-600 mb-5 w-full pb-2 border-b border-b-green-600">
+                <h1 className="sm:text-3xl text-xl font-bold text-blue-600 mb-5 w-full pb-2 border-b border-b-blue-600">
                     All Products
                 </h1>
                 <Link
                     href="/components/products"
-                    className="w-32 px-2 py-2 bg-green-600 rounded-md text-white -mt-6 sm:-mt-4 text-center hover:bg-green-700 transition"
+                    className="w-32 px-2 py-2 bg-gradient-to-r from-blue-600 to-purple-500 rounded-md text-white -mt-6 sm:-mt-4 text-center hover:bg-green-700 transition"
                 >
                     See More
                 </Link>

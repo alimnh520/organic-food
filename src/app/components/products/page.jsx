@@ -84,7 +84,7 @@ export default function AllProductsPage() {
 
     return (
         <div className="py-6 px-4 sm:w-[1280px] mx-auto flex flex-col w-full bg-white dark:bg-gray-900 gap-y-6">
-            <h1 className="sm:text-3xl text-xl font-bold text-green-600 mb-4 w-full pb-2 border-b border-b-green-600">
+            <h1 className="sm:text-3xl text-xl font-bold text-blue-600 mb-4 w-full pb-2 border-b border-b-blue-600">
                 All Products
             </h1>
 
@@ -95,9 +95,9 @@ export default function AllProductsPage() {
                     placeholder="Search product..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-800 dark:text-white"
+                    className="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
                 />
-                <button className="flex items-center gap-1 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded">
+                <button className="flex items-center gap-1 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded">
                     <Search className="w-4 h-4" /> Search
                 </button>
             </div>
