@@ -35,6 +35,7 @@ export default function AllProductsPage() {
 
     // Category List
     const categories = [
+        { label: "All", value: "all" },
         { label: "99 TK Shop", value: "others" },
         { label: "Fashion", value: "fashion" },
         { label: "Electronic", value: "electronics" },
@@ -112,7 +113,7 @@ export default function AllProductsPage() {
                                 key={cat.value}
                                 onClick={() => setSelectedCategory(cat.value)}
                                 className={`flex-shrink-0 px-4 py-2 rounded-full text-sm sm:text-base font-medium transition-all duration-300 ${active
-                                    ? "bg-gradient-to-r from-green-500 to-blue-500 text-white shadow"
+                                    ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow"
                                     : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:shadow-sm"
                                     }`}
                             >

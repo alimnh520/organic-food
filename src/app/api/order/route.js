@@ -97,14 +97,30 @@ export async function PATCH(request) {
     try {
         const { orderId, status } = await request.json();
         const collection = await getCollection("orders");
-        await collection.findOneAndUpdate({ _id: new ObjectId(orderId) }, {
-            $set: {
-                status
-            }
+
+        if (status === "rejected") {
+            await collection.deleteOne({ _id: new ObjectId(orderId) });
+            return NextResponse.json({
+                message: 'Order rejected and deleted successfully!',
+                success: true
+            });
+        }
+
+        await collection.findOneAndUpdate(
+            { _id: new ObjectId(orderId) },
+            { $set: { status } }
+        );
+
+        return NextResponse.json({
+            message: 'Order status updated successfully!',
+            success: true
         });
-        return NextResponse.json({ message: 'success', success: true });
+
     } catch (error) {
-        console.log(error);
-        return NextResponse.json({ message: 'সার্ভারে সমস্যা', success: false });
+        console.error("Server Error:", error);
+        return NextResponse.json({
+            message: 'সার্ভারে সমস্যা হয়েছে',
+            success: false
+        });
     }
 }

@@ -39,14 +39,14 @@ export default function Footer() {
                     <div className="flex-1 text-blue-400">
                         <h4 className="text-lg font-semibold mb-2 border-b border-blue-400">Categories</h4>
                         <div className="flex gap-4">
-                            <ul className="flex list-disc list-inside flex-col gap-1 text-[11px]">
+                            <ul className="flex list-disc list-inside flex-col gap-1 text-sm">
                                 {categories.slice(0, Math.ceil(categories.length / 2)).map(cat => (
                                     <li key={cat.value}>
                                         <Link href={`/components/category/${cat.value}`} className="hover:text-pink-600 transition">{cat.label}</Link>
                                     </li>
                                 ))}
                             </ul>
-                            <ul className="flex list-disc list-inside flex-col gap-1 text-[11px]">
+                            <ul className="flex list-disc list-inside flex-col gap-1 text-sm">
                                 {categories.slice(Math.ceil(categories.length / 2)).map(cat => (
                                     <li key={cat.value}>
                                         <Link href={`/components/category/${cat.value}`} className="hover:text-pink-600 transition">{cat.label}</Link>
@@ -59,7 +59,7 @@ export default function Footer() {
                     {/* Quick Links */}
                     <div className="text-blue-400">
                         <h4 className="text-lg font-semibold mb-2 border-b border-blue-400">Quick Links</h4>
-                        <ul className="flex list-disc list-inside flex-col gap-1 text-[11px]">
+                        <ul className="flex list-disc list-inside flex-col gap-1 text-sm">
                             <li><Link href="/" className="hover:text-pink-600 transition">Home</Link></li>
                             <li><Link href="/components/about" className="hover:text-pink-600 transition">About</Link></li>
                             <li><Link href="/components/contact" className="hover:text-pink-600 transition">Contact</Link></li>

@@ -41,7 +41,7 @@ body {
   background-color: rgba(0, 0, 0, 0.196);
 }
 .scroll-bar::-webkit-scrollbar-thumb {
-  background-color: green;
+  background-color: blue;
   border-radius: 20px;
 }
 
