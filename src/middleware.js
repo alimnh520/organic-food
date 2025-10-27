@@ -3,7 +3,7 @@ import { jwtVerify } from "jose";
 
 export async function middleware(request) {
   const pathName = request.nextUrl.pathname;
-  const token = request.cookies.get("shop-admin")?.value;
+  const token = request.cookies.get("abdullahonlineshop")?.value;
 
   if (token && (pathName.startsWith("/login") || pathName.startsWith("/reset-pass"))) {
     return NextResponse.redirect(new URL("/components/dashboard", request.url));

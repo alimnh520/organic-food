@@ -34,7 +34,7 @@ export async function POST(request) {
         );
 
         const response = NextResponse.json({ message: 'login successful', success: true });
-        response.cookies.set('shop-admin', token, {
+        response.cookies.set('abdullahonlineshop', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             maxAge: 1 * 24 * 60 * 60,

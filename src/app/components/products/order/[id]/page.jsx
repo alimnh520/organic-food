@@ -107,7 +107,9 @@ export default function OrderPage() {
             const data = await res.json();
             if (data.success) {
                 toast.success(data.message, { position: "bottom-right" });
-                window.location.reload();
+                setTimeout(() => {
+                    window.location.reload();
+                }, 3000);
             }
         } catch (err) {
             console.error("Backend error:", err);

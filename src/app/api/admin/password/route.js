@@ -4,11 +4,6 @@ import bcrypt from 'bcryptjs';
 import { getCollection } from '@/lib/mongoClient';
 import { ObjectId } from 'mongodb';
 
-/**
- * POST body: { id?: string, newPassword: string }
- * যদি id না থাকে -> প্রথম admin ডকুমেন্ট আপডেট করবে
- */
-
 export async function POST(req) {
     try {
         const body = await req.json();
@@ -17,10 +12,6 @@ export async function POST(req) {
         if (!newPassword || typeof newPassword !== 'string' || newPassword.length < 8) {
             return NextResponse.json({ success: false, message: 'পাসওয়ার্ড অন্তত 8 অক্ষরের হতে হবে।' }, { status: 400 });
         }
-
-        // hash password
-        // const salt = await bcrypt.genSalt(10);
-        // const hashed = await bcrypt.hash(newPassword, salt);
 
         const collection = await getCollection('admin');
 
