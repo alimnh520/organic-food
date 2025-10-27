@@ -89,7 +89,7 @@ export default function AllProducts() {
                                     className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden relative cursor-pointer"
                                 >
                                     {/* Product Image */}
-                                    <div className="relative overflow-hidden h-36 sm:h-48 flex justify-center items-center">
+                                    <div className="relative overflow-hidden h-36 sm:h-48 flex justify-center items-center p-2">
                                         {/* 👁 View count */}
                                         <div className="absolute top-2 right-2 z-20 bg-white/90 dark:bg-black/70 px-2 py-1 rounded-full flex items-center gap-1 text-[10px] sm:text-xs shadow">
                                             <Eye className="w-3 h-3 sm:w-4 sm:h-4 text-gray-600 dark:text-gray-200" />
@@ -100,7 +100,7 @@ export default function AllProducts() {
 
                                         {/* 🏷 Discount Tag */}
                                         {product.discount > 0 && (
-                                            <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded-md shadow-md">
+                                            <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded-md shadow-md z-10">
                                                 -{product.discount}%
                                             </div>
                                         )}
@@ -109,7 +109,7 @@ export default function AllProducts() {
 
                                         {product.stock === 0 && (
                                             <div className="absolute z-20 flex items-center justify-center">
-                                                <img src="/logo/sold.jpg" alt="" className='w-20 h-20  rounded-full object-center'/>
+                                                <img src="/logo/sold.png" alt="" className='w-20 h-20 sm:w-28 sm:h-28 rotate-45  rounded-full object-center' />
                                             </div>
                                         )}
 
@@ -126,7 +126,7 @@ export default function AllProducts() {
                                             <img
                                                 src={product.product_image}
                                                 alt={product.product_name}
-                                                className={`h-36 sm:h-48 w-full object-cover transition-transform duration-500 transform hover:scale-110 ${product.stock === 0 ? 'opacity-60' : ''
+                                                className={`h-32 sm:h-44 w-full object-cover transition-transform duration-500 transform hover:scale-110 ${product.stock === 0 ? 'opacity-60' : ''
                                                     }`}
                                             />
                                         </Link>
@@ -161,8 +161,8 @@ export default function AllProducts() {
                                             <p className="text-gray-500 dark:text-gray-400">
                                                 Stock: {product.stock}
                                             </p>
-                                            <p className="text-gray-500 dark:text-gray-400 flex items-center gap-1 truncate">
-                                                <span className="w-0.5 h-4 bg-gray-200 hidden sm:inline-block"></span>
+                                            <p className="text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                                                <span className="w-0.5 h-4 bg-gray-200"></span>
                                                 Sold: {product?.soldCount}
                                             </p>
                                         </div>
@@ -171,15 +171,15 @@ export default function AllProducts() {
                                         <div className="flex justify-between mt-2 gap-2">
                                             <button
                                                 onClick={() => toggleWhitelist(product)}
-                                                className={`flex truncate items-center sm:w-auto w-16 gap-1 px-2 py-1 sm:py-2 text-xs sm:text-sm rounded transition ${isWhitelisted(product._id)
-                                                        ? 'bg-red-500 text-white'
-                                                        : 'bg-red-100 hover:bg-red-200 text-red-500'
+                                                className={`flex items-center justify-center sm:w-auto w-16 gap-1 px-2 py-1 sm:py-2 text-xs sm:text-sm rounded transition ${isWhitelisted(product._id)
+                                                    ? 'bg-red-500 text-white'
+                                                    : 'bg-red-100 hover:bg-red-200 text-red-500'
                                                     }`}
                                             >
                                                 <Heart
-                                                    className={`w-3 hidden sm:inline h-3 sm:w-4 sm:h-4 ${isWhitelisted(product._id)
-                                                            ? 'text-white'
-                                                            : 'text-red-500'
+                                                    className={`w-3 h-3 mb-0.5 sm:w-4 sm:h-4 ${isWhitelisted(product._id)
+                                                        ? 'text-white'
+                                                        : 'text-red-500'
                                                         }`}
                                                 />
                                                 Cart
@@ -192,12 +192,12 @@ export default function AllProducts() {
                                                 <button
                                                     disabled={product.stock === 0}
                                                     className={`w-full flex items-center justify-center gap-1 px-2 py-1 sm:py-2 text-xs sm:text-sm rounded transition ${product.stock === 0
-                                                            ? 'bg-gray-400 cursor-not-allowed text-white'
-                                                            : 'bg-blue-500 hover:bg-blue-600 text-white'
+                                                        ? 'bg-gray-400 cursor-not-allowed text-white'
+                                                        : 'bg-blue-500 hover:bg-blue-600 text-white'
                                                         }`}
                                                 >
-                                                    <ShoppingCart className="w-3 h-3 sm:w-4 sm:h-4" />{' '}
-                                                    {product.stock === 0 ? 'Unavailable' : 'Order Now'}
+                                                    <ShoppingCart className="w-3 h-3 mb-0.5 sm:w-4 sm:h-4" />{' '}
+                                                    {product.stock === 0 ? 'Out' : 'Order Now'}
                                                 </button>
                                             </Link>
                                         </div>

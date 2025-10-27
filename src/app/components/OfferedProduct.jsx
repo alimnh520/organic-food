@@ -50,14 +50,14 @@ export default function OfferProductsPage() {
                         return (
                             <div
                                 key={p._id}
-                                className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden relative cursor-pointer group p-3"
+                                className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden relative cursor-pointer group p-2"
                             >
                                 <Link href={`/components/products/${p._id}`} className="relative flex items-center justify-center">
                                     {/* 🖼 Product Image */}
                                     <img
                                         src={p.product_image}
                                         alt={p.product_name}
-                                        className={`h-36 sm:h-48 relative left-1/2 -translate-x-1/2 transition-transform duration-500 transform group-hover:scale-110 ${p.stock === 0 ? "opacity-60" : ""
+                                        className={`h-32 sm:h-44 relative transition-transform duration-500 transform group-hover:scale-110 ${p.stock === 0 ? "opacity-60" : ""
                                             }`}
                                     />
 
@@ -71,13 +71,13 @@ export default function OfferProductsPage() {
                                     {/* ❌ Sold Out Badge */}
                                     {p.stock === 0 && (
                                         <div className="absolute z-20 flex items-center justify-center">
-                                            <img src="/logo/sold.jpg" alt="" className='w-20 h-20  rounded-full object-center' />
+                                            <img src="/logo/sold.png" alt="" className='w-20 h-20 sm:w-28 sm:h-28 rotate-45  rounded-full object-center' />
                                         </div>
                                     )}
                                 </Link>
 
                                 {/* 🏷 Name */}
-                                <h4 className="mt-3 line-clamp-2 font-semibold text-gray-800 dark:text-gray-100 px-1">
+                                <h4 className="mt-3 truncate text-sm sm:text-base font-semibold text-gray-800 dark:text-gray-100 px-1">
                                     {p.product_name}
                                 </h4>
 
@@ -109,8 +109,8 @@ export default function OfferProductsPage() {
                                                 : "bg-blue-500 hover:bg-blue-600 text-white"
                                                 }`}
                                         >
-                                            <ShoppingCart className="w-4 h-4" />{" "}
-                                            {p.stock === 0 ? "Unavailable" : "Order Now"}
+                                            <ShoppingCart className="w-4 h-4 mb-1" />{" "}
+                                            {p.stock === 0 ? "Out" : "Order Now"}
                                         </button>
                                     </Link>
                                 </div>

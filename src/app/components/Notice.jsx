@@ -22,7 +22,7 @@ export default function NoticeHeadline() {
     console.log(visitor)
     return (
         <div className="bg-red-600/60 overflow-hidden relative flex">
-            <div className="h-12 z-10 w-fit bg-red-400 text-white rounded-r-full px-2 sm:px-4 border-r-2 flex items-center justify-center">
+            <div className="h-12 z-10 w-fit bg-red-400 text-white rounded-r-full px-2 sm:px-4 border-r-2 flex items-center justify-center text-sm sm:text-base">
                Our page visitor : {visitor}
             </div>
             <motion.div

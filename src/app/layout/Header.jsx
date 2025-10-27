@@ -62,10 +62,10 @@ export default function Header() {
                 </nav>
 
                 {/* Mobile Menu Button */}
-                <div className="md:hidden">
+                <div className="md:hidden relative">
                     <button
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        className="text-white mt-2 ml-10 hover:text-yellow-300 transition"
+                        className="text-white mt-2 relative -right-8 hover:text-yellow-300 transition"
                     >
                         {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
                     </button>
