@@ -39,22 +39,25 @@ export default function ChangePassword({ adminId = null }) {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    id: adminId, // যদি null হয়, backend প্রথম admin আপডেট করবে
+                    id: adminId,
                     newPassword,
                 }),
             });
 
             const data = await res.json();
             if (data.success) {
-                toast.success(data.message || 'পাসওয়ার্ড সফলভাবে পরিবর্তন হয়েছে।',{ position: "bottom-right" });
+                toast.success(data.message || 'পাসওয়ার্ড সফলভাবে পরিবর্তন হয়েছে।', { position: "bottom-right" });
                 setNewPassword('');
                 setConfirmPassword('');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
             } else {
                 toast.error(data.message || 'কিছু ভুল হয়েছে। আবার চেষ্টা করুন।', { position: "bottom-right" });
             }
         } catch (err) {
             console.error('Change password error:', err);
-            toast.error('সার্ভার এরর। পরে চেষ্টা করুন।',{ position: "bottom-right" });
+            toast.error('সার্ভার এরর। পরে চেষ্টা করুন।', { position: "bottom-right" });
         } finally {
             setLoading(false);
         }

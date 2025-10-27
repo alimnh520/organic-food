@@ -20,7 +20,9 @@ export async function POST(req) {
             { $set: { password: newPassword } }
         );
 
-        return NextResponse.json({ success: true, message: 'পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে।' });
+        const response = NextResponse.json({ success: true, message: 'পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে।' });
+        response.cookies.delete('abdullahonlineshop');
+        return response;
 
     } catch (err) {
         console.error('Change password error:', err);
