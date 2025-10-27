@@ -25,7 +25,7 @@ export default function Dashboard() {
         ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} 
         md:translate-x-0 md:static md:inset-0`}
             >
-                <div className="flex justify-between items-center mb-8">
+                <div className="flex justify-between items-center mb-5 lg:mb-8 lg:mt-0 mt-14">
 
                     <div className="flex items-center gap-x-3">
                         <img src="/my-logo.jpg" alt="লোগো" className="w-10 h-10 rounded-full object-contain" />
