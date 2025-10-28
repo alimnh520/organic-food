@@ -84,7 +84,7 @@ export default function AllProductsPage() {
     };
 
     return (
-        <div className="py-6 px-4 sm:w-[1280px] mx-auto flex flex-col w-full bg-white dark:bg-gray-900 gap-y-6">
+        <div className="py-3 sm:py-6 px-4 sm:w-[1280px] mx-auto flex flex-col w-full bg-white dark:bg-gray-900 sm:gap-y-6 gap-y-3">
             <h1 className="sm:text-3xl text-xl font-bold text-blue-600 mb-2 lg:mb-4 w-full pb-2 border-b border-b-blue-600">
                 All Products
             </h1>
@@ -130,7 +130,7 @@ export default function AllProductsPage() {
                     <div className="w-16 h-16 border-4 border-red-500 border-t-transparent rounded-full animate-spin"></div>
                 </div>
             ) : (
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6 mt-2">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-6 mt-2">
                     <AnimatePresence>
                         {filteredProducts
                             .slice()
@@ -213,16 +213,26 @@ export default function AllProductsPage() {
                                                         <p className="text-gray-500 line-through text-xs sm:text-sm">
                                                             ৳ {product.price}
                                                         </p>
+                                                        <p className="text-gray-500 dark:text-gray-400 flex items-center gap-1 truncate">
+                                                            <span className="w-0.5 h-4 bg-gray-200"></span>
+                                                            Sold: {product?.soldCount}
+                                                        </p>
                                                     </div>
                                                 </div>
                                             ) : (
-                                                <p className="text-green-600 font-bold text-sm sm:text-base">
-                                                    ৳ {product.price}
-                                                </p>
+                                                <div className="flex items-center gap-x-1 sm:gap-x-2">
+                                                    <p className="text-green-600 font-bold text-sm sm:text-base">
+                                                        ৳ {product.price}
+                                                    </p>
+                                                    <p className="text-gray-500 dark:text-gray-400 flex items-center gap-1 truncate">
+                                                        <span className="w-0.5 h-4 bg-gray-200"></span>
+                                                        Sold: {product?.soldCount}
+                                                    </p>
+                                                </div>
                                             )}
 
                                             {/* 📦 Stock & Sold */}
-                                            <div className="flex flex-wrap items-center gap-x-2 text-xs sm:text-sm">
+                                            {/* <div className="flex flex-wrap items-center gap-x-2 text-xs sm:text-sm">
                                                 <p className="text-gray-500 dark:text-gray-400">
                                                     Stock: {product.stock}
                                                 </p>
@@ -230,7 +240,7 @@ export default function AllProductsPage() {
                                                     <span className="w-0.5 h-4 bg-gray-200"></span>
                                                     Sold: {product?.soldCount}
                                                 </p>
-                                            </div>
+                                            </div> */}
 
                                             {/* ❤️ Whitelist & 🛒 Order Buttons */}
                                             <div className="flex justify-between mt-2 gap-2">

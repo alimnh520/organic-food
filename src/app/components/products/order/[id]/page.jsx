@@ -60,7 +60,7 @@ export default function OrderPage() {
 
     const handleQuantity = (type) => {
         if (!product) return;
-        if (type === 'inc' && quantity < product.stock) setQuantity(quantity + 1);
+        if (type === 'inc' && setQuantity(quantity + 1));
         if (type === 'dec' && quantity > 1) setQuantity(quantity - 1);
     };
 
@@ -124,7 +124,7 @@ export default function OrderPage() {
             <div className="w-16 h-16 border-4 border-green-500 border-t-transparent rounded-full animate-spin"></div>
         </div>
     );
-
+    
     return (
         <div className="max-w-3xl mx-auto py-5 px-6 relative">
             <motion.h1
@@ -200,7 +200,7 @@ export default function OrderPage() {
                                         <p className="text-gray-500 line-through">৳ {product.price}</p>
                                     )}
                                 </div>
-                                <p className="text-gray-500">স্টক: {product.stock}</p>
+                                {/* <p className="text-gray-500">স্টক: {product.stock}</p> */}
 
                                 <div className="flex items-center gap-4 mt-2">
                                     <button

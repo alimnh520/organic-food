@@ -26,7 +26,7 @@ export default function OfferProductsPage() {
     }, []);
 
     return (
-        <div className="py-3 sm:px-0 px-4 flex flex-col gap-y-5">
+        <div className="py-3 sm:px-0 px-4 flex flex-col gap-y-0 lg:gap-y-5">
             <div className="flex items-center justify-between">
                 <h1 className="sm:text-3xl text-xl font-bold text-blue-600 mb-5 w-full pb-2 border-b border-b-blue-600">
                     Flash Sale
@@ -44,7 +44,7 @@ export default function OfferProductsPage() {
                     <div className="w-16 h-16 border-4 border-red-500 border-t-transparent rounded-full animate-spin"></div>
                 </div>
             ) : (
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-6">
                     {products.map((p) => {
                         const discountedPrice = Math.round(p.price - (p.price * p.discount) / 100);
                         return (
@@ -83,21 +83,23 @@ export default function OfferProductsPage() {
 
                                 {/* 💰 Price Section */}
                                 {p.discount > 0 ? (
-                                    <div className="mt-1 flex items-center gap-x-3 px-1">
-                                        <div className="flex items-center gap-x-2">
-                                            <p className="text-green-600 font-bold">৳ {discountedPrice}</p>
-                                            <p className="text-gray-500 line-through">৳ {p.price}</p>
-                                        </div>
+                                    <div className="flex items-center justify-start gap-x-1">
+                                        <p className="text-green-600 font-bold">৳ {discountedPrice}</p>
+                                        <p className="text-gray-500 line-through text-sm">৳ {p.price}</p>
+                                        <p className="text-gray-500 dark:text-gray-400 flex items-center gap-1 truncate">
+                                            <span className="w-0.5 h-4 bg-gray-200"></span>
+                                            Sold: {p?.soldCount}
+                                        </p>
                                     </div>
                                 ) : (
                                     <p className="text-green-600 font-bold px-1">৳ {p.price}</p>
                                 )}
 
                                 {/* 📦 Stock and Sold Count */}
-                                <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 px-1 mt-1">
+                                {/* <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 px-1 mt-1">
                                     <p>Stock: {p.stock}</p>
                                     <p>Sold: {p?.soldCount || 0}</p>
-                                </div>
+                                </div> */}
 
                                 {/* 🛒 Order Button */}
                                 <div className="mt-3 px-1 pb-2">

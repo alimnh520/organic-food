@@ -66,7 +66,7 @@ export default function OfferProductsPage() {
     };
 
     return (
-        <div className="py-6 px-4 mx-auto flex flex-col sm:w-[1280px] w-full bg-white dark:bg-gray-900 gap-y-6">
+        <div className="py-2 sm:py-6 px-4 mx-auto flex flex-col sm:w-[1280px] w-full bg-white dark:bg-gray-900 sm:gap-y-6 gap-y-3">
             <h1 className="sm:text-3xl text-xl font-bold text-blue-600 mb-5 w-full pb-2 border-b border-b-blue-600">
                 Flash Sale
             </h1>
@@ -76,7 +76,7 @@ export default function OfferProductsPage() {
                     <div className="w-16 h-16 border-4 border-red-500 border-t-transparent rounded-full animate-spin"></div>
                 </div>
             ) : (
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-6">
                     <AnimatePresence>
                         {products.map((p) => {
                             const discountedPrice =
@@ -149,22 +149,32 @@ export default function OfferProductsPage() {
                                                     <p className="text-gray-500 line-through text-xs sm:text-sm">
                                                         ৳ {p.price}
                                                     </p>
+                                                    <p className="text-gray-500 dark:text-gray-400 flex items-center gap-1 truncate">
+                                                        <span className="w-0.5 h-4 bg-gray-200"></span>
+                                                        Sold: {p?.soldCount}
+                                                    </p>
                                                 </div>
                                             </div>
                                         ) : (
-                                            <p className="text-green-600 font-bold text-sm sm:text-base">
-                                                ৳ {p.price}
-                                            </p>
+                                            <div className="flex items-center gap-x-1 sm:gap-x-2">
+                                                <p className="text-green-600 font-bold text-sm sm:text-base">
+                                                    ৳ {p.price}
+                                                </p>
+                                                <p className="text-gray-500 dark:text-gray-400 flex items-center gap-1 truncate">
+                                                    <span className="w-0.5 h-4 bg-gray-200"></span>
+                                                    Sold: {p?.soldCount}
+                                                </p>
+                                            </div>
                                         )}
 
                                         {/* 📦 Stock info */}
-                                        <div className="flex flex-wrap items-center gap-x-2 text-xs sm:text-sm">
+                                        {/* <div className="flex flex-wrap items-center gap-x-2 text-xs sm:text-sm">
                                             <p className="text-gray-500 dark:text-gray-400">Stock: {p.stock}</p>
                                             <p className="text-gray-500 dark:text-gray-400 flex items-center gap-1">
                                                 <span className="w-0.5 h-4 bg-gray-200"></span>
                                                 Sold: {p?.soldCount}
                                             </p>
-                                        </div>
+                                        </div> */}
 
                                         {/* ❤️ Cart + 🛒 Order Buttons */}
                                         <div className="flex justify-between mt-2 gap-2">

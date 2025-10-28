@@ -53,7 +53,7 @@ export default function AllProducts() {
     };
 
     return (
-        <div className="py-4 px-4 sm:px-0 flex flex-col gap-y-5">
+        <div className="py-1 sm:py-4 px-4 sm:px-0 flex flex-col gap-y-0 sm:gap-y-5">
             <div className="flex items-center justify-between">
                 <h1 className="sm:text-3xl text-xl font-bold text-blue-600 mb-5 w-full pb-2 border-b border-b-blue-600">
                     All Products
@@ -67,7 +67,7 @@ export default function AllProducts() {
             </div>
 
             {/* Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-6">
                 <AnimatePresence>
                     {products
                         .slice()
@@ -148,16 +148,26 @@ export default function AllProducts() {
                                                     <p className="text-gray-500 line-through text-xs sm:text-sm">
                                                         ৳ {product.price}
                                                     </p>
+                                                    <p className="text-gray-500 dark:text-gray-400 flex items-center gap-1 truncate">
+                                                        <span className="w-0.5 h-4 bg-gray-200"></span>
+                                                        Sold: {product?.soldCount}
+                                                    </p>
                                                 </div>
                                             </div>
                                         ) : (
-                                            <p className="text-green-600 font-bold text-sm sm:text-base">
-                                                ৳ {product.price}
-                                            </p>
+                                            <div className="flex items-center gap-x-1 sm:gap-x-2">
+                                                <p className="text-green-600 font-bold text-sm sm:text-base">
+                                                    ৳ {product.price}
+                                                </p>
+                                                <p className="text-gray-500 dark:text-gray-400 flex items-center gap-1 truncate">
+                                                    <span className="w-0.5 h-4 bg-gray-200"></span>
+                                                    Sold: {product?.soldCount}
+                                                </p>
+                                            </div>
                                         )}
 
                                         {/* 📦 Stock & Sold */}
-                                        <div className="flex flex-wrap items-center gap-x-2 text-xs sm:text-sm">
+                                        {/* <div className="flex flex-wrap items-center gap-x-2 text-xs sm:text-sm">
                                             <p className="text-gray-500 dark:text-gray-400">
                                                 Stock: {product.stock}
                                             </p>
@@ -165,7 +175,7 @@ export default function AllProducts() {
                                                 <span className="w-0.5 h-4 bg-gray-200"></span>
                                                 Sold: {product?.soldCount}
                                             </p>
-                                        </div>
+                                        </div> */}
 
                                         {/* ❤️ Whitelist & 🛒 Order Buttons */}
                                         <div className="flex justify-between mt-2 gap-2">

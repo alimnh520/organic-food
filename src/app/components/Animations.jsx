@@ -73,7 +73,7 @@ export default function Animation() {
 
     return (
         <div className="flex flex-col gap-y-1 w-full">
-            <div className="flex flex-col sm:flex-row w-full gap-3">
+            <div className="flex flex-col sm:flex-row w-full gap-0 sm:gap-3">
                 {/* 🔹 Main Slider */}
                 <div
                     className="relative sm:flex-1 h-[180px] sm:h-[220px] md:h-[300px] lg:h-[320px] overflow-hidden"

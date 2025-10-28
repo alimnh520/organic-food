@@ -20,9 +20,10 @@ export default function CategoriesPage() {
     ];
 
     return (
-        <div className="py-4 px-4 sm:px-8 bg-gradient-to-br from-green-50 via-white to-green-100">
-            <h1 className="text-center text-3xl sm:text-4xl font-extrabold text-blue-700 mb-8 sm:mb-12 drop-shadow-md">
-                🌿 Our Categories 🌿
+        <div className="py-2 px-4 sm:px-8 bg-gradient-to-br from-green-50 via-white to-green-100">
+            <h1 className="text-center text-2xl flex items-center justify-center gap-x-2 sm:text-4xl font-extrabold text-red-600/60 mb-5 sm:mb-12 drop-shadow-md w-full border-b border-b-red-600/60">
+                {/* <span className="w-12 h-0.5 bg-blue-600"></span> Our Categories <span className="w-12 h-0.5 bg-blue-600"></span> */}
+                Popular Categories For You
             </h1>
 
             {/* Grid */}
