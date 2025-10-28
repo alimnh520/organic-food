@@ -47,27 +47,27 @@ export async function POST(request) {
         await saveNotify.save();
 
         // Save Order
-        // const saveOrder = new Order({
-        //     productId,
-        //     productName: product.product_name,
-        //     productImage: product.product_image,
-        //     price: pricePerUnit,
-        //     quantity,
-        //     totalPrice: finalTotalPrice,
-        //     deliveryCharge,
-        //     referCode: referCode || null,
-        //     name,
-        //     mobile,
-        //     division,
-        //     district,
-        //     upazilla,
-        //     address,
-        //     paymentMethod: paymentMethod || "Cash on Delivery",
-        //     date: date || new Date(),
-        //     status: "pending"
-        // });
+        const saveOrder = new Order({
+            productId,
+            productName: product.product_name,
+            productImage: product.product_image,
+            price: pricePerUnit,
+            quantity,
+            totalPrice: finalTotalPrice,
+            deliveryCharge,
+            referCode: referCode || null,
+            name,
+            mobile,
+            division,
+            district,
+            upazilla,
+            address,
+            paymentMethod: paymentMethod || "Cash on Delivery",
+            date: date || new Date(),
+            status: "pending"
+        });
 
-        // await saveOrder.save();
+        await saveOrder.save();
 
         await products.updateOne(
             { _id: productId },
