@@ -28,7 +28,7 @@ export const metadata = {
     siteName: "Abdullah Online Shop",
     images: [
       {
-        url: "https://www.abdullahshopbd.com/my-logo.jpg",
+        url: "https://www.abdullahshopbd.com/logo/my-image.png",
         width: 1200,
         height: 630,
         alt: "Abdullah Online Shop Logo",
@@ -38,9 +38,9 @@ export const metadata = {
     type: "website",
   },
   icons: {
-    icon: "/my-logo.jpg",
-    shortcut: "/my-logo.jpg",
-    apple: "/my-logo.jpg",
+    icon: "/logo/my-image.png",
+    shortcut: "/logo/my-image.png",
+    apple: "/logo/my-image.png",
   },
 };
 
