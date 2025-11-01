@@ -207,7 +207,7 @@ export default function AllProducts() {
                                                         }`}
                                                 >
                                                     <ShoppingCart className="w-3 h-3 mb-0.5 sm:w-4 sm:h-4" />{' '}
-                                                    {product.stock === 0 ? 'Out' : 'Order Now'}
+                                                    {product.stock === 0 ? 'Sold Out' : 'Order Now'}
                                                 </button>
                                             </Link>
                                         </div>
