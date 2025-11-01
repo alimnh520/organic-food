@@ -201,7 +201,7 @@ export default function OfferProductsPage() {
                                                         }`}
                                                 >
                                                     <ShoppingCart className="w-3 h-3 mb-0.5 sm:w-4 sm:h-4" />
-                                                    {p.stock === 0 ? "Out" : "Order Now"}
+                                                    {p.stock === 0 ? "Sold Out" : "Order Now"}
                                                 </button>
                                             </Link>
                                         </div>
