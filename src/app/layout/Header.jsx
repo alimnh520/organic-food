@@ -41,7 +41,7 @@ export default function Header() {
                     <img
                         src="/logo/my-image.png"
                         alt="লোগো"
-                        className="sm:h-20 h-16 rounded-full object-cover shadow-md"
+                        className="sm:h-20 h-16 rounded-full"
                     />
                 </div>
 
