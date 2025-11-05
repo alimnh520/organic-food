@@ -28,9 +28,7 @@
 
 body {
   font-family: "Bornomala", sans-serif;
-  background: linear-gradient(135deg, rgba(0, 102, 255, 0.15), rgba(255, 0, 150, 0.25));
-  background-attachment: fixed;
-  background-size: cover;
+  background: white;
 }
 
 ::-webkit-scrollbar {
