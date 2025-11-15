@@ -37,11 +37,11 @@ export default function Header() {
                 </nav>
 
                 {/* Logo */}
-                <div className="flex items-center gap-3 py-1">
+                <div className="flex items-center gap-3 sm:h-20 h-16 py-1">
                     <img
                         src="/logo/my-image.png"
                         alt="লোগো"
-                        className="sm:h-20 h-16 rounded-full"
+                        className="h-full rounded-full"
                     />
                 </div>
 
