@@ -37,7 +37,7 @@ export default function Header() {
                 </nav>
 
                 {/* Logo */}
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 py-1">
                     <img
                         src="/logo/my-image.png"
                         alt="লোগো"
