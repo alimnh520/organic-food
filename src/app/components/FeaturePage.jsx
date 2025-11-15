@@ -169,14 +169,13 @@ export default function FeaturesPage() {
                             <button onClick={() => setShowHow(!showHow)} className="px-3 py-1 bg-blue-50 text-blue-700 rounded-md">
                                 {showHow ? 'Hide' : 'Show'}
                             </button>
-                            <button onClick={() => setShowPolicy(true)} className="px-3 py-1 bg-gray-50 text-gray-700 rounded-md border">Returns Policy</button>
                         </div>
                     </div>
 
                     {showHow && (
                         <div className="mt-4 text-sm text-gray-700 space-y-3">
                             How to Return a Product?
-                            Sign in to your Daraz Account, then go to the "Account" option on the bottom of your homepage.
+                            Sign in to your abdullahshop Account, then go to the "Account" option on the bottom of your homepage.
                             Tap on "View All Orders" at the top of the page.
                             Under the "All" section, scroll up or down to the order you want to return.
                             Tap on the "Return/Refund" option for the relevant order.
@@ -191,7 +190,7 @@ export default function FeaturesPage() {
                             To ensure a smooth and hassle-free return process, please review the requirements below:
                             The product must be in its original condition—unused, unworn, unwashed, and free of any flaws. For fashion items, feel free to try them on to check the size, as this counts as unworn.
                             Make sure you include the original tags, user manuals, warranty cards, freebies, invoice, and any accessories that came with the product.
-                            Please return the product in its original, undamaged manufacturer's packaging or box. If the product was delivered in Daraz packaging/box, kindly use the same packaging/box for the return. To avoid damage, do not tape or place stickers directly on the manufacturer's packaging/box.
+                            Please return the product in its original, undamaged manufacturer's packaging or box. If the product was delivered in abdullahshop packaging/box, kindly use the same packaging/box for the return. To avoid damage, do not tape or place stickers directly on the manufacturer's packaging/box.
                             If your returned item does not meet these requirements, we may not be able to process your refund request.
                             Important Reminder:
                             If your return request is rejected, the item will be sent back to you within 4-6 days, after the Quality Check Process.
@@ -222,16 +221,16 @@ export default function FeaturesPage() {
                                 <section className="prose prose-sm max-w-none text-gray-700">
                                     Returns Policy
                                     Free & Easy Returns Policy
-                                    This Returns Policy applies to all purchases made through the Daraz platform.
-                                    Customers can filr a return on any item purchased from Daraz but only selected items can be returned (as per the case), and the requests can be submitted through the platform. This Policy helps customers and sellers understand the conditions for such returns and how Daraz processes the return requests.
-                                    Daraz reserve the right to amend, vary or modify these terms at any time, without giving prior notice to the customers and the sellers.
+                                    This Returns Policy applies to all purchases made through the abdullahshop platform.
+                                    Customers can filr a return on any item purchased from abdullahshop but only selected items can be returned (as per the case), and the requests can be submitted through the platform. This Policy helps customers and sellers understand the conditions for such returns and how abdullahshop processes the return requests.
+                                    abdullahshop reserve the right to amend, vary or modify these terms at any time, without giving prior notice to the customers and the sellers.
                                     The return request must be raised within 14 days from the date of delivery (for all items).
-                                    Customers are responsible for ensuring that the correct item is properly packed and returned, along with any included gifts, accessories, or peripherals, if applicable. If an incorrect or incomplete return is sent to the seller or Daraz, customers will not receive the replacement item; they'll have to place a new order.
-                                    All Daraz Mall items are 100% authentic and covered under the 3x Money Back Guarantee.
+                                    Customers are responsible for ensuring that the correct item is properly packed and returned, along with any included gifts, accessories, or peripherals, if applicable. If an incorrect or incomplete return is sent to the seller or abdullahshop, customers will not receive the replacement item; they'll have to place a new order.
+                                    All abdullahshop Mall items are 100% authentic and covered under the 3x Money Back Guarantee.
                                     Groceries and Digital Goods are excluded from the 3x Money Back Guarantee.
                                     Warranty After Usage
                                     For electronic appliances and mobile phones, if issues arise after usage or after the return period ends, please check if the product is covered under seller warranty or brand warranty.
-                                    For purchases under Daraz Like New:
+                                    For purchases under abdullahshop Like New:
                                     Phones → 3-Month Warranty
                                     Laptops & Tablets → 6-Month Warranty
                                     Refer to the Warranty Policy for full terms and conditions.
@@ -258,21 +257,21 @@ export default function FeaturesPage() {
                                     To make things easier for you, the table below gives a general overview of the categories where Change of Mind returns may be acceptable. However, some sub-categories may have exceptions. We strongly urge customers to check the Product Display Page (PDP) carefully before placing your order to avoid any confusion.
 
                                     Refund Policy
-                                    Note: Please note that this policy does not apply to Daraz Global products.
+                                    Note: Please note that this policy does not apply to abdullahshop Global products.
 
-                                    At Daraz, we aim to make the refund process as straightforward and transparent as possible. Whether you've changed your mind or received an item that didn't meet your expectations, we offer various refund options to suit your needs. On this page, you'll find everything you need to know about refund types, eligibility, timelines, and methods to ensure a smooth and hassle-free experience.
+                                    At abdullahshop, we aim to make the refund process as straightforward and transparent as possible. Whether you've changed your mind or received an item that didn't meet your expectations, we offer various refund options to suit your needs. On this page, you'll find everything you need to know about refund types, eligibility, timelines, and methods to ensure a smooth and hassle-free experience.
 
                                     When are you Eligible for a Refund?
-                                    The Customers' eligibility for a refund and when the refund is processed/received depends on several factors, including but not limited to, Daraz's Return Policy, Terms and Conditions under this Policy and customers’ payment methods.
+                                    The Customers' eligibility for a refund and when the refund is processed/received depends on several factors, including but not limited to, abdullahshop's Return Policy, Terms and Conditions under this Policy and customers’ payment methods.
                                     In general most items can be returned for a refund/replacement within 14 days of delivery as long as the items are in original and unused condition, subject to the terms of this Policy.
-                                    Refunds are usually made through the payment method as given in below. In some circumstances, an alternative refund method may be used (e.g. Daraz Wallet)
-                                    What are the Different Types of Refunds Offered by Daraz?
-                                    The refund process at Daraz varies depending on the type of refund case. Here's an overview:
+                                    Refunds are usually made through the payment method as given in below. In some circumstances, an alternative refund method may be used (e.g. abdullahshop Wallet)
+                                    What are the Different Types of Refunds Offered by abdullahshop?
+                                    The refund process at abdullahshop varies depending on the type of refund case. Here's an overview:
 
                                     Refunds for Returns: Once your returned item reaches our warehouse and successfully clears the Quality Check (QC), the refund process will be initiated.
                                     Refunds for Canceled Orders: If your order is canceled, the refund is automatically processed once the cancellation request is successfully completed.
                                     Refunds for Failed Deliveries: In cases of failed deliveries, the refund process begins as soon as the item is returned to the seller. Please note that the timeline may vary depending on the location of your shipping address.
-                                    Refunds for Refund Only: These are cases where the is presented with an issue where a physical return of the product is not possible like the customer hasn't received the item at all, the item is expired, the package is empty, or one or more items in the parcel are missing. In this case, the customer will file a return, submit proofs in the form of pictures, Daraz will review it, and process a refund if the case is valid.
+                                    Refunds for Refund Only: These are cases where the is presented with an issue where a physical return of the product is not possible like the customer hasn't received the item at all, the item is expired, the package is empty, or one or more items in the parcel are missing. In this case, the customer will file a return, submit proofs in the form of pictures, abdullahshop will review it, and process a refund if the case is valid.
                                     How Are Your Refunds Processed?
                                     The Refund process first starts by checking your order's refund eligibility (which is based on your whole return case). If your product is eligible for a refund, the tables below will guide you about Refund Timelines, Refund Methods, and Refund Mechanisms.
 
